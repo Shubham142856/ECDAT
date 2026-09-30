@@ -1,0 +1,10 @@
+{
+  "package": "ECDAT_Final_Project_Pack",
+  "version": "2026-09-30-v3",
+  "purpose": "Consolidated corrected project documentation, requirements, data references and demo materials for SIH26164.",
+  "working_docs": "docs/",
+  "reference_originals": "reference/originals/",
+  "deliverables": "deliverables/",
+  "file_count_excluding_manifest": 50,
+  "last_refreshed": "2026-09-30"
+}

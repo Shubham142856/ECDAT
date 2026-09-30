@@ -1,0 +1,98 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ecdat}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ecdat_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-ecdat}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ecdat}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save "" --appendonly no
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
+      SYNC_DATABASE_URL: postgresql://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
+      REDIS_URL: redis://redis:6379/0
+      ECDAT_UPLOAD_DIR: /app/uploads
+      ECDAT_MAX_UPLOAD_BYTES: "268435456"
+      ECDAT_RISK_SEED: "20260930"
+      ECDAT_OFFLINE: "1"
+    volumes:
+      - uploads:/app/uploads
+      - ./config:/app/config:ro
+      - ./ecdat:/app/ecdat:ro
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  worker:
+    build:
+      context: .
+      dockerfile: services/worker/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
+      SYNC_DATABASE_URL: postgresql://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
+      REDIS_URL: redis://redis:6379/0
+      ECDAT_UPLOAD_DIR: /app/uploads
+      ECDAT_MAX_UPLOAD_BYTES: "268435456"
+      ECDAT_RISK_SEED: "20260930"
+      ECDAT_OFFLINE: "1"
+    volumes:
+      - uploads:/app/uploads
+      - ./config:/app/config:ro
+      - ./ecdat:/app/ecdat:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    environment:
+      NEXT_PUBLIC_API_URL: http://api:8000
+      # When running in browser, it uses the host-mapped port
+      NEXT_PUBLIC_API_BASE: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  db_data:
+  uploads:

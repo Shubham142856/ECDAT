@@ -1,0 +1,18 @@
+# Enterprise Lab — L05: Config selected algorithm
+# Expected evidence roles: CONFIGURATION
+# Scanner must detect: algorithm: AES-256-GCM
+
+service:
+  name: payment-processor
+  version: "2.3.1"
+
+crypto:
+  algorithm: AES-256-GCM
+  key_derivation: HKDF
+  hash: SHA-256
+  signature_algorithm: ECDSA
+  tls_version: TLSv1.3
+
+database:
+  host: localhost
+  port: 5432

@@ -1,0 +1,359 @@
+{
+  "schema_version": "1.0.0",
+  "verification_date": "2026-09-30",
+  "purpose": "Pinned real-world corpus for ECDAT evidence verification and benchmark seeding.",
+  "selection_note": "Projects were selected to cover different crypto roles and evidence modalities; they are not claimed to be statistically representative of enterprise software.",
+  "repositories": [
+    {
+      "id": "R01",
+      "repo": "openssl/openssl",
+      "branch": "master",
+      "commit": "146688ff377f38d4ef21e608a6f95a4dc47065c6",
+      "license_status": "Apache-2.0 (GitHub metadata)",
+      "findings": [
+        {
+          "file": "crypto/rsa/rsa_gen.c",
+          "lines": "42-47",
+          "algorithm": "RSA",
+          "role": "key_generation",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/openssl/openssl/blob/146688ff377f38d4ef21e608a6f95a4dc47065c6/crypto/rsa/rsa_gen.c",
+          "note": "Contains RSA_generate_key_ex and RSA key-generation implementation."
+        },
+        {
+          "file": "crypto/evp/c_allc.c",
+          "lines": "143",
+          "algorithm": "AES-128-GCM",
+          "role": "cipher_registration",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/openssl/openssl/blob/146688ff377f38d4ef21e608a6f95a4dc47065c6/crypto/evp/c_allc.c",
+          "note": "Registers AES modes including AES-128-GCM through EVP."
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "repo": "aws/s2n-tls",
+      "branch": "main",
+      "commit": "e46a07dfc0f5fedb3ad4e4bbb347c3f1a3cd5f97",
+      "license_status": "Apache-2.0 (GitHub metadata)",
+      "findings": [
+        {
+          "file": "tls/s2n_kem.c",
+          "lines": "26-36",
+          "algorithm": "ML-KEM-768",
+          "role": "KEM_implementation",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/aws/s2n-tls/blob/e46a07dfc0f5fedb3ad4e4bbb347c3f1a3cd5f97/tls/s2n_kem.c",
+          "note": "Defines s2n_mlkem_768 with key generation, encapsulation and decapsulation."
+        },
+        {
+          "file": "tls/s2n_kem_preferences.c",
+          "lines": "20-34",
+          "algorithm": "X25519MLKEM768; SecP256r1MLKEM768; SecP384r1MLKEM1024; ML-KEM-1024",
+          "role": "TLS_KEM_group_capability",
+          "evidence_type": "protocol_configuration",
+          "source_url": "https://github.com/aws/s2n-tls/blob/e46a07dfc0f5fedb3ad4e4bbb347c3f1a3cd5f97/tls/s2n_kem_preferences.c",
+          "note": "Contains IETF hybrid groups and pure ML-KEM preference entries."
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "repo": "rustls/rustls",
+      "branch": "main",
+      "commit": "99f2358cae2954837dbb866faf6727de75489ab9",
+      "license_status": "Other / not asserted by GitHub metadata",
+      "findings": [
+        {
+          "file": "rustls-ring/src/kx.rs",
+          "lines": "17-18, 86-109",
+          "algorithm": "X25519; secp256r1; secp384r1",
+          "role": "TLS_KEM_group_capability",
+          "evidence_type": "backend_implementation",
+          "source_url": "https://github.com/rustls/rustls/blob/99f2358cae2954837dbb866faf6727de75489ab9/rustls-ring/src/kx.rs",
+          "note": "Ring backend exposes classical TLS key-exchange groups."
+        },
+        {
+          "file": "rustls-aws-lc-rs/src/kx.rs",
+          "lines": "20-81",
+          "algorithm": "X25519MLKEM768; SecP256R1MLKEM768; MLKEM768; MLKEM1024",
+          "role": "TLS_KEM_group_capability",
+          "evidence_type": "backend_implementation",
+          "source_url": "https://github.com/rustls/rustls/blob/99f2358cae2954837dbb866faf6727de75489ab9/rustls-aws-lc-rs/src/kx.rs",
+          "note": "AWS-LC backend exposes PQ/hybrid KX options and notes default MLKEM768 behavior."
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "repo": "openssh/openssh-portable",
+      "branch": "master",
+      "commit": "ccc26c76cd47ca224ff5e4ef8b96007b65ff0b4e",
+      "license_status": "Other / not asserted by GitHub metadata",
+      "findings": [
+        {
+          "file": "myproposal.h",
+          "lines": "28-35",
+          "algorithm": "mlkem768x25519-sha256; sntrup761x25519-sha512; ECDH NIST P-curves",
+          "role": "SSH_KEX_proposal",
+          "evidence_type": "protocol_configuration",
+          "source_url": "https://github.com/openssh/openssh-portable/blob/ccc26c76cd47ca224ff5e4ef8b96007b65ff0b4e/myproposal.h",
+          "note": "Current proposal list contains hybrid and classical SSH key-exchange methods."
+        },
+        {
+          "file": "ssh-ed25519.c",
+          "lines": "54-86",
+          "algorithm": "Ed25519",
+          "role": "signature_implementation",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/openssh/openssh-portable/blob/ccc26c76cd47ca224ff5e4ef8b96007b65ff0b4e/ssh-ed25519.c",
+          "note": "Dedicated Ed25519 implementation."
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "repo": "FiloSottile/age",
+      "branch": "main",
+      "commit": "b74dce4cdbe35b5e5f66c06d9612b72f89028758",
+      "license_status": "BSD-3-Clause (GitHub metadata)",
+      "findings": [
+        {
+          "file": "pq.go",
+          "lines": "36, 72, 106, 115",
+          "algorithm": "ML-KEM-768 + X25519",
+          "role": "hybrid_key_establishment",
+          "evidence_type": "application_implementation",
+          "source_url": "https://github.com/FiloSottile/age/blob/b74dce4cdbe35b5e5f66c06d9612b72f89028758/pq.go",
+          "note": "Uses HPKE MLKEM768X25519 for a hybrid recipient/identity path."
+        },
+        {
+          "file": "x25519.go",
+          "lines": "24-65",
+          "algorithm": "X25519",
+          "role": "key_establishment",
+          "evidence_type": "application_implementation",
+          "source_url": "https://github.com/FiloSottile/age/blob/b74dce4cdbe35b5e5f66c06d9612b72f89028758/x25519.go",
+          "note": "X25519 recipient/identity support."
+        },
+        {
+          "file": "primitives.go",
+          "lines": "20, 53, 58, 66",
+          "algorithm": "ChaCha20-Poly1305; SHA-256; HKDF; HMAC-SHA256",
+          "role": "symmetric_and_kdf",
+          "evidence_type": "application_implementation",
+          "source_url": "https://github.com/FiloSottile/age/blob/b74dce4cdbe35b5e5f66c06d9612b72f89028758/primitives.go",
+          "note": "Uses ChaCha20-Poly1305 plus SHA-256/HKDF/HMAC in file encryption primitives."
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "repo": "WireGuard/wireguard-go",
+      "branch": "master",
+      "commit": "ecfc5a8d54462e18e13c72173e2623d16d8e25a0",
+      "license_status": "MIT (GitHub metadata)",
+      "findings": [
+        {
+          "file": "device/noise-helpers.go",
+          "lines": "94, 103",
+          "algorithm": "Curve25519",
+          "role": "key_agreement",
+          "evidence_type": "protocol_implementation",
+          "source_url": "https://github.com/WireGuard/wireguard-go/blob/ecfc5a8d54462e18e13c72173e2623d16d8e25a0/device/noise-helpers.go",
+          "note": "Calls Curve25519 ScalarBaseMult and ScalarMult."
+        },
+        {
+          "file": "device/noise-protocol.go",
+          "lines": "15-17, 50, 239-266, 309-365",
+          "algorithm": "ChaCha20-Poly1305; Poly1305; BLAKE2s",
+          "role": "transport_protection",
+          "evidence_type": "protocol_implementation",
+          "source_url": "https://github.com/WireGuard/wireguard-go/blob/ecfc5a8d54462e18e13c72173e2623d16d8e25a0/device/noise-protocol.go",
+          "note": "Noise construction and transport protection use these primitives."
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "repo": "jedisct1/libsodium",
+      "branch": "master",
+      "commit": "75c6d5520a3b99790696d98b554673697c71c5cc",
+      "license_status": "Other / not asserted by GitHub metadata",
+      "findings": [
+        {
+          "file": "src/libsodium/crypto_aead/xchacha20poly1305/aead_xchacha20poly1305.c",
+          "lines": "41-146",
+          "algorithm": "XChaCha20-Poly1305",
+          "role": "authenticated_encryption",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/jedisct1/libsodium/blob/75c6d5520a3b99790696d98b554673697c71c5cc/src/libsodium/crypto_aead/xchacha20poly1305/aead_xchacha20poly1305.c",
+          "note": "Dedicated XChaCha20-Poly1305 implementation."
+        },
+        {
+          "file": "src/libsodium/crypto_sign/ed25519/ref10/sign.c",
+          "lines": "97-119",
+          "algorithm": "Ed25519",
+          "role": "signature_implementation",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/jedisct1/libsodium/blob/75c6d5520a3b99790696d98b554673697c71c5cc/src/libsodium/crypto_sign/ed25519/ref10/sign.c",
+          "note": "Dedicated Ed25519 signing implementation."
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "repo": "golang-jwt/jwt",
+      "branch": "main",
+      "commit": "73c870b18e68b6e654b2b03f485aa3c9fab32cea",
+      "license_status": "MIT (GitHub metadata)",
+      "findings": [
+        {
+          "file": "rsa.go",
+          "lines": "25-37",
+          "algorithm": "RS256; RS384; RS512",
+          "role": "JWT_signature_method_capability",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/golang-jwt/jwt/blob/73c870b18e68b6e654b2b03f485aa3c9fab32cea/rsa.go",
+          "note": "Defines RSA signing methods for JWTs."
+        },
+        {
+          "file": "rsa_pss.go",
+          "lines": "22-76",
+          "algorithm": "PS256; PS384; PS512",
+          "role": "JWT_signature_method_capability",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/golang-jwt/jwt/blob/73c870b18e68b6e654b2b03f485aa3c9fab32cea/rsa_pss.go",
+          "note": "Defines RSA-PSS signing methods for JWTs."
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "repo": "cert-manager/cert-manager",
+      "branch": "master",
+      "commit": "05b683c98ec6970c4e1dceb9b7e723b048f38af5",
+      "license_status": "Apache-2.0 (GitHub metadata)",
+      "findings": [
+        {
+          "file": "pkg/util/pki/generate.go",
+          "lines": "95, 114, 119",
+          "algorithm": "RSA; ECDSA; Ed25519",
+          "role": "PKI_key_generation",
+          "evidence_type": "PKI_implementation",
+          "source_url": "https://github.com/cert-manager/cert-manager/blob/05b683c98ec6970c4e1dceb9b7e723b048f38af5/pkg/util/pki/generate.go",
+          "note": "Key generation switches on RSA, ECDSA and Ed25519 algorithms."
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "repo": "smallstep/certificates",
+      "branch": "master",
+      "commit": "fdeb6fdf53f9ad430c283940eb4c5f1203406fa7",
+      "license_status": "Apache-2.0 (GitHub metadata)",
+      "findings": [
+        {
+          "file": "cas/softcas/softcas.go",
+          "lines": "253-257, 270-284",
+          "algorithm": "ECDSAWithSHA256; X.509 signing via configured signer/KMS",
+          "role": "PKI_signing_path",
+          "evidence_type": "PKI_KMS_integration",
+          "source_url": "https://github.com/smallstep/certificates/blob/fdeb6fdf53f9ad430c283940eb4c5f1203406fa7/cas/softcas/softcas.go",
+          "note": "KMS-backed key manager path and X.509 certificate creation; RSA issuer signature handling includes RSA-PSS."
+        },
+        {
+          "file": "cas/softcas/softcas.go",
+          "lines": "287-295",
+          "algorithm": "SHA256WithRSA; SHA384WithRSA; SHA512WithRSA; SHA256/384/512WithRSAPSS",
+          "role": "certificate_signature",
+          "evidence_type": "implementation",
+          "source_url": "https://github.com/smallstep/certificates/blob/fdeb6fdf53f9ad430c283940eb4c5f1203406fa7/cas/softcas/softcas.go",
+          "note": "Explicit RSA and RSA-PSS signature algorithm cases."
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "repo": "open-quantum-safe/liboqs",
+      "branch": "main",
+      "commit": "e6b9e783747536f34700aab4bd10718c2fecab3f",
+      "license_status": "Other / not asserted by GitHub metadata",
+      "findings": [
+        {
+          "file": "README.md",
+          "lines": "49-72",
+          "algorithm": "ML-KEM; ML-DSA; SLH-DSA",
+          "role": "PQC_registry_reference",
+          "evidence_type": "library_documentation",
+          "source_url": "https://github.com/open-quantum-safe/liboqs/blob/e6b9e783747536f34700aab4bd10718c2fecab3f/README.md",
+          "note": "Lists the standardized NIST algorithm names and implementation status tiers."
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "repo": "open-quantum-safe/oqs-provider",
+      "branch": "main",
+      "commit": "36cafae022c15408e251b28cdcf0dba741f96709",
+      "license_status": "MIT (GitHub metadata)",
+      "findings": [
+        {
+          "file": "oqsprov/oqs_kmgmt.c",
+          "lines": "717-749, 1749-1758",
+          "algorithm": "ML-DSA-44; ML-DSA-65; ML-KEM-768; X25519MLKEM768; SecP256r1MLKEM768",
+          "role": "OpenSSL_provider_algorithm_registration",
+          "evidence_type": "provider_implementation",
+          "source_url": "https://github.com/open-quantum-safe/oqs-provider/blob/36cafae022c15408e251b28cdcf0dba741f96709/oqsprov/oqs_kmgmt.c",
+          "note": "Documents standardized algorithms and hybrid KEMs exposed through an OpenSSL provider."
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "repo": "curl/curl",
+      "branch": "master",
+      "commit": "5566d7ae4372541be5f0a1e793db4af321c736ac",
+      "license_status": "Other / not asserted by GitHub metadata",
+      "findings": [
+        {
+          "file": "lib/vtls/openssl.c",
+          "lines": "60-68",
+          "algorithm": "OpenSSL X.509/RSA interfaces",
+          "role": "TLS_backend_dependency",
+          "evidence_type": "source_integration",
+          "source_url": "https://github.com/curl/curl/blob/5566d7ae4372541be5f0a1e793db4af321c736ac/lib/vtls/openssl.c",
+          "note": "Includes OpenSSL X.509/RSA interfaces; this is capability/integration evidence, not proof that a particular algorithm is negotiated."
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "repo": "aws/aws-lc",
+      "branch": "main",
+      "commit": "fa1b1fb9281d5a6d1435771b37fc0b183dd9c634",
+      "license_status": "Other / not asserted by GitHub metadata",
+      "findings": [
+        {
+          "file": "crypto/cipher_extra/cipher_extra.c",
+          "lines": "38",
+          "algorithm": "AES-256-GCM",
+          "role": "cipher_implementation",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/aws/aws-lc/blob/fa1b1fb9281d5a6d1435771b37fc0b183dd9c634/crypto/cipher_extra/cipher_extra.c",
+          "note": "Current source registers AES-256-GCM."
+        },
+        {
+          "file": "crypto/fipsmodule/curve25519/curve25519_s2n_bignum_asm.c",
+          "lines": "21, 38",
+          "algorithm": "X25519",
+          "role": "key_agreement_implementation",
+          "evidence_type": "library_implementation",
+          "source_url": "https://github.com/aws/aws-lc/blob/fa1b1fb9281d5a6d1435771b37fc0b183dd9c634/crypto/fipsmodule/curve25519/curve25519_s2n_bignum_asm.c",
+          "note": "Current source contains X25519 shared-key and base-multiplication routines."
+        }
+      ]
+    }
+  ]
+}

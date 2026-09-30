@@ -1,0 +1,5 @@
+# Enterprise Lab — L04 requirements.txt
+# Expected result: CAPABILITY evidence only for 'cryptography'
+# This file proves the capability — not usage in source code.
+cryptography>=41.0
+requests>=2.31.0

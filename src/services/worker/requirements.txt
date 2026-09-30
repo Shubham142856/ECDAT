@@ -1,0 +1,13 @@
+# ECDAT Worker dependencies (superset of API deps)
+fastapi==0.115.0
+sqlalchemy[asyncio]==2.0.35
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+alembic==1.13.2
+redis==5.1.0
+rq==1.16.2
+cryptography==43.0.1
+lief==0.15.1
+numpy==2.1.1
+networkx==3.3
+pydantic==2.9.0

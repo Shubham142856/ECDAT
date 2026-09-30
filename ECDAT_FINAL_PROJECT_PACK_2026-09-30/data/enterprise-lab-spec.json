@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "Controlled Enterprise Lab design; ground truth is defined by fixture metadata, not by this file alone.",
+  "required_cases": [
+    {
+      "id": "L01",
+      "case": "python_direct_rsa_usage",
+      "expected_roles": [
+        "implementation",
+        "usage"
+      ]
+    },
+    {
+      "id": "L02",
+      "case": "python_import_alias",
+      "expected_roles": [
+        "implementation",
+        "usage"
+      ]
+    },
+    {
+      "id": "L03",
+      "case": "java_direct_signature_usage",
+      "expected_roles": [
+        "implementation",
+        "usage"
+      ]
+    },
+    {
+      "id": "L04",
+      "case": "dependency_only_openssl",
+      "expected_roles": [
+        "capability"
+      ]
+    },
+    {
+      "id": "L05",
+      "case": "config_selected_algorithm",
+      "expected_roles": [
+        "configuration"
+      ]
+    },
+    {
+      "id": "L06",
+      "case": "certificate_ecdsa_signature",
+      "expected_roles": [
+        "observed"
+      ]
+    },
+    {
+      "id": "L07",
+      "case": "pqc_hybrid_usage",
+      "expected_roles": [
+        "implementation",
+        "usage"
+      ]
+    },
+    {
+      "id": "L08",
+      "case": "contradictory_evidence",
+      "expected_roles": [
+        "capability",
+        "usage"
+      ]
+    },
+    {
+      "id": "L09",
+      "case": "binary_crypto_library_signal",
+      "expected_roles": [
+        "capability",
+        "observed"
+      ]
+    },
+    {
+      "id": "L10",
+      "case": "container_crypto_package",
+      "expected_roles": [
+        "capability",
+        "observed"
+      ]
+    },
+    {
+      "id": "L11",
+      "case": "negative_lookalike_string",
+      "expected_roles": []
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+# ECDAT API dependencies
+
+# Web framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+
+# Database
+sqlalchemy[asyncio]==2.0.35
+asyncpg==0.29.0
+psycopg2-binary==2.9.9
+alembic==1.13.2
+
+# Redis / RQ
+redis==5.1.0
+rq==1.16.2
+
+# Cryptography (parsing only — no key generation for user-supplied inputs)
+cryptography==43.0.1
+
+# Binary inspection
+lief==0.15.1
+
+# Data analysis (risk engine)
+numpy==2.1.1
+
+# TOML parsing (Python 3.11+ ships tomllib in stdlib; this is the backport for 3.10)
+# tomli==2.0.2  # only needed if Python < 3.11
+
+# Networking
+httpx==0.27.2
+
+# Pydantic
+pydantic==2.9.0

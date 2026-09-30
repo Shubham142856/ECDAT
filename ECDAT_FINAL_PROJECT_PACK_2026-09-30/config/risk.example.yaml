@@ -1,0 +1,14 @@
+# ECDAT risk policy example
+# Values in this file are model/policy parameters, not NIST-prescribed numbers.
+seed: 20260930
+monte_carlo:
+  samples: 10000
+  distribution: triangular
+  # Supply low/mode/high through the product configuration. Do not hard-code a CRQC year as fact.
+context_weights:
+  quantum_exposure: 0.35
+  data_sensitivity: 0.20
+  business_criticality: 0.20
+  internet_exposure: 0.10
+  blast_radius: 0.10
+  migration_difficulty: 0.05

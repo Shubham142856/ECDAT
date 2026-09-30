@@ -1,0 +1,50 @@
+{
+  "verification_date": "2026-09-30",
+  "claims": [
+    {
+      "claim": "SIH26164 asks for source/binary/library/container cryptographic discovery, risk assessment, PQC/hybrid recommendation and GUI",
+      "status": "indexed-siH-source",
+      "source": "https://sih2026.vuce.in/ps/SIH26164"
+    },
+    {
+      "claim": "RFC 10024 is Standards Track and defines X25519MLKEM768, SecP256r1MLKEM768, SecP384r1MLKEM1024",
+      "status": "authoritative",
+      "source": "https://www.rfc-editor.org/rfc/rfc10024.html"
+    },
+    {
+      "claim": "RFC 10042 is Informational and defines SSH PQ/T hybrid methods",
+      "status": "authoritative",
+      "source": "https://www.rfc-editor.org/rfc/rfc10042.html"
+    },
+    {
+      "claim": "CycloneDX 1.7 is current released version in checked overview",
+      "status": "authoritative",
+      "source": "https://cyclonedx.org/specification/overview/"
+    },
+    {
+      "claim": "CycloneDX 2.0 is announced for fall 2026; not treated as released in this package",
+      "status": "official-announcement",
+      "source": "https://cyclonedx.org/news/"
+    },
+    {
+      "claim": "FIPS 140-2 active through 2026-09-21 and Historical from 2026-09-22",
+      "status": "authoritative",
+      "source": "https://csrc.nist.gov/projects/cryptographic-module-validation-program"
+    },
+    {
+      "claim": "The 25 real findings are source observations tied to pinned repository commits",
+      "status": "primary-repo",
+      "source": "data/real-findings.json"
+    },
+    {
+      "claim": "Exact 14,522-repository PQCScanner count",
+      "status": "not-used",
+      "source": "student poster; exact manifest not verified"
+    },
+    {
+      "claim": "AutoPQC as a verified primary artifact",
+      "status": "unverified",
+      "source": "not included as factual support"
+    }
+  ]
+}

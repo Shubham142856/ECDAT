@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "verification_date": "2026-09-30",
+  "algorithms": [
+    {
+      "name": "ML-KEM",
+      "standard": "NIST FIPS 203",
+      "status": "final",
+      "family": "KEM",
+      "source": "https://csrc.nist.gov/pubs/fips/203/final"
+    },
+    {
+      "name": "ML-DSA",
+      "standard": "NIST FIPS 204",
+      "status": "final",
+      "family": "signature",
+      "source": "https://csrc.nist.gov/pubs/fips/204/final"
+    },
+    {
+      "name": "SLH-DSA",
+      "standard": "NIST FIPS 205",
+      "status": "final",
+      "family": "signature",
+      "source": "https://csrc.nist.gov/pubs/fips/205/final"
+    },
+    {
+      "name": "X25519MLKEM768",
+      "standard": "IETF RFC 10024",
+      "status": "standards-track",
+      "family": "TLS PQ/T hybrid KEX",
+      "source": "https://www.rfc-editor.org/rfc/rfc10024.html"
+    },
+    {
+      "name": "SecP256r1MLKEM768",
+      "standard": "IETF RFC 10024",
+      "status": "standards-track",
+      "family": "TLS PQ/T hybrid KEX",
+      "source": "https://www.rfc-editor.org/rfc/rfc10024.html"
+    },
+    {
+      "name": "SecP384r1MLKEM1024",
+      "standard": "IETF RFC 10024",
+      "status": "standards-track",
+      "family": "TLS PQ/T hybrid KEX",
+      "source": "https://www.rfc-editor.org/rfc/rfc10024.html"
+    }
+  ]
+}

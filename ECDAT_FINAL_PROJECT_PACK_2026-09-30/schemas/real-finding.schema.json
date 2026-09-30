@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ECDAT real finding",
+  "type": "object",
+  "required": [
+    "finding_id",
+    "repository",
+    "commit",
+    "file",
+    "line_range",
+    "algorithm",
+    "role",
+    "evidence_type",
+    "source_url",
+    "expected_ground_truth"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "file": {
+      "type": "string"
+    },
+    "line_range": {
+      "type": "string"
+    },
+    "algorithm": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "evidence_type": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "expected_ground_truth": {
+      "type": "boolean"
+    },
+    "note": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

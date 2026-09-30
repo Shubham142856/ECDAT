@@ -1,0 +1,7 @@
+# Enterprise Lab — L08: Contradictory config
+# Config says AES-128 — but source code uses AES-256.
+# Expected: CONTRADICTORY claim state for AES after fusion.
+
+crypto:
+  algorithm: AES-128-GCM
+  key_size: 128

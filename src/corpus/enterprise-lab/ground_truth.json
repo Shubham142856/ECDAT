@@ -1,0 +1,131 @@
+{
+  "version": "1.0",
+  "description": "Enterprise Lab ground truth — 11 labeled test cases for scanner validation",
+  "cases": [
+    {
+      "id": "L01",
+      "name": "python_direct_rsa_usage",
+      "file": "python-service/l01_rsa_usage.py",
+      "scanner": "python_ast",
+      "expected_algorithms": ["RSA"],
+      "expected_roles": ["implementation", "usage"],
+      "expected_claim_state": "supported",
+      "must_not_emit": [],
+      "notes": "rsa.sign() call with 'SHA-256' arg — must produce USAGE evidence"
+    },
+    {
+      "id": "L02",
+      "name": "python_import_alias",
+      "file": "python-service/l02_aes_alias.py",
+      "scanner": "python_ast",
+      "expected_algorithms": ["AES"],
+      "expected_roles": ["implementation", "usage"],
+      "expected_claim_state": "supported",
+      "must_not_emit": [],
+      "notes": "AES imported as crypto_aes; crypto_aes.new() call must be detected"
+    },
+    {
+      "id": "L03",
+      "name": "java_direct_signature_usage",
+      "file": "java-service/L03SignatureService.java",
+      "scanner": "java_rules",
+      "expected_algorithms": ["RSA", "AES"],
+      "expected_roles": ["implementation", "usage"],
+      "expected_claim_state": "supported",
+      "must_not_emit": [],
+      "notes": "Signature.getInstance('SHA256withRSA') and Cipher.getInstance('AES/GCM/NoPadding')"
+    },
+    {
+      "id": "L04",
+      "name": "dependency_only_openssl",
+      "file": "python-service/l04_requirements.txt",
+      "scanner": "dependency",
+      "expected_algorithms": ["RSA", "ECDSA", "AES", "ChaCha20-Poly1305", "X25519", "Ed25519"],
+      "expected_roles": ["capability"],
+      "forbidden_roles": ["implementation", "usage"],
+      "expected_claim_state": "ambiguous",
+      "must_not_emit": ["usage"],
+      "notes": "cryptography package in requirements.txt — CAPABILITY only. Source has no calls."
+    },
+    {
+      "id": "L05",
+      "name": "config_selected_algorithm",
+      "file": "python-service/l05_config.yaml",
+      "scanner": "config_scan",
+      "expected_algorithms": ["AES", "HKDF", "SHA-256", "ECDSA"],
+      "expected_roles": ["configuration"],
+      "expected_claim_state": "supported",
+      "must_not_emit": [],
+      "notes": "YAML config with algorithm: AES-256-GCM — must produce CONFIGURATION evidence"
+    },
+    {
+      "id": "L06",
+      "name": "certificate_ecdsa_signature",
+      "file": "certificates/l06_ecdsa.pem",
+      "scanner": "certificate",
+      "expected_algorithms": ["ECDSA"],
+      "expected_roles": ["observed"],
+      "expected_claim_state": "supported",
+      "must_not_emit": [],
+      "notes": "X.509 cert with ECDSA-with-SHA256; must NOT infer application key-exchange from cert"
+    },
+    {
+      "id": "L07",
+      "name": "pqc_hybrid_usage",
+      "file": "python-service/l07_pqc_hybrid.py",
+      "scanner": "python_ast",
+      "expected_algorithms": ["ML-KEM", "X25519"],
+      "expected_roles": ["implementation", "usage"],
+      "expected_claim_state": "supported",
+      "must_not_emit": [],
+      "notes": "oqs.KeyEncapsulation('ML-KEM-768') and X25519PrivateKey.generate()"
+    },
+    {
+      "id": "L08",
+      "name": "contradictory_evidence",
+      "files": [
+        "python-service/l08_contradictory_code.py",
+        "python-service/l08_config.yaml"
+      ],
+      "scanners": ["python_ast", "config_scan"],
+      "expected_algorithms": ["AES"],
+      "expected_claim_state": "contradictory",
+      "notes": "Config says AES-128-GCM, code calls AES (256-bit key). Fusion must detect contradiction."
+    },
+    {
+      "id": "L09",
+      "name": "binary_crypto_library_signal",
+      "file": "binary-sample/l09_libssl_linked.elf",
+      "scanner": "binary",
+      "expected_algorithms": ["TLS"],
+      "expected_roles": ["capability", "observed"],
+      "forbidden_roles": ["usage", "implementation"],
+      "expected_claim_state": "supported",
+      "must_not_emit": ["usage"],
+      "notes": "ELF binary linking libssl — CAPABILITY/OBSERVED only"
+    },
+    {
+      "id": "L10",
+      "name": "container_crypto_package",
+      "file": "container-sample/l10_openssl_container.tar",
+      "scanner": "container",
+      "expected_algorithms": ["RSA", "ECDSA", "AES", "TLS"],
+      "expected_roles": ["capability", "observed"],
+      "forbidden_roles": ["usage", "implementation"],
+      "expected_claim_state": "ambiguous",
+      "must_not_emit": ["usage"],
+      "notes": "Container with openssl package in dpkg manifest — CAPABILITY only"
+    },
+    {
+      "id": "L11",
+      "name": "negative_lookalike_string",
+      "file": "python-service/l11_negative_lookalike.py",
+      "scanner": "python_ast",
+      "expected_algorithms": [],
+      "expected_roles": [],
+      "expected_claim_state": null,
+      "must_emit_nothing": true,
+      "notes": "Crypto strings only in comments/docstrings/variables — scanner MUST NOT fire"
+    }
+  ]
+}

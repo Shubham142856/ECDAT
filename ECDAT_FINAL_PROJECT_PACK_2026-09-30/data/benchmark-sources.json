@@ -1,0 +1,45 @@
+{
+  "verification_date": "2026-09-30",
+  "benchmarks": [
+    {
+      "name": "CamBench",
+      "repo": "CROSSINGTUD/CamBench",
+      "commit": "3c5aeb7151fbee0074520a3730f71d299e18b20d",
+      "verified_fact": "README describes CamBench_Real (real Java apps with manually labeled usages), CamBench_Cap (synthetic capability cases), and CamBench_Cov (heuristic coverage).",
+      "use": "Primary benchmark source for Java crypto API detection and capability coverage.",
+      "caution": "Older benchmark; not an enterprise CBOM benchmark and not a direct measure of ECDAT quantum-risk quality."
+    },
+    {
+      "name": "CryptoAPI-Bench",
+      "repo": "CryptoAPI-Bench/CryptoAPI-Bench",
+      "commit": "e6b6b50fef6970151300c1ac2de62e188ba6de19",
+      "verified_fact": "README states it contains 16 cryptographic vulnerabilities with secure and insecure Java snippets.",
+      "use": "Regression and misuse benchmark for Java rules.",
+      "caution": "Focuses on crypto API misuse, not full CBOM discovery."
+    },
+    {
+      "name": "Python Crypto Misuses in the Wild",
+      "repo": "stg-tud/python-crypto-misuses-study-results",
+      "commit": "3496189032d23501bec908a6518c8b378764b101",
+      "verified_fact": "README states the study analyzed the top 895 Python GitHub repositories by stars and dependencies, with published misuse findings.",
+      "use": "Large real-world Python misuse corpus and methodology reference.",
+      "caution": "Study data is from an older snapshot; use for benchmarking methodology and historical comparison, not current ecosystem prevalence."
+    },
+    {
+      "name": "PQC Signature Benchmarks in C",
+      "repo": "cryptohslu/pqc-sig-bench-c",
+      "commit": "5efde17d97875dd235e13372c54ace10440a7e54",
+      "verified_fact": "README describes keygen/sign/verify benchmarks for PQ signatures via liboqs and traditional signatures via OpenSSL, with metadata and CSV output.",
+      "use": "Migration trade-off measurements; repeat locally on the actual demo machine before using numbers.",
+      "caution": "README example numbers are not ECDAT measurements and must not be copied into results."
+    },
+    {
+      "name": "RSL PQC Benchmarks",
+      "repo": "RSL-Quantum/pqc-benchmarks",
+      "commit": "788ad6b90ba78ca91436e3cca7aba041b67e1c6b",
+      "verified_fact": "README labels v0.0 as methodology + scaffolding and says no measurement data has been published yet.",
+      "use": "Methodology inspiration only until a measured release exists.",
+      "caution": "Do not cite it as an empirical benchmark dataset."
+    }
+  ]
+}

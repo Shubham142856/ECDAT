@@ -1,0 +1,33 @@
+{
+  "corpus": "PyJWT @ b5bd6fe",
+  "scan_id": "rescan_pyjwt_20260930T231408",
+  "timestamp": "2026-09-30T23:14:09.363936+00:00",
+  "raw_findings_total": 106,
+  "detectors": {
+    "python.ast.import": 3,
+    "python.ast.import_from": 13,
+    "python.ast.assignment": 20,
+    "python.ast.registry": 15,
+    "python.ast.call": 46,
+    "python.ast.attribute": 9
+  },
+  "roles": {
+    "capability": 3,
+    "implementation": 83,
+    "configuration": 35,
+    "usage": 2
+  },
+  "fused_assets_total": 9,
+  "unknown_assets_total": 0,
+  "canonical_algorithms": [
+    "ECDSA",
+    "Ed25519",
+    "Ed448",
+    "HMAC",
+    "RSA",
+    "RSA-PSS",
+    "SHA-256",
+    "SHA-384",
+    "SHA-512"
+  ]
+}

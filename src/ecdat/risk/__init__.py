@@ -115,12 +115,12 @@ class RiskAssessment:
     asset_id: str
     canonical_algorithm: str
     quantum_status: QuantumStatus
-    mosca: MoscaResult
-    probability: MonteCarloResult
+    mosca: Optional[MoscaResult]
+    probability: Optional[MonteCarloResult]
     context_score: float         # 0.0–1.0 composite context risk score
     context_breakdown: dict      # per-component context scores
-    risk_level: str              # CRITICAL / HIGH / MEDIUM / LOW / UNKNOWN
-    risk_label: str              # "scenario-model result, not a forecast"
+    risk_level: str              # CRITICAL / HIGH / MEDIUM / LOW / UNKNOWN / INSUFFICIENT CONTEXT
+    risk_label: str              # "scenario-model result, not a forecast" or "insufficient context"
     blast_radius_count: int      # number of affected nodes (predicted)
 
 
@@ -267,8 +267,8 @@ def _risk_level_from_scores(p_at_risk: float, context_score: float) -> str:
 def assess_asset_risk(
     asset: FusedAsset,
     blast_radius: BlastRadiusResult,
-    x: float = 10.0,
-    y_estimate: float = 3.0,
+    x: Optional[float] = None,
+    y_estimate: Optional[float] = None,
     z_low: float = 5.0,
     z_mode: float = 12.0,
     z_high: float = 20.0,
@@ -282,10 +282,9 @@ def assess_asset_risk(
 ) -> RiskAssessment:
     """Full risk assessment for a single crypto asset.
 
-    All results are labeled as scenario-model results, not forecasts.
+    If X (required data secrecy lifetime) or Y (migration time) is omitted,
+    the risk assessment reports 'INSUFFICIENT CONTEXT' — no hidden defaults.
     """
-    mosca = compute_mosca(x, y_estimate, z_mode)
-    mc = compute_monte_carlo(x, y_estimate, z_low, z_mode, z_high, samples, seed)
     context_score, breakdown = compute_context_score(
         asset.quantum_status,
         data_sensitivity=data_sensitivity,
@@ -296,6 +295,22 @@ def assess_asset_risk(
         weights=context_weights,
     )
 
+    if x is None or y_estimate is None:
+        return RiskAssessment(
+            asset_id=asset.asset_id,
+            canonical_algorithm=asset.canonical_algorithm,
+            quantum_status=asset.quantum_status,
+            mosca=None,
+            probability=None,
+            context_score=context_score,
+            context_breakdown=breakdown,
+            risk_level="INSUFFICIENT CONTEXT",
+            risk_label="insufficient context — analyst inputs X (secrecy lifetime) and Y (migration time) must be provided",
+            blast_radius_count=blast_radius.affected_count,
+        )
+
+    mosca = compute_mosca(x, y_estimate, z_mode)
+    mc = compute_monte_carlo(x, y_estimate, z_low, z_mode, z_high, samples, seed)
     risk_level = _risk_level_from_scores(mc.p_at_risk, context_score)
 
     return RiskAssessment(

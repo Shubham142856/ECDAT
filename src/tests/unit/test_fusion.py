@@ -159,3 +159,59 @@ class TestConfidenceFusion:
         aes = next((a for a in assets if "AES" in a.canonical_algorithm), None)
         assert aes is not None
         assert abs(aes.confidence - 0.85) < 0.01
+
+
+# ---------------------------------------------------------------------------
+# Step 3B — Fusion Semantics Tests
+# ---------------------------------------------------------------------------
+
+class TestStep3BFusion:
+    def test_hmac_fusion_produces_mac_usage_role(self):
+        raw = _make_raw("HMAC", [EvidenceRole.IMPLEMENTATION], SourceType.PYTHON_SOURCE)
+        raw.provenance = {"family": "mac"}
+        assets = fuse_evidence("scan-hmac", [raw], NOW)
+        hmac = next((a for a in assets if a.canonical_algorithm == "HMAC"), None)
+        assert hmac is not None
+        assert hmac.family == AlgorithmFamily.MAC
+        from ecdat.ontology import UsageRole
+        assert hmac.usage_role == UsageRole.MAC
+        assert hmac.quantum_status == QuantumStatus.SAFE
+
+    def test_rs256_fusion_produces_rsa_digital_signature_usage(self):
+        from ecdat.knowledge import normalize_algorithm
+        meta = normalize_algorithm("RS256")
+        raw = _make_raw("RS256", [EvidenceRole.USAGE], SourceType.PYTHON_SOURCE)
+        raw.provenance = {"family": meta["family"].value, "variant": meta.get("variant", "")}
+        assets = fuse_evidence("scan-rs256", [raw], NOW)
+        rsa = next((a for a in assets if a.canonical_algorithm == "RSA"), None)
+        assert rsa is not None
+        assert rsa.family == AlgorithmFamily.DIGITAL_SIGNATURE
+        from ecdat.ontology import UsageRole
+        assert rsa.usage_role == UsageRole.DIGITAL_SIGNATURE
+        assert EvidenceRole.USAGE in rsa.roles
+
+    def test_ps256_fusion_produces_rsa_pss_digital_signature_usage(self):
+        from ecdat.knowledge import normalize_algorithm
+        meta = normalize_algorithm("PS256")
+        raw = _make_raw("PS256", [EvidenceRole.USAGE], SourceType.PYTHON_SOURCE)
+        raw.provenance = {"family": meta["family"].value, "variant": meta.get("variant", "")}
+        assets = fuse_evidence("scan-ps256", [raw], NOW)
+        ps = next((a for a in assets if a.canonical_algorithm == "RSA-PSS"), None)
+        assert ps is not None
+        assert ps.family == AlgorithmFamily.DIGITAL_SIGNATURE
+        from ecdat.ontology import UsageRole
+        assert ps.usage_role == UsageRole.DIGITAL_SIGNATURE
+        assert EvidenceRole.USAGE in ps.roles
+
+    def test_pure_rsa_import_has_unknown_usage_role(self):
+        from ecdat.knowledge import normalize_algorithm
+        meta = normalize_algorithm("RSA")
+        raw = _make_raw("RSA", [EvidenceRole.IMPLEMENTATION], SourceType.PYTHON_SOURCE)
+        raw.provenance = {"family": meta["family"].value}
+        assets = fuse_evidence("scan-pure-rsa", [raw], NOW)
+        rsa = next((a for a in assets if a.canonical_algorithm == "RSA"), None)
+        assert rsa is not None
+        from ecdat.ontology import UsageRole
+        assert rsa.usage_role == UsageRole.UNKNOWN
+        assert EvidenceRole.USAGE not in rsa.roles
+

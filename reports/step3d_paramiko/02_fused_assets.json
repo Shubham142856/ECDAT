@@ -1,0 +1,1895 @@
+[
+  {
+    "asset_id": "54d14b72-0eaf-4220-9584-32b51015db66",
+    "canonical_algorithm": "SHA-1",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "usage",
+      "configuration",
+      "implementation"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 10,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\config.py:31",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha1",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha1",
+          "local_alias": "sha1",
+          "algo_identified": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\config.py:449",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "sha1(tohash.encode())",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "sha1(tohash.encode())",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\hostkeys.py:25",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha1",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha1",
+          "local_alias": "sha1",
+          "algo_identified": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\hostkeys.py:294",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "sha1()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "sha1()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\hostkeys.py:299",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "sha1()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "sha1()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\sftp_server.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha1",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha1",
+          "local_alias": "sha1",
+          "algo_identified": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "paramiko\\sftp_server.py:83",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "sha1: sha1",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:30",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha1",
+          "local_alias": "sha1",
+          "algo_identified": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "tests\\test_packetizer.py:25",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha1",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha1",
+          "local_alias": "sha1",
+          "algo_identified": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "tests\\test_util.py:25",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha1",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha1",
+          "local_alias": "sha1",
+          "algo_identified": "sha1",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      }
+    ]
+  },
+  {
+    "asset_id": "03f8961c-c086-4236-b14a-0ddec5d17c89",
+    "canonical_algorithm": "SHA-256",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "usage",
+      "implementation"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 9,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.attribute",
+        "source_type": "python_source",
+        "source_location": "paramiko\\ecdsakey.py:59",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "self.hash_object = hashes.SHA256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "Assign",
+          "target": "hash_object",
+          "module": "cryptography.hazmat.primitives.hashes",
+          "attr": "SHA256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.attribute",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_curve25519.py:21",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "hash_algo = hashlib.sha256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "Assign",
+          "target": "hash_algo",
+          "module": "hashlib",
+          "attr": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_ecdh_nist.py:6",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha256, sha384, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha256",
+          "local_alias": "sha256",
+          "algo_identified": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_gex.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha256",
+          "local_alias": "sha256",
+          "algo_identified": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_group14.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha256",
+          "local_alias": "sha256",
+          "algo_identified": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.attribute",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_mlkem.py:55",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "hash_algo = hashlib.sha256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "Assign",
+          "target": "hash_algo",
+          "module": "hashlib",
+          "attr": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:29",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha256",
+          "local_alias": "sha256",
+          "algo_identified": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:401",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "sha256(bytes(self))",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "sha256(bytes(self))",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:30",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha256",
+          "local_alias": "sha256",
+          "algo_identified": "sha256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "629c5319-442a-4d43-9935-28d836f1ffff",
+    "canonical_algorithm": "SHA-384",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "supported",
+    "confidence": 0.8,
+    "roles": [
+      "implementation"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 2,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.attribute",
+        "source_type": "python_source",
+        "source_location": "paramiko\\ecdsakey.py:61",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "self.hash_object = hashes.SHA384",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "Assign",
+          "target": "hash_object",
+          "module": "cryptography.hazmat.primitives.hashes",
+          "attr": "SHA384",
+          "canonical": "SHA-384",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_ecdh_nist.py:6",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha256, sha384, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha384",
+          "local_alias": "sha384",
+          "algo_identified": "sha384",
+          "canonical": "SHA-384",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "7fbf8b56-9f60-4886-9341-c3a34f5e7e34",
+    "canonical_algorithm": "SHA-512",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "supported",
+    "confidence": 0.85,
+    "roles": [
+      "implementation"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 4,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.attribute",
+        "source_type": "python_source",
+        "source_location": "paramiko\\ecdsakey.py:63",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "self.hash_object = hashes.SHA512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "Assign",
+          "target": "hash_object",
+          "module": "cryptography.hazmat.primitives.hashes",
+          "attr": "SHA512",
+          "canonical": "SHA-512",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_ecdh_nist.py:6",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha256, sha384, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha512",
+          "local_alias": "sha512",
+          "algo_identified": "sha512",
+          "canonical": "SHA-512",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_group16.py:24",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha512",
+          "local_alias": "sha512",
+          "algo_identified": "sha512",
+          "canonical": "SHA-512",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:30",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "sha512",
+          "local_alias": "sha512",
+          "algo_identified": "sha512",
+          "canonical": "SHA-512",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "4a0b6def-133b-4a21-b0e3-25796f87b580",
+    "canonical_algorithm": "ECDSA",
+    "family": "digital_signature",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9292481250360578,
+    "roles": [
+      "usage",
+      "capability",
+      "implementation"
+    ],
+    "usage_role": "digital_signature",
+    "evidence_count": 3,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\ecdsakey.py:224",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+          "has_concrete_algo": true,
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\ecdsakey.py:242",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+          "has_concrete_algo": true,
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=3.3",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "cryptography",
+          "version": ">=3.3",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "2d314155-2b0a-4601-aaa0-8fc3b2513d6c",
+    "canonical_algorithm": "HMAC",
+    "family": "mac",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "supported",
+    "confidence": 0.95,
+    "roles": [
+      "implementation"
+    ],
+    "usage_role": "mac",
+    "evidence_count": 4,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\hostkeys.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hmac import HMAC",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hmac",
+          "name": "HMAC",
+          "local_alias": "HMAC",
+          "algo_identified": "HMAC",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\hostkeys.py:300",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "HMAC(salt, b(hostname), sha1)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "HMAC(salt, b(hostname), sha1)",
+          "has_concrete_algo": true,
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\packet.py:29",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hmac import HMAC",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hmac",
+          "name": "HMAC",
+          "local_alias": "HMAC",
+          "algo_identified": "HMAC",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\packet.py:47",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "HMAC(key, message, digest_class)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "HMAC(key, message, digest_class)",
+          "has_concrete_algo": true,
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "6aa77e40-bf0c-419c-90d2-e31356c89950",
+    "canonical_algorithm": "X25519",
+    "family": "key_agreement",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.8903677461028803,
+    "roles": [
+      "capability",
+      "implementation"
+    ],
+    "usage_role": "key_establishment",
+    "evidence_count": 7,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_curve25519.py:6",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+          "name": "X25519PrivateKey",
+          "local_alias": "X25519PrivateKey",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_curve25519.py:6",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+          "name": "X25519PublicKey",
+          "local_alias": "X25519PublicKey",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_mlkem.py:20",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+          "name": "X25519PrivateKey",
+          "local_alias": "X25519PrivateKey",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_mlkem.py:20",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+          "name": "X25519PublicKey",
+          "local_alias": "X25519PublicKey",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "tests\\test_kex.py:34",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import x25519",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "x25519",
+          "local_alias": "x25519",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=3.3",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "cryptography",
+          "version": ">=3.3",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl = >=1.5",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "pynacl",
+          "version": ">=1.5",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "b5cd4a0f-11a8-45f2-be7e-c13f08bc631c",
+    "canonical_algorithm": "ECDH",
+    "family": "key_agreement",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9,
+    "roles": [
+      "usage",
+      "implementation"
+    ],
+    "usage_role": "key_establishment",
+    "evidence_count": 2,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_ecdh_nist.py:71",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "ec.ECDH()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "ec.ECDH()",
+          "has_concrete_algo": true,
+          "canonical": "ECDH",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_ecdh_nist.py:117",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "ec.ECDH()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "ec.ECDH()",
+          "has_concrete_algo": true,
+          "canonical": "ECDH",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "41754fba-3839-49bc-9333-245cd652234b",
+    "canonical_algorithm": "mlkem",
+    "family": "unknown",
+    "variant": null,
+    "quantum_status": "unknown",
+    "claim_state": "supported",
+    "confidence": 0.75,
+    "roles": [
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 1,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\kex_mlkem.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import mlkem",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "mlkem",
+          "local_alias": "mlkem",
+          "algo_identified": "mlkem",
+          "canonical": "mlkem",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "24c29ec5-5380-4488-ad85-fbeabcef93c2",
+    "canonical_algorithm": "MD5",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9792481250360578,
+    "roles": [
+      "usage",
+      "configuration",
+      "implementation"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 6,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:29",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "md5",
+          "local_alias": "md5",
+          "algo_identified": "md5",
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:390",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "md5(self.asbytes())",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "md5(self.asbytes())",
+          "has_concrete_algo": true,
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\sftp_server.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha1",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "md5",
+          "local_alias": "md5",
+          "algo_identified": "md5",
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "paramiko\\sftp_server.py:83",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "md5: md5",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "md5",
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:30",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "md5",
+          "local_alias": "md5",
+          "algo_identified": "md5",
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "tests\\test_pkey.py:28",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from hashlib import md5",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "hashlib",
+          "name": "md5",
+          "local_alias": "md5",
+          "algo_identified": "md5",
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      }
+    ]
+  },
+  {
+    "asset_id": "edb3ca41-c414-486f-b0f8-6b13ab76a393",
+    "canonical_algorithm": "Ed25519",
+    "family": "digital_signature",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.8292481250360578,
+    "roles": [
+      "capability",
+      "implementation"
+    ],
+    "usage_role": "digital_signature",
+    "evidence_count": 3,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:40",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.ed25519",
+          "name": "Ed25519PrivateKey",
+          "local_alias": "Ed25519PrivateKey",
+          "algo_identified": "ed25519",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=3.3",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "cryptography",
+          "version": ">=3.3",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl = >=1.5",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "pynacl",
+          "version": ">=1.5",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "0a474255-5b92-469b-95cf-f51bdc6775aa",
+    "canonical_algorithm": "RSA",
+    "family": "asymmetric_cipher",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.8660964047443681,
+    "roles": [
+      "capability",
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 5,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:41",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateKey",
+          "local_alias": "RSAPrivateKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "paramiko\\rsakey.py:28",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import padding, rsa",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "tests\\pkey.py:9",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateKey",
+          "local_alias": "RSAPrivateKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "tests\\test_pkey.py:34",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateNumbers",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateNumbers",
+          "local_alias": "RSAPrivateNumbers",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=3.3",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "cryptography",
+          "version": ">=3.3",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "c1aa411c-df8a-4460-a478-ed39b5e69504",
+    "canonical_algorithm": "AES",
+    "family": "symmetric_cipher",
+    "variant": null,
+    "quantum_status": "conditionally_safe",
+    "claim_state": "supported",
+    "confidence": 0.9660964047443681,
+    "roles": [
+      "usage",
+      "capability",
+      "implementation"
+    ],
+    "usage_role": "encryption",
+    "evidence_count": 5,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "paramiko\\pkey.py:727",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "algorithms.AES(key)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "algorithms.AES(key)",
+          "has_concrete_algo": true,
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "tests\\test_packetizer.py:49",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "algorithms.AES(zero_byte * 16)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "algorithms.AES(zero_byte * 16)",
+          "has_concrete_algo": true,
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "tests\\test_packetizer.py:79",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "algorithms.AES(zero_byte * 16)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "algorithms.AES(zero_byte * 16)",
+          "has_concrete_algo": true,
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "tests\\test_packetizer.py:103",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "algorithms.AES(zero_byte * 16)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "algorithms.AES(zero_byte * 16)",
+          "has_concrete_algo": true,
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "test"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=3.3",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "cryptography",
+          "version": ">=3.3",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "0db49951-1ddd-4618-b937-f6d063050dab",
+    "canonical_algorithm": "aes128-cbc",
+    "family": "unknown",
+    "variant": null,
+    "quantum_status": "unknown",
+    "claim_state": "supported",
+    "confidence": 0.8,
+    "roles": [
+      "configuration",
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 1,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:248",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "aes128-cbc: {'class': algorithms.AES, 'mode': modes.CBC, 'block-size': 16, 'key-size': 16}",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "aes128-cbc",
+          "canonical": "aes128-cbc",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "6ef0252e-4a08-4e48-81a8-cf19de52ea56",
+    "canonical_algorithm": "aes192-cbc",
+    "family": "unknown",
+    "variant": null,
+    "quantum_status": "unknown",
+    "claim_state": "supported",
+    "confidence": 0.8,
+    "roles": [
+      "configuration",
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 1,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:254",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "aes192-cbc: {'class': algorithms.AES, 'mode': modes.CBC, 'block-size': 16, 'key-size': 24}",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "aes192-cbc",
+          "canonical": "aes192-cbc",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "cf2324c6-3be5-4eb9-8065-42e7f575403a",
+    "canonical_algorithm": "aes256-cbc",
+    "family": "unknown",
+    "variant": null,
+    "quantum_status": "unknown",
+    "claim_state": "supported",
+    "confidence": 0.8,
+    "roles": [
+      "configuration",
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 1,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "paramiko\\transport.py:260",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "aes256-cbc: {'class': algorithms.AES, 'mode': modes.CBC, 'block-size': 16, 'key-size': 32}",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "aes256-cbc",
+          "canonical": "aes256-cbc",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "dfa9b271-fa62-4f86-b79b-e4aec605cb16",
+    "canonical_algorithm": "ChaCha20-Poly1305",
+    "family": "symmetric_cipher",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.55,
+    "roles": [
+      "capability"
+    ],
+    "usage_role": "encryption",
+    "evidence_count": 2,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=3.3",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "cryptography",
+          "version": ">=3.3",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl = >=1.5",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "pynacl",
+          "version": ">=1.5",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  },
+  {
+    "asset_id": "64816630-f7fc-423f-9362-74300466db10",
+    "canonical_algorithm": "BLAKE2b",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.5,
+    "roles": [
+      "capability"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 1,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl = >=1.5",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "pyproject.toml",
+          "package": "pynacl",
+          "version": ">=1.5",
+          "ecosystem": "python",
+          "canonical": "BLAKE2b",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        },
+        "path_class": "production"
+      }
+    ]
+  }
+]

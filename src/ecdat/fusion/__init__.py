@@ -292,12 +292,62 @@ def fuse_evidence(
         )
         normalized.append(ev)
 
-    # Step 2: Group by asset key
-    groups: dict[str, list[NormalizedEvidence]] = defaultdict(list)
+    # Step 2: Filter non-algorithm evidence records before grouping.
+    #
+    # Two filter rules:
+    #
+    # Rule A — Library-presence CAPABILITY records:
+    #   A CAPABILITY finding whose normalized_claim is UNKNOWN represents a bare
+    #   package import (e.g. `import jwt` → algo_hint='jwt' → normalize → UNKNOWN).
+    #   The library name is NOT a cryptographic algorithm. Preserve for audit trail
+    #   but exclude from asset grouping.
+    #
+    # Rule B — Unresolved API call IMPLEMENTATION records:
+    #   An IMPLEMENTATION finding whose normalized_claim is UNKNOWN and whose
+    #   source is python.ast.call or python.ast.import_from represents a call
+    #   to a function/class in a crypto module that we couldn't map to a named
+    #   algorithm (e.g. `decode_dss_signature()`, `load_pem_private_key()`).
+    #   These are valid crypto operations but are not standalone algorithm assets.
+    #   They are preserved for audit and will contribute to the asset evidence
+    #   when the same file has other corroborating evidence (e.g. RSA from the
+    #   import above).
+    library_capability_evidence: list[NormalizedEvidence] = []
+    unresolved_api_evidence: list[NormalizedEvidence] = []
+    algorithm_evidence: list[NormalizedEvidence] = []
+    _call_detectors = {
+        "python.ast.call", "python.ast.import_from", "python.ast.attribute", "python.ast.registry",
+        "java.rule.import", "java.rule.engine_instantiation", "java.rule.getinstance",
+        "java.rule.keygen_init", "java.rule.pqc_string",
+    }
+
     for ev in normalized:
+        is_capability_only = (ev.roles == [EvidenceRole.CAPABILITY])
+        algo_family = ev.provenance.get("family", "unknown")
+        claim_meta = normalize_algorithm(ev.normalized_claim)
+        is_unknown_algo = (ev.normalized_claim == "UNKNOWN" or claim_meta.get("family") == AlgorithmFamily.UNKNOWN)
+        is_library_presence = is_capability_only and (is_unknown_algo or algo_family == "unknown")
+
+        if is_library_presence:
+            # Rule A: Library-presence record (e.g. `import hashlib`, `import cryptography`)
+            library_capability_evidence.append(ev)
+        elif is_unknown_algo and ev.detector in _call_detectors:
+            # Rule B: Unresolved API call — preserves for audit, skip as standalone asset
+            unresolved_api_evidence.append(ev)
+        else:
+            algorithm_evidence.append(ev)
+
+    logger.debug(
+        "Fusion filter: %d algorithm evidence, %d library-presence (Rule A), %d unresolved-API (Rule B) — excluded from asset grouping",
+        len(algorithm_evidence), len(library_capability_evidence), len(unresolved_api_evidence),
+    )
+
+    # Step 3: Group by asset key
+    groups: dict[str, list[NormalizedEvidence]] = defaultdict(list)
+    for ev in algorithm_evidence:
         source_type_val = ev.source_type
         key = _asset_key(scan_id, ev.normalized_claim, source_type_val)
         groups[key].append(ev)
+
 
     # Step 3: Build FusedAsset for each group
     fused_assets: list[FusedAsset] = []
@@ -310,6 +360,16 @@ def fuse_evidence(
                 family = AlgorithmFamily(family)
             except ValueError:
                 family = AlgorithmFamily.UNKNOWN
+
+        # Refine family if contributing evidence provides more specific role evidence (e.g. DIGITAL_SIGNATURE from RS256)
+        for rec in records:
+            rec_family = rec.provenance.get("family")
+            if rec_family in (AlgorithmFamily.DIGITAL_SIGNATURE, "digital_signature"):
+                family = AlgorithmFamily.DIGITAL_SIGNATURE
+                break
+            elif rec_family in (AlgorithmFamily.MAC, "mac"):
+                family = AlgorithmFamily.MAC
+                break
 
         quantum_status = algo_meta.get("quantum_status", QuantumStatus.UNKNOWN)
         if isinstance(quantum_status, str):
@@ -376,7 +436,8 @@ def fuse_evidence(
         fused_assets.append(asset)
 
     logger.info(
-        "Fusion: %d raw findings → %d normalized evidence records → %d fused assets",
-        len(raw_findings), len(normalized), len(fused_assets),
+        "Fusion: %d raw findings → %d normalized (%d algorithm, %d library-capability, %d unresolved-API) → %d fused assets",
+        len(raw_findings), len(normalized), len(algorithm_evidence),
+        len(library_capability_evidence), len(unresolved_api_evidence), len(fused_assets),
     )
     return fused_assets

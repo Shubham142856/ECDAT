@@ -35,12 +35,12 @@ logger = logging.getLogger(__name__)
 
 # Known Java crypto class imports
 JAVA_IMPORT_PATTERNS: list[re.Pattern] = [
-    re.compile(r'import\s+(javax\.crypto\.[A-Za-z.]+)'),
-    re.compile(r'import\s+(java\.security\.[A-Za-z.]+)'),
-    re.compile(r'import\s+(org\.bouncycastle\.[A-Za-z.]+)'),
-    re.compile(r'import\s+(com\.google\.crypto\.tink\.[A-Za-z.]+)'),
-    re.compile(r'import\s+(software\.amazon\.awscryptography\.[A-Za-z.]+)'),
-    re.compile(r'import\s+(org\.apache\.commons\.codec\.[A-Za-z.]+)'),
+    re.compile(r'import\s+(javax\.crypto\.[\w.*]+)'),
+    re.compile(r'import\s+(java\.security\.[\w.*]+)'),
+    re.compile(r'import\s+(org\.bouncycastle\.[\w.*]+)'),
+    re.compile(r'import\s+(com\.google\.crypto\.tink\.[\w.*]+)'),
+    re.compile(r'import\s+(software\.amazon\.awscryptography\.[\w.*]+)'),
+    re.compile(r'import\s+(org\.apache\.commons\.codec\.[\w.*]+)'),
 ]
 
 # Known Java crypto API calls with algorithm argument (as string constant)
@@ -77,12 +77,27 @@ JAVA_PQC_PATTERN = re.compile(
 
 # Algorithm strings we recognize
 ALGO_STRING_RE = re.compile(
-    r'\b(AES|RSA|ECDSA|ECDH|Ed25519|X25519|ChaCha20|'
+    r'\b(AES|RSA|ECDSA|ECDH|Ed25519|Ed448|X25519|X448|ChaCha20|'
     r'SHA[-/]256|SHA[-/]384|SHA[-/]512|SHA[-/]1|MD5|HMAC|PBKDF2|HKDF|'
-    r'ML-KEM|ML-DSA|SLH-DSA|kyber|dilithium|'
+    r'ML[-_]?KEM|ML[-_]?DSA|SLH[-_]?DSA|kyber|dilithium|'
     r'AES/\w+/\w+|RSA/\w+/\w+)\b',
     re.IGNORECASE,
 )
+
+# Standard Java generic cryptographic framework classes/interfaces
+JAVA_GENERIC_CLASSES: set[str] = {
+    "key", "privatekey", "publickey", "secretkey", "provider", "securerandom",
+    "security", "cipher", "signature", "mac", "messagedigest", "keyagreement",
+    "keypair", "keypairgenerator", "keyfactory", "secretkeyfactory", "keygenerator",
+    "algorithmparameters", "certificate", "certificatefactory", "certpath", "x509certificate",
+    "keyspec", "secretkeyspec", "algorithmparameterspec", "ivparameterspec", "gcmparameterspec",
+    "oaepparameterspec", "pssparameterspec", "pbekeyspec", "pkcs8encodedkeyspec",
+    "x509encodedkeyspec", "ecfieldfp", "ecpoint", "ellipticcurve", "mgf1parameterspec", "psource",
+    "rsaotherprimeinfo", "rsaotherprimeinfoconverter",
+    "nosuchalgorithmexception", "nosuchpaddingexception",
+    "invalidkeyexception", "invalidalgorithmparameterexception", "invalidkeyspecexception",
+    "certificateexception", "certificateencodingexception",
+}
 
 
 @dataclass
@@ -127,17 +142,37 @@ def scan_java_file(file_path: str, source_text: str) -> list[JavaFinding]:
     for pattern in JAVA_IMPORT_PATTERNS:
         for m in pattern.finditer(source_text):
             lineno = _lineno_from_pos(m.start())
-            import_name = m.group(1)
+            import_name = m.group(1).rstrip(";")
+            simple_name = import_name.split(".")[-1]
             algo_m = ALGO_STRING_RE.search(import_name.replace(".", " "))
-            algo_hint = algo_m.group(0) if algo_m else import_name.split(".")[-1]
+
+            if algo_m:
+                algo_hint = algo_m.group(0)
+                roles = [EvidenceRole.IMPLEMENTATION]
+                conf = 0.60
+            elif simple_name.lower() in JAVA_GENERIC_CLASSES or simple_name == "*":
+                algo_hint = simple_name
+                roles = [EvidenceRole.CAPABILITY]
+                conf = 0.50
+            else:
+                meta = normalize_algorithm(simple_name)
+                if meta["canonical"] != "UNKNOWN":
+                    algo_hint = meta["canonical"]
+                    roles = [EvidenceRole.IMPLEMENTATION]
+                    conf = 0.60
+                else:
+                    algo_hint = simple_name
+                    roles = [EvidenceRole.CAPABILITY]
+                    conf = 0.50
+
             findings.append(JavaFinding(
                 file_path=file_path,
                 line=lineno,
                 detector="java.rule.import",
                 raw_signal=_line_at(lineno),
-                roles=[EvidenceRole.IMPLEMENTATION],
+                roles=roles,
                 algorithm_hint=algo_hint,
-                confidence=0.6,
+                confidence=conf,
                 provenance={"import": import_name},
             ))
 
@@ -175,12 +210,16 @@ def scan_java_file(file_path: str, source_text: str) -> list[JavaFinding]:
             provenance={"class": cls, "key_size": keysize},
         ))
 
-    # --- Step 4: new XxxEngine() patterns (Bouncy Castle) ---
+    # --- Step 4: new XxxEngine() patterns (Bouncy Castle & crypto engines) ---
     for m in JAVA_ENGINE_PATTERN.finditer(source_text):
         lineno = _lineno_from_pos(m.start())
         engine = m.group("engine")
         algo_m = ALGO_STRING_RE.search(engine)
-        algo_hint = algo_m.group(0) if algo_m else engine
+        if algo_m:
+            algo_hint = algo_m.group(0)
+        else:
+            meta = normalize_algorithm(engine)
+            algo_hint = meta["canonical"] if meta["canonical"] != "UNKNOWN" else engine
         findings.append(JavaFinding(
             file_path=file_path,
             line=lineno,

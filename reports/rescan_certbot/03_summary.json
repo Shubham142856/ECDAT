@@ -1,0 +1,44 @@
+{
+  "corpus": "Certbot @ 4856493",
+  "scan_id": "rescan_certbot_20260930T231408",
+  "timestamp": "2026-09-30T23:16:28.770247+00:00",
+  "raw_findings_total": 369,
+  "detectors": {
+    "python.ast.import_from": 25,
+    "python.ast.call": 220,
+    "python.ast.assignment": 13,
+    "python.ast.import": 5,
+    "python.ast.attribute": 1,
+    "python.ast.registry": 3,
+    "dependency.requirements_txt": 23,
+    "dependency.pyproject_toml": 26,
+    "certificate.x509_parser": 51,
+    "config.text_scan": 2
+  },
+  "roles": {
+    "implementation": 249,
+    "usage": 21,
+    "configuration": 18,
+    "capability": 54,
+    "observed": 51
+  },
+  "fused_assets_total": 17,
+  "unknown_assets_total": 0,
+  "canonical_algorithms": [
+    "AES",
+    "BLAKE2b",
+    "ChaCha20-Poly1305",
+    "ECDSA",
+    "Ed25519",
+    "Ed448",
+    "HMAC",
+    "MD5",
+    "ML-DSA",
+    "ML-KEM",
+    "RSA",
+    "SHA-1",
+    "SHA-256",
+    "X25519",
+    "X448"
+  ]
+}

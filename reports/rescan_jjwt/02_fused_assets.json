@@ -1,0 +1,139 @@
+[
+  {
+    "asset_id": "60f777f4-8d0f-49d9-a2ee-c954e66c9954",
+    "canonical_algorithm": "ECDSA",
+    "family": "digital_signature",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.8761780978028506,
+    "roles": [
+      "implementation",
+      "capability"
+    ],
+    "evidence_count": 46
+  },
+  {
+    "asset_id": "862ef414-81af-4bd9-8eca-cb255be1f792",
+    "canonical_algorithm": "RSA",
+    "family": "asymmetric_cipher",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "implementation",
+      "capability",
+      "usage"
+    ],
+    "evidence_count": 46
+  },
+  {
+    "asset_id": "72349ee5-00a3-4400-8c68-7dc7a4229135",
+    "canonical_algorithm": "AES",
+    "family": "symmetric_cipher",
+    "quantum_status": "conditionally_safe",
+    "claim_state": "supported",
+    "confidence": 0.9292481250360578,
+    "roles": [
+      "implementation",
+      "capability",
+      "usage"
+    ],
+    "evidence_count": 12
+  },
+  {
+    "asset_id": "c47a5a96-80d1-447e-8e55-1f15ad126ec5",
+    "canonical_algorithm": "ML-KEM",
+    "family": "pqc_kem",
+    "quantum_status": "safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.5,
+    "roles": [
+      "capability"
+    ],
+    "evidence_count": 1
+  },
+  {
+    "asset_id": "9f3f6549-e6f9-4abc-945e-98db45fdf824",
+    "canonical_algorithm": "ML-DSA",
+    "family": "pqc_signature",
+    "quantum_status": "safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.5,
+    "roles": [
+      "capability"
+    ],
+    "evidence_count": 1
+  },
+  {
+    "asset_id": "627a4186-ff1e-4e08-9ed7-30118080ff67",
+    "canonical_algorithm": "Ed25519",
+    "family": "digital_signature",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.95,
+    "roles": [
+      "observed"
+    ],
+    "evidence_count": 1
+  },
+  {
+    "asset_id": "aa3d0414-43d6-4689-8040-bfe30f6a5bc2",
+    "canonical_algorithm": "Ed448",
+    "family": "digital_signature",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.95,
+    "roles": [
+      "observed"
+    ],
+    "evidence_count": 1
+  },
+  {
+    "asset_id": "16b83f7b-9622-43ef-8f14-bcac2f88c038",
+    "canonical_algorithm": "ECDSA",
+    "family": "digital_signature",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "observed"
+    ],
+    "evidence_count": 3
+  },
+  {
+    "asset_id": "a46b07db-ca7b-4c6d-9055-73ed5e15d9dc",
+    "canonical_algorithm": "RSA",
+    "family": "asymmetric_cipher",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "observed"
+    ],
+    "evidence_count": 6
+  },
+  {
+    "asset_id": "1f79656d-cf43-4080-a111-5d3f1a1ee213",
+    "canonical_algorithm": "X25519",
+    "family": "key_agreement",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.95,
+    "roles": [
+      "observed"
+    ],
+    "evidence_count": 1
+  },
+  {
+    "asset_id": "4a6e2445-8a2e-4765-a411-bca3d33a39ad",
+    "canonical_algorithm": "X448",
+    "family": "key_agreement",
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.95,
+    "roles": [
+      "observed"
+    ],
+    "evidence_count": 1
+  }
+]

@@ -43,20 +43,47 @@ ALGORITHM_ALIASES: dict[str, dict] = {
     "p-384":             {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "P-384"},
     "secp256r1":         {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "secp256r1"},
     "secp384r1":         {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "secp384r1"},
+    "es256":             {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "P-256"},
+    "es256k":            {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "secp256k1"},
+    "es384":             {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "P-384"},
+    "es512":             {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "P-521"},
+    "es521":             {"canonical": "ECDSA",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE, "variant": "P-521"},
 
     # Curve25519 family
     "x25519":            {"canonical": "X25519",     "family": AlgorithmFamily.KEY_AGREEMENT,    "quantum_status": QuantumStatus.VULNERABLE},
     "curve25519":        {"canonical": "Curve25519",  "family": AlgorithmFamily.KEY_AGREEMENT,    "quantum_status": QuantumStatus.VULNERABLE},
     "ed25519":           {"canonical": "Ed25519",     "family": AlgorithmFamily.DIGITAL_SIGNATURE,"quantum_status": QuantumStatus.VULNERABLE},
+    "eddsa":             {"canonical": "Ed25519",     "family": AlgorithmFamily.DIGITAL_SIGNATURE,"quantum_status": QuantumStatus.VULNERABLE},
 
     # AES variants
     "aes":               {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE},
     "aes-128-gcm":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128-GCM"},
     "aes-256-gcm":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256-GCM"},
+    "aes-192-gcm":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "192-GCM"},
+    "aes128-gcm":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128-GCM"},
+    "aes192-gcm":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "192-GCM"},
+    "aes256-gcm":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256-GCM"},
     "aes-128-cbc":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128-CBC"},
+    "aes-192-cbc":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "192-CBC"},
     "aes-256-cbc":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256-CBC"},
+    "aes128-cbc":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128-CBC"},
+    "aes192-cbc":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "192-CBC"},
+    "aes256-cbc":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256-CBC"},
+    "aes-128-ctr":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128-CTR"},
+    "aes-192-ctr":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "192-CTR"},
+    "aes-256-ctr":       {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256-CTR"},
+    "aes128-ctr":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128-CTR"},
+    "aes192-ctr":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "192-CTR"},
+    "aes256-ctr":        {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256-CTR"},
     "aes256":            {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE,               "variant": "256"},
     "aes128":            {"canonical": "AES",        "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "128"},
+
+    # 3DES / TripleDES
+    "3des":              {"canonical": "3DES",       "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE, "lifecycle": Lifecycle.DEPRECATED},
+    "tripledes":         {"canonical": "3DES",       "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE, "lifecycle": Lifecycle.DEPRECATED},
+    "3des-cbc":          {"canonical": "3DES",       "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE, "variant": "CBC", "lifecycle": Lifecycle.DEPRECATED},
+    "des-ede3":          {"canonical": "3DES",       "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE, "lifecycle": Lifecycle.DEPRECATED},
+    "des-ede3-cbc":      {"canonical": "3DES",       "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE, "variant": "CBC", "lifecycle": Lifecycle.DEPRECATED},
 
     # ChaCha20
     "chacha20-poly1305":    {"canonical": "ChaCha20-Poly1305",   "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE},
@@ -64,6 +91,8 @@ ALGORITHM_ALIASES: dict[str, dict] = {
     "chacha20poly1305":     {"canonical": "ChaCha20-Poly1305",   "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.SAFE},
 
     # Hash algorithms
+    "sha-224":           {"canonical": "SHA-224", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
+    "sha224":            {"canonical": "SHA-224", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
     "sha-256":           {"canonical": "SHA-256", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
     "sha256":            {"canonical": "SHA-256", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
     "sha-384":           {"canonical": "SHA-384", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
@@ -73,12 +102,21 @@ ALGORITHM_ALIASES: dict[str, dict] = {
     "sha-1":             {"canonical": "SHA-1",   "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.VULNERABLE, "lifecycle": Lifecycle.DEPRECATED},
     "sha1":              {"canonical": "SHA-1",   "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.VULNERABLE, "lifecycle": Lifecycle.DEPRECATED},
     "md5":               {"canonical": "MD5",     "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.VULNERABLE, "lifecycle": Lifecycle.DEPRECATED},
+    "sha3-224":          {"canonical": "SHA3-224","family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
+    "sha3-256":          {"canonical": "SHA3-256","family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
+    "sha3-384":          {"canonical": "SHA3-384","family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
+    "sha3-512":          {"canonical": "SHA3-512","family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
+    "shake128":          {"canonical": "SHAKE128","family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
+    "shake256":          {"canonical": "SHAKE256","family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
     "blake2s":           {"canonical": "BLAKE2s", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
     "blake2b":           {"canonical": "BLAKE2b", "family": AlgorithmFamily.HASH, "quantum_status": QuantumStatus.SAFE},
 
     # MAC
     "hmac":              {"canonical": "HMAC",    "family": AlgorithmFamily.MAC, "quantum_status": QuantumStatus.SAFE},
     "hmac-sha256":       {"canonical": "HMAC",    "family": AlgorithmFamily.MAC, "quantum_status": QuantumStatus.SAFE, "variant": "SHA-256"},
+    "hs256":             {"canonical": "HMAC",    "family": AlgorithmFamily.MAC, "quantum_status": QuantumStatus.SAFE, "variant": "SHA-256"},
+    "hs384":             {"canonical": "HMAC",    "family": AlgorithmFamily.MAC, "quantum_status": QuantumStatus.SAFE, "variant": "SHA-384"},
+    "hs512":             {"canonical": "HMAC",    "family": AlgorithmFamily.MAC, "quantum_status": QuantumStatus.SAFE, "variant": "SHA-512"},
     "poly1305":          {"canonical": "Poly1305","family": AlgorithmFamily.MAC, "quantum_status": QuantumStatus.SAFE},
 
     # KDF
@@ -89,21 +127,69 @@ ALGORITHM_ALIASES: dict[str, dict] = {
 
     # --- PQC STANDARDS (NIST FIPS 203/204/205 — final 2024) ---
     "ml-kem":            {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "standard": "NIST FIPS 203"},
+    "mlkem":             {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "standard": "NIST FIPS 203"},
     "ml-kem-512":        {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "variant": "512",  "standard": "NIST FIPS 203"},
     "ml-kem-768":        {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "variant": "768",  "standard": "NIST FIPS 203"},
     "ml-kem-1024":       {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "variant": "1024", "standard": "NIST FIPS 203"},
+    "mlkem512":          {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "variant": "512",  "standard": "NIST FIPS 203"},
     "mlkem768":          {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "variant": "768",  "standard": "NIST FIPS 203"},
     "mlkem1024":         {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "variant": "1024", "standard": "NIST FIPS 203"},
     "kyber":             {"canonical": "ML-KEM",  "family": AlgorithmFamily.PQC_KEM,       "quantum_status": QuantumStatus.SAFE, "note": "Kyber is ML-KEM draft name"},
 
     "ml-dsa":            {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "standard": "NIST FIPS 204"},
+    "mldsa":             {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "standard": "NIST FIPS 204"},
     "ml-dsa-44":         {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "variant": "44",   "standard": "NIST FIPS 204"},
     "ml-dsa-65":         {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "variant": "65",   "standard": "NIST FIPS 204"},
     "ml-dsa-87":         {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "variant": "87",   "standard": "NIST FIPS 204"},
+    "mldsa44":           {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "variant": "44",   "standard": "NIST FIPS 204"},
+    "mldsa65":           {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "variant": "65",   "standard": "NIST FIPS 204"},
+    "mldsa87":           {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "variant": "87",   "standard": "NIST FIPS 204"},
     "dilithium":         {"canonical": "ML-DSA",  "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "note": "Dilithium is ML-DSA draft name"},
 
     "slh-dsa":           {"canonical": "SLH-DSA", "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "standard": "NIST FIPS 205"},
+    "slhdsa":            {"canonical": "SLH-DSA", "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "standard": "NIST FIPS 205"},
     "sphincs+":          {"canonical": "SLH-DSA", "family": AlgorithmFamily.PQC_SIGNATURE, "quantum_status": QuantumStatus.SAFE, "note": "SPHINCS+ is SLH-DSA draft name"},
+
+    # Curve448 family
+    "ed448":             {"canonical": "Ed448",   "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "x448":              {"canonical": "X448",    "family": AlgorithmFamily.KEY_AGREEMENT,     "quantum_status": QuantumStatus.VULNERABLE},
+
+    # --- Java Interface and Specification Aliases ---
+    "rsapublickey":                  {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsaprivatekey":                 {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsaprivatecrtkey":              {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsaprivatecrtkeyspec":          {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsamultiprimeprivatecrtkey":    {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsamultiprimeprivatecrtkeyspec":{"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsakey":                        {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsapublickeyspec":              {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsaprivatekeyspec":             {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsakeygenparameterspec":        {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsasignaturealgorithm":         {"canonical": "RSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsaprivatejwkfactory":          {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "rsapublicjwkfactory":           {"canonical": "RSA", "family": AlgorithmFamily.ASYMMETRIC_CIPHER, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecpublickey":                   {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecprivatekey":                  {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "eckey":                         {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecpublickeyspec":               {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecprivatekeyspec":              {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecparameterspec":               {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecgenparameterspec":            {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecsignaturealgorithm":          {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecpublicjwkfactory":            {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecprivatejwkfactory":           {"canonical": "ECDSA", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "edecpublickey":                 {"canonical": "Ed25519", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "edecprivatekey":                {"canonical": "Ed25519", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "edsignaturealgorithm":          {"canonical": "Ed25519", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "edwardscurve":                  {"canonical": "Ed25519", "family": AlgorithmFamily.DIGITAL_SIGNATURE, "quantum_status": QuantumStatus.VULNERABLE},
+    "xecpublickey":                  {"canonical": "X25519", "family": AlgorithmFamily.KEY_AGREEMENT, "quantum_status": QuantumStatus.VULNERABLE},
+    "xecprivatekey":                 {"canonical": "X25519", "family": AlgorithmFamily.KEY_AGREEMENT, "quantum_status": QuantumStatus.VULNERABLE},
+    "ecdhkeyalgorithm":              {"canonical": "ECDH", "family": AlgorithmFamily.KEY_AGREEMENT, "quantum_status": QuantumStatus.VULNERABLE},
+    "aeswrapkeyalgorithm":           {"canonical": "AES", "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "KW"},
+    "aesgcmkeyalgorithm":            {"canonical": "AES", "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "GCM"},
+    "aesalgorithm":                  {"canonical": "AES", "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE},
+    "gcmaesaeadalgorithm":           {"canonical": "AES", "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "GCM"},
+    "hmacaesaeadalgorithm":          {"canonical": "AES", "family": AlgorithmFamily.SYMMETRIC_CIPHER, "quantum_status": QuantumStatus.CONDITIONALLY_SAFE, "variant": "CBC-HMAC"},
 
     # --- PQC Hybrid KEX (IETF RFC 10024 — Standards Track, August 2026) ---
     "x25519mlkem768":    {"canonical": "X25519MLKEM768",    "family": AlgorithmFamily.HYBRID_KEM, "quantum_status": QuantumStatus.HYBRID, "standard": "IETF RFC 10024"},
@@ -121,13 +207,19 @@ ALGORITHM_ALIASES: dict[str, dict] = {
 }
 
 
-def normalize_algorithm(raw: str) -> dict:
+def normalize_algorithm(raw: Optional[str]) -> dict:
     """Return canonical metadata for a raw algorithm name.
 
     Returns a dict with keys: canonical, family, quantum_status, and optional variant, standard, note.
     If the raw name is not in the alias table, the canonical name is the
     original string (title-cased) and family/status are UNKNOWN.
     """
+    if not raw or not isinstance(raw, str) or not raw.strip():
+        return {
+            "canonical": "UNKNOWN",
+            "family": AlgorithmFamily.UNKNOWN,
+            "quantum_status": QuantumStatus.UNKNOWN,
+        }
     key = raw.strip().lower().replace(" ", "-").replace("_", "-")
     if key in ALGORITHM_ALIASES:
         return dict(ALGORITHM_ALIASES[key])
@@ -174,6 +266,9 @@ CRYPTO_PACKAGES: dict[str, dict] = {
     "bouncy-castle":       {"canonical_algorithms": ["RSA", "ECDSA", "AES", "ML-KEM", "ML-DSA"], "ecosystem": "java"},
     "bouncycastle":        {"canonical_algorithms": ["RSA", "ECDSA", "AES", "ML-KEM", "ML-DSA"], "ecosystem": "java"},
     "bcprov-jdk":          {"canonical_algorithms": ["RSA", "ECDSA", "AES", "ML-KEM", "ML-DSA"], "ecosystem": "java"},
+    "bcprov":              {"canonical_algorithms": ["RSA", "ECDSA", "AES", "ML-KEM", "ML-DSA"], "ecosystem": "java"},
+    "bcpkix":              {"canonical_algorithms": ["RSA", "ECDSA", "AES", "TLS"], "ecosystem": "java"},
+    "bcutil":              {"canonical_algorithms": ["RSA", "ECDSA", "AES"], "ecosystem": "java"},
     "conscrypt":           {"canonical_algorithms": ["RSA", "ECDSA", "AES", "TLS"], "ecosystem": "java"},
     "amazon-corretto-crypto": {"canonical_algorithms": ["RSA", "ECDSA", "AES", "ML-KEM"], "ecosystem": "java"},
     "tink":                {"canonical_algorithms": ["AES", "ECDSA", "Ed25519", "HKDF"], "ecosystem": "java"},

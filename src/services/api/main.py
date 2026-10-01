@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.INFO)
 # Database setup
 # ---------------------------------------------------------------------------
 
-DATABASE_URL = os.environ["DATABASE_URL"]
+DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql+asyncpg://vigil:vigil@localhost:5433/ecdat")
 engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 

@@ -114,3 +114,67 @@ class TestContextScore:
         required_keys = {"quantum_exposure", "data_sensitivity", "business_criticality",
                          "internet_exposure", "blast_radius", "migration_difficulty"}
         assert required_keys.issubset(set(breakdown.keys()))
+
+
+# ---------------------------------------------------------------------------
+# Insufficient context policy (no hidden X/Y defaults)
+# ---------------------------------------------------------------------------
+
+class TestInsufficientContextPolicy:
+    def test_missing_x_produces_insufficient_context(self):
+        from ecdat.risk import assess_asset_risk
+        from ecdat.fusion import FusedAsset
+        from ecdat.graph import BlastRadiusResult
+        from ecdat.ontology import AlgorithmFamily, UsageRole, ClaimState, EvidenceRole, Lifecycle
+
+        asset = FusedAsset(
+            asset_id="test-1",
+            scan_id="scan-1",
+            canonical_algorithm="RSA",
+            family=AlgorithmFamily.ASYMMETRIC_CIPHER,
+            variant=None,
+            parameters={},
+            roles={EvidenceRole.USAGE},
+            claim_state=ClaimState.SUPPORTED,
+            confidence=0.9,
+            quantum_status=QuantumStatus.VULNERABLE,
+            lifecycle=Lifecycle.ACTIVE,
+            usage_role=UsageRole.DIGITAL_SIGNATURE,
+            evidence_records=[],
+            contradictions=[],
+        )
+        blast = BlastRadiusResult("test-1", "RSA", [], 0, 10, True)
+        ra = assess_asset_risk(asset, blast, x=None, y_estimate=3.0)
+        assert ra.risk_level == "INSUFFICIENT CONTEXT"
+        assert ra.mosca is None
+        assert ra.probability is None
+        assert "insufficient context" in ra.risk_label.lower()
+
+    def test_missing_y_produces_insufficient_context(self):
+        from ecdat.risk import assess_asset_risk
+        from ecdat.fusion import FusedAsset
+        from ecdat.graph import BlastRadiusResult
+        from ecdat.ontology import AlgorithmFamily, UsageRole, ClaimState, EvidenceRole, Lifecycle
+
+        asset = FusedAsset(
+            asset_id="test-2",
+            scan_id="scan-1",
+            canonical_algorithm="RSA",
+            family=AlgorithmFamily.ASYMMETRIC_CIPHER,
+            variant=None,
+            parameters={},
+            roles={EvidenceRole.USAGE},
+            claim_state=ClaimState.SUPPORTED,
+            confidence=0.9,
+            quantum_status=QuantumStatus.VULNERABLE,
+            lifecycle=Lifecycle.ACTIVE,
+            usage_role=UsageRole.DIGITAL_SIGNATURE,
+            evidence_records=[],
+            contradictions=[],
+        )
+        blast = BlastRadiusResult("test-2", "RSA", [], 0, 10, True)
+        ra = assess_asset_risk(asset, blast, x=10.0, y_estimate=None)
+        assert ra.risk_level == "INSUFFICIENT CONTEXT"
+        assert ra.mosca is None
+        assert ra.probability is None
+        assert "insufficient context" in ra.risk_label.lower()

@@ -1,0 +1,2671 @@
+[
+  {
+    "file_path": "paramiko\\config.py",
+    "line": 31,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha1",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha1",
+      "local_alias": "sha1",
+      "algo_identified": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\config.py",
+    "line": 449,
+    "col": 18,
+    "detector": "python.ast.call",
+    "raw_signal": "sha1(tohash.encode())",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "sha1(tohash.encode())",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 59,
+    "col": 12,
+    "detector": "python.ast.attribute",
+    "raw_signal": "self.hash_object = hashes.SHA256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "hash_object",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 61,
+    "col": 12,
+    "detector": "python.ast.attribute",
+    "raw_signal": "self.hash_object = hashes.SHA384",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA384",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "hash_object",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 63,
+    "col": 12,
+    "detector": "python.ast.attribute",
+    "raw_signal": "self.hash_object = hashes.SHA512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "hash_object",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 224,
+    "col": 16,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "ECDSA",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 226,
+    "col": 15,
+    "detector": "python.ast.call",
+    "raw_signal": "decode_dss_signature(sig)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "decode_dss_signature(sig)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 238,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "encode_dss_signature(sigR, sigS)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "encode_dss_signature(sigR, sigS)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 242,
+    "col": 33,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "ECDSA",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.ECDSA(self.ecdsa_curve.hash_object())",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 254,
+    "col": 28,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP256R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP256R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 268,
+    "col": 22,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.generate_private_key(curve, backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.generate_private_key(curve, backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 268,
+    "col": 61,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 285,
+    "col": 22,
+    "detector": "python.ast.call",
+    "raw_signal": "serialization.load_der_private_key(data, password=None, backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "serialization.load_der_private_key(data, password=None, backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 286,
+    "col": 49,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 305,
+    "col": 22,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.derive_private_key(sigkey, curve.curve_class(), default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.derive_private_key(sigkey, curve.curve_class(), default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ecdsakey.py",
+    "line": 306,
+    "col": 49,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ed25519key.py",
+    "line": 20,
+    "col": 0,
+    "detector": "python.ast.import",
+    "raw_signal": "import nacl.signing",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "nacl",
+    "confidence": 0.5,
+    "provenance": {
+      "ast_node": "Import",
+      "module": "nacl.signing",
+      "local_alias": "nacl.signing",
+      "evidence_kind": "library_present"
+    },
+    "source_type": "python_source",
+    "library_package": "nacl"
+  },
+  {
+    "file_path": "paramiko\\ed25519key.py",
+    "line": 128,
+    "col": 24,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(cipher['class'](key[:cipher['key-size']]), cipher['mode'](key[cipher['key-size']:]), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(cipher['class'](key[:cipher['key-size']]), cipher['mode'](key[cipher['key-size']:]), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\ed25519key.py",
+    "line": 131,
+    "col": 24,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\hostkeys.py",
+    "line": 25,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha1",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha1",
+      "local_alias": "sha1",
+      "algo_identified": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\hostkeys.py",
+    "line": 26,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hmac import HMAC",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "HMAC",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hmac",
+      "name": "HMAC",
+      "local_alias": "HMAC",
+      "algo_identified": "HMAC"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\hostkeys.py",
+    "line": 294,
+    "col": 30,
+    "detector": "python.ast.call",
+    "raw_signal": "sha1()",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "sha1()",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\hostkeys.py",
+    "line": 299,
+    "col": 28,
+    "detector": "python.ast.call",
+    "raw_signal": "sha1()",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "sha1()",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\hostkeys.py",
+    "line": 300,
+    "col": 15,
+    "detector": "python.ast.call",
+    "raw_signal": "HMAC(salt, b(hostname), sha1)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "HMAC",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "HMAC(salt, b(hostname), sha1)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 2,
+    "col": 0,
+    "detector": "python.ast.import",
+    "raw_signal": "import hashlib",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "hashlib",
+    "confidence": 0.5,
+    "provenance": {
+      "ast_node": "Import",
+      "module": "hashlib",
+      "local_alias": "hashlib",
+      "evidence_kind": "library_present"
+    },
+    "source_type": "python_source",
+    "library_package": "hashlib"
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 6,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "x25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+      "name": "X25519PrivateKey",
+      "local_alias": "X25519PrivateKey",
+      "algo_identified": "x25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 6,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "x25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+      "name": "X25519PublicKey",
+      "local_alias": "X25519PublicKey",
+      "algo_identified": "x25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 21,
+    "col": 4,
+    "detector": "python.ast.attribute",
+    "raw_signal": "hash_algo = hashlib.sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "hash_algo",
+      "module": "hashlib",
+      "attr": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 30,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PrivateKey.generate()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PrivateKey.generate()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 38,
+    "col": 11,
+    "detector": "python.ast.call",
+    "raw_signal": "constant_time.bytes_eq(secret, b'\\x00' * 32)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "constant_time.bytes_eq(secret, b'\\x00' * 32)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 45,
+    "col": 19,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PrivateKey.generate()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PrivateKey.generate()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 71,
+    "col": 19,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PublicKey.from_public_bytes(peer_key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PublicKey.from_public_bytes(peer_key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_curve25519.py",
+    "line": 109,
+    "col": 19,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PublicKey.from_public_bytes(peer_key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PublicKey.from_public_bytes(peer_key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 6,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha256, sha384, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha256",
+      "local_alias": "sha256",
+      "algo_identified": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 6,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha256, sha384, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha384",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha384",
+      "local_alias": "sha384",
+      "algo_identified": "sha384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 6,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha256, sha384, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha512",
+      "local_alias": "sha512",
+      "algo_identified": "sha512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 23,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP256R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP256R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 59,
+    "col": 17,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.generate_private_key(self.curve, default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.generate_private_key(self.curve, default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 59,
+    "col": 53,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 71,
+    "col": 28,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.ECDH()",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "ECDH",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.ECDH()",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 117,
+    "col": 28,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.ECDH()",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "ECDH",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.ECDH()",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 145,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP384R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP384R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_ecdh_nist.py",
+    "line": 151,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP521R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP521R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_gex.py",
+    "line": 26,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha256",
+      "local_alias": "sha256",
+      "algo_identified": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_group14.py",
+    "line": 26,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha256",
+      "local_alias": "sha256",
+      "algo_identified": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_group16.py",
+    "line": 24,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha512",
+      "local_alias": "sha512",
+      "algo_identified": "sha512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 15,
+    "col": 0,
+    "detector": "python.ast.import",
+    "raw_signal": "import hashlib",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "hashlib",
+    "confidence": 0.5,
+    "provenance": {
+      "ast_node": "Import",
+      "module": "hashlib",
+      "local_alias": "hashlib",
+      "evidence_kind": "library_present"
+    },
+    "source_type": "python_source",
+    "library_package": "hashlib"
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 20,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "x25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+      "name": "X25519PrivateKey",
+      "local_alias": "X25519PrivateKey",
+      "algo_identified": "x25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 20,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "x25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+      "name": "X25519PublicKey",
+      "local_alias": "X25519PublicKey",
+      "algo_identified": "x25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 26,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric import mlkem",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "mlkem",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "name": "mlkem",
+      "local_alias": "mlkem",
+      "algo_identified": "mlkem"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 55,
+    "col": 4,
+    "detector": "python.ast.attribute",
+    "raw_signal": "hash_algo = hashlib.sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "hash_algo",
+      "module": "hashlib",
+      "attr": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 75,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "mlkem.MLKEM768PrivateKey.generate()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "mlkem.MLKEM768PrivateKey.generate()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 76,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PrivateKey.generate()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PrivateKey.generate()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 84,
+    "col": 26,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PrivateKey.generate()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PrivateKey.generate()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 88,
+    "col": 25,
+    "detector": "python.ast.call",
+    "raw_signal": "mlkem.MLKEM768PrivateKey.generate()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "mlkem.MLKEM768PrivateKey.generate()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 111,
+    "col": 15,
+    "detector": "python.ast.call",
+    "raw_signal": "X25519PublicKey.from_public_bytes(peer_pub_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "X25519PublicKey.from_public_bytes(peer_pub_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\kex_mlkem.py",
+    "line": 115,
+    "col": 11,
+    "detector": "python.ast.call",
+    "raw_signal": "constant_time.bytes_eq(secret, b'\\x00' * 32)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "constant_time.bytes_eq(secret, b'\\x00' * 32)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\packet.py",
+    "line": 29,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hmac import HMAC",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "HMAC",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hmac",
+      "name": "HMAC",
+      "local_alias": "HMAC",
+      "algo_identified": "HMAC"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\packet.py",
+    "line": 47,
+    "col": 11,
+    "detector": "python.ast.call",
+    "raw_signal": "HMAC(key, message, digest_class)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "HMAC",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "HMAC(key, message, digest_class)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 29,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "md5",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "md5",
+      "local_alias": "md5",
+      "algo_identified": "md5"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 29,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha256",
+      "local_alias": "sha256",
+      "algo_identified": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 40,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "ed25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.ed25519",
+      "name": "Ed25519PrivateKey",
+      "local_alias": "Ed25519PrivateKey",
+      "algo_identified": "ed25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 41,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPrivateKey",
+      "local_alias": "RSAPrivateKey",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 195,
+    "col": 21,
+    "detector": "python.ast.call",
+    "raw_signal": "serialization.load_ssh_private_key(data=data, password=password)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "serialization.load_ssh_private_key(data=data, password=password)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 200,
+    "col": 21,
+    "detector": "python.ast.call",
+    "raw_signal": "serialization.load_pem_private_key(data=data, password=password)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "serialization.load_pem_private_key(data=data, password=password)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 390,
+    "col": 15,
+    "detector": "python.ast.call",
+    "raw_signal": "md5(self.asbytes())",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "md5",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "md5(self.asbytes())",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 401,
+    "col": 16,
+    "detector": "python.ast.call",
+    "raw_signal": "sha256(bytes(self))",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "sha256(bytes(self))",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 654,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(cipher(key), mode(salt), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(cipher(key), mode(salt), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 655,
+    "col": 45,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 658,
+    "col": 19,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PKCS7(cipher.block_size)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PKCS7(cipher.block_size)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 726,
+    "col": 24,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(algorithms.AES(key), mode(iv), default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(algorithms.AES(key), mode(iv), default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 727,
+    "col": 16,
+    "detector": "python.ast.call",
+    "raw_signal": "algorithms.AES(key)",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "AES",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "algorithms.AES(key)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 727,
+    "col": 47,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 833,
+    "col": 25,
+    "detector": "python.ast.call",
+    "raw_signal": "serialization.NoEncryption()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "serialization.NoEncryption()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\pkey.py",
+    "line": 835,
+    "col": 25,
+    "detector": "python.ast.call",
+    "raw_signal": "serialization.BestAvailableEncryption(b(password))",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "serialization.BestAvailableEncryption(b(password))",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 28,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric import padding, rsa",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "name": "rsa",
+      "local_alias": "rsa",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 78,
+    "col": 23,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa.RSAPublicNumbers(e=msg.get_mpint(), n=msg.get_mpint())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa.RSAPublicNumbers(e=msg.get_mpint(), n=msg.get_mpint())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 80,
+    "col": 25,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 139,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PKCS1v15()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PKCS1v15()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 167,
+    "col": 28,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PKCS1v15()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PKCS1v15()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 184,
+    "col": 14,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa.generate_private_key(public_exponent=65537, key_size=bits, backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa.generate_private_key(public_exponent=65537, key_size=bits, backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 185,
+    "col": 58,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 203,
+    "col": 22,
+    "detector": "python.ast.call",
+    "raw_signal": "serialization.load_der_private_key(data, password=None, backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "serialization.load_der_private_key(data, password=None, backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 204,
+    "col": 49,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 210,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa.RSAPublicNumbers(e=e, n=n)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa.RSAPublicNumbers(e=e, n=n)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 211,
+    "col": 18,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa.RSAPrivateNumbers(p=p, q=q, d=d, dmp1=d % (p - 1), dmq1=d % (q - 1), iqmp=iqmp, public_numbers=public_numbers)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa.RSAPrivateNumbers(p=p, q=q, d=d, dmp1=d % (p - 1), dmq1=d % (q - 1), iqmp=iqmp, public_numbers=public_numbers)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\rsakey.py",
+    "line": 219,
+    "col": 26,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\sftp_server.py",
+    "line": 26,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha1",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "md5",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "md5",
+      "local_alias": "md5",
+      "algo_identified": "md5"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\sftp_server.py",
+    "line": 26,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha1",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha1",
+      "local_alias": "sha1",
+      "algo_identified": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\sftp_server.py",
+    "line": 83,
+    "col": 15,
+    "detector": "python.ast.registry",
+    "raw_signal": "sha1: sha1",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\sftp_server.py",
+    "line": 83,
+    "col": 29,
+    "detector": "python.ast.registry",
+    "raw_signal": "md5: md5",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "md5",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "md5"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 30,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "md5",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "md5",
+      "local_alias": "md5",
+      "algo_identified": "md5"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 30,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha1",
+      "local_alias": "sha1",
+      "algo_identified": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 30,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha256",
+      "local_alias": "sha256",
+      "algo_identified": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 30,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5, sha1, sha256, sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha512",
+      "local_alias": "sha512",
+      "algo_identified": "sha512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 248,
+    "col": 8,
+    "detector": "python.ast.registry",
+    "raw_signal": "aes128-cbc: {'class': algorithms.AES, 'mode': modes.CBC, 'block-size': 16, 'key-size': 16}",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "aes128-cbc",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "aes128-cbc"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 254,
+    "col": 8,
+    "detector": "python.ast.registry",
+    "raw_signal": "aes192-cbc: {'class': algorithms.AES, 'mode': modes.CBC, 'block-size': 16, 'key-size': 24}",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "aes192-cbc",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "aes192-cbc"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 260,
+    "col": 8,
+    "detector": "python.ast.registry",
+    "raw_signal": "aes256-cbc: {'class': algorithms.AES, 'mode': modes.CBC, 'block-size': 16, 'key-size': 32}",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "aes256-cbc",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "aes256-cbc"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 1917,
+    "col": 17,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(algorithm=algorithm, mode=info['mode'](iv), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(algorithm=algorithm, mode=info['mode'](iv), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "paramiko\\transport.py",
+    "line": 1921,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\pkey.py",
+    "line": 9,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPrivateKey",
+      "local_alias": "RSAPrivateKey",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_kex.py",
+    "line": 34,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric import x25519",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "x25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "name": "x25519",
+      "local_alias": "x25519",
+      "algo_identified": "x25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_kex.py",
+    "line": 62,
+    "col": 8,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP256R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP256R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_kex.py",
+    "line": 64,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.EllipticCurvePrivateNumbers(private_value=private_key_value, public_numbers=public_key_numbers_obj)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.EllipticCurvePrivateNumbers(private_value=private_key_value, public_numbers=public_key_numbers_obj)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_kex.py",
+    "line": 66,
+    "col": 18,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_kex.py",
+    "line": 69,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP256R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP256R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_kex.py",
+    "line": 73,
+    "col": 8,
+    "detector": "python.ast.call",
+    "raw_signal": "ec.SECP256R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ec.SECP256R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 25,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha1",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha1",
+      "local_alias": "sha1",
+      "algo_identified": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 48,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(algorithms.AES(zero_byte * 16), modes.CBC(x55 * 16), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(algorithms.AES(zero_byte * 16), modes.CBC(x55 * 16), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 49,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "algorithms.AES(zero_byte * 16)",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "AES",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "algorithms.AES(zero_byte * 16)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 50,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "modes.CBC(x55 * 16)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "modes.CBC(x55 * 16)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 51,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 78,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(algorithms.AES(zero_byte * 16), modes.CBC(x55 * 16), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(algorithms.AES(zero_byte * 16), modes.CBC(x55 * 16), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 79,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "algorithms.AES(zero_byte * 16)",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "AES",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "algorithms.AES(zero_byte * 16)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 80,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "modes.CBC(x55 * 16)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "modes.CBC(x55 * 16)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 81,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 102,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "Cipher(algorithms.AES(zero_byte * 16), modes.CBC(x55 * 16), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Cipher(algorithms.AES(zero_byte * 16), modes.CBC(x55 * 16), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 103,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "algorithms.AES(zero_byte * 16)",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "AES",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "algorithms.AES(zero_byte * 16)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 104,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "modes.CBC(x55 * 16)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "modes.CBC(x55 * 16)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_packetizer.py",
+    "line": 105,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_pkey.py",
+    "line": 28,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import md5",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "md5",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "md5",
+      "local_alias": "md5",
+      "algo_identified": "md5"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_pkey.py",
+    "line": 34,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateNumbers",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPrivateNumbers",
+      "local_alias": "RSAPrivateNumbers",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_pkey.py",
+    "line": 154,
+    "col": 45,
+    "detector": "python.ast.call",
+    "raw_signal": "UnsupportedAlgorithm('oops')",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "UnsupportedAlgorithm('oops')",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_pkey.py",
+    "line": 324,
+    "col": 45,
+    "detector": "python.ast.call",
+    "raw_signal": "UnsupportedAlgorithm('oops')",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "UnsupportedAlgorithm('oops')",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "tests\\test_util.py",
+    "line": 25,
+    "col": 0,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from hashlib import sha1",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha1",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "hashlib",
+      "name": "sha1",
+      "local_alias": "sha1",
+      "algo_identified": "sha1"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "bcrypt = >=3.2",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "bcrypt",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "bcrypt",
+      "version": ">=3.2",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "cryptography = >=3.3",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "RSA",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "cryptography",
+      "version": ">=3.3",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "cryptography = >=3.3",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "ECDSA",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "cryptography",
+      "version": ">=3.3",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "cryptography = >=3.3",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "AES",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "cryptography",
+      "version": ">=3.3",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "cryptography = >=3.3",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "ChaCha20-Poly1305",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "cryptography",
+      "version": ">=3.3",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "cryptography = >=3.3",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "X25519",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "cryptography",
+      "version": ">=3.3",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "cryptography = >=3.3",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "Ed25519",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "cryptography",
+      "version": ">=3.3",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "pynacl = >=1.5",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "X25519",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "pynacl",
+      "version": ">=1.5",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "pynacl = >=1.5",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "Ed25519",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "pynacl",
+      "version": ">=1.5",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "pynacl = >=1.5",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "ChaCha20-Poly1305",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "pynacl",
+      "version": ">=1.5",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  },
+  {
+    "file_path": "pyproject.toml",
+    "line": 0,
+    "col": 0,
+    "detector": "dependency.pyproject_toml",
+    "raw_signal": "pynacl = >=1.5",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "BLAKE2b",
+    "confidence": 0.5,
+    "provenance": {
+      "manifest": "pyproject.toml",
+      "package": "pynacl",
+      "version": ">=1.5",
+      "ecosystem": "python"
+    },
+    "source_type": "dependency"
+  }
+]

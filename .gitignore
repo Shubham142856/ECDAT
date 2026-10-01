@@ -53,3 +53,12 @@ Thumbs.db
 *.zip
 *.tar.gz
 *.exe
+
+# JVM & IDE artifacts
+hs_err_pid*.log
+replay_pid*.log
+.gradle/
+.claude/
+.hurc-harness/
+.vscode/
+

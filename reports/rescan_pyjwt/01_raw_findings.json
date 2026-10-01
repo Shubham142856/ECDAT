@@ -1,0 +1,2056 @@
+[
+  {
+    "file_path": "algorithms.py",
+    "line": 3,
+    "col": 0,
+    "detector": "python.ast.import",
+    "raw_signal": "import hashlib",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "hashlib",
+    "confidence": 0.5,
+    "provenance": {
+      "ast_node": "Import",
+      "module": "hashlib",
+      "local_alias": "hashlib",
+      "evidence_kind": "library_present"
+    },
+    "source_type": "python_source",
+    "library_package": "hashlib"
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 4,
+    "col": 0,
+    "detector": "python.ast.import",
+    "raw_signal": "import hmac",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "hmac",
+    "confidence": 0.5,
+    "provenance": {
+      "ast_node": "Import",
+      "module": "hmac",
+      "local_alias": "hmac",
+      "evidence_kind": "library_present"
+    },
+    "source_type": "python_source",
+    "library_package": "hmac"
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 41,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ec import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "ECDSA",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.ec",
+      "name": "ECDSA",
+      "local_alias": "ECDSA",
+      "algo_identified": "ECDSA"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 53,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed448 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "ed448",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.ed448",
+      "name": "Ed448PrivateKey",
+      "local_alias": "Ed448PrivateKey",
+      "algo_identified": "ed448"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 53,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed448 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "ed448",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.ed448",
+      "name": "Ed448PublicKey",
+      "local_alias": "Ed448PublicKey",
+      "algo_identified": "ed448"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 57,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed25519 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "ed25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.ed25519",
+      "name": "Ed25519PrivateKey",
+      "local_alias": "Ed25519PrivateKey",
+      "algo_identified": "ed25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 57,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed25519 import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "ed25519",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.ed25519",
+      "name": "Ed25519PublicKey",
+      "local_alias": "Ed25519PublicKey",
+      "algo_identified": "ed25519"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPrivateKey",
+      "local_alias": "RSAPrivateKey",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPrivateNumbers",
+      "local_alias": "RSAPrivateNumbers",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPublicKey",
+      "local_alias": "RSAPublicKey",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "RSAPublicNumbers",
+      "local_alias": "RSAPublicNumbers",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "rsa_crt_dmp1",
+      "local_alias": "rsa_crt_dmp1",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "rsa_crt_dmq1",
+      "local_alias": "rsa_crt_dmq1",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "rsa_crt_iqmp",
+      "local_alias": "rsa_crt_iqmp",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 61,
+    "col": 4,
+    "detector": "python.ast.import_from",
+    "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import (",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "rsa",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "ImportFrom",
+      "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+      "name": "rsa_recover_prime_factors",
+      "local_alias": "rsa_recover_prime_factors",
+      "algo_identified": "rsa"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 127,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"RS256\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "RS256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "RS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 128,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"RS384\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "RS384",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "RS384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 129,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"RS512\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "RS512",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "RS512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 130,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"ES256\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "ES256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 131,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"ES256K\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES256K",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "ES256K"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 132,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"ES384\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES384",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "ES384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 133,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"ES521\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES521",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "ES521"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 134,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"ES512\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES512",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "ES512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 135,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"PS256\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "PS256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "PS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 136,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"PS384\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "PS384",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "PS384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 137,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"PS512\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "PS512",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "PS512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 138,
+    "col": 4,
+    "detector": "python.ast.assignment",
+    "raw_signal": "\"EdDSA\",",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "EdDSA",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign_Sequence",
+      "variable": "requires_cryptography",
+      "value": "EdDSA"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 148,
+    "col": 8,
+    "detector": "python.ast.registry",
+    "raw_signal": "HS256: HMACAlgorithm(HMACAlgorithm.SHA256)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "HS256",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "HS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 149,
+    "col": 8,
+    "detector": "python.ast.registry",
+    "raw_signal": "HS384: HMACAlgorithm(HMACAlgorithm.SHA384)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "HS384",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "HS384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 150,
+    "col": 8,
+    "detector": "python.ast.registry",
+    "raw_signal": "HS512: HMACAlgorithm(HMACAlgorithm.SHA512)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "HS512",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "HS512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 156,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "RS256: RSAAlgorithm(RSAAlgorithm.SHA256)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "RS256",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "RS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 157,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "RS384: RSAAlgorithm(RSAAlgorithm.SHA384)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "RS384",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "RS384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 158,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "RS512: RSAAlgorithm(RSAAlgorithm.SHA512)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "RS512",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "RS512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 159,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "ES256: ECAlgorithm(ECAlgorithm.SHA256, SECP256R1)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "ES256",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "ES256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 160,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "ES256K: ECAlgorithm(ECAlgorithm.SHA256, SECP256K1)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "ES256K",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "ES256K"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 161,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "ES384: ECAlgorithm(ECAlgorithm.SHA384, SECP384R1)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "ES384",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "ES384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 162,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "ES521: ECAlgorithm(ECAlgorithm.SHA512, SECP521R1)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "ES521",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "ES521"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 163,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "ES512: ECAlgorithm(ECAlgorithm.SHA512, SECP521R1)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "ES512",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "ES512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 166,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "PS256: RSAPSSAlgorithm(RSAPSSAlgorithm.SHA256)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "PS256",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "PS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 167,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "PS384: RSAPSSAlgorithm(RSAPSSAlgorithm.SHA384)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "PS384",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "PS384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 168,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "PS512: RSAPSSAlgorithm(RSAPSSAlgorithm.SHA512)",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "PS512",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "PS512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 169,
+    "col": 16,
+    "detector": "python.ast.registry",
+    "raw_signal": "EdDSA: OKPAlgorithm()",
+    "roles": [
+      "implementation",
+      "configuration"
+    ],
+    "algorithm_hint": "EdDSA",
+    "confidence": 0.8,
+    "provenance": {
+      "ast_node": "Dict",
+      "registry_key": "EdDSA"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 200,
+    "col": 21,
+    "detector": "python.ast.call",
+    "raw_signal": "hashes.Hash(hash_alg(), backend=default_backend())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "hashes.Hash(hash_alg(), backend=default_backend())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 200,
+    "col": 53,
+    "detector": "python.ast.call",
+    "raw_signal": "default_backend()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "default_backend()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 320,
+    "col": 4,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA256: ClassVar[HashlibHash] = hashlib.sha256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA256",
+      "module": "hashlib",
+      "attr": "sha256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 321,
+    "col": 4,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA384: ClassVar[HashlibHash] = hashlib.sha384",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha384",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA384",
+      "module": "hashlib",
+      "attr": "sha384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 322,
+    "col": 4,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA512: ClassVar[HashlibHash] = hashlib.sha512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "sha512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA512",
+      "module": "hashlib",
+      "attr": "sha512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 333,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "load_der_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_der_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 340,
+    "col": 12,
+    "detector": "python.ast.call",
+    "raw_signal": "x509.load_der_x509_certificate(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "x509.load_der_x509_certificate(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 494,
+    "col": 15,
+    "detector": "python.ast.call",
+    "raw_signal": "hmac.new(key, msg, self.hash_alg)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "HMAC",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "hmac.new(key, msg, self.hash_alg)",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 497,
+    "col": 15,
+    "detector": "python.ast.call",
+    "raw_signal": "hmac.compare_digest(sig, self.sign(msg, key))",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "hmac.compare_digest(sig, self.sign(msg, key))",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 508,
+    "col": 8,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA256: ClassVar[type[hashes.HashAlgorithm]] = hashes.SHA256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA256",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 509,
+    "col": 8,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA384: ClassVar[type[hashes.HashAlgorithm]] = hashes.SHA384",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA384",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA384",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 510,
+    "col": 8,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA512: ClassVar[type[hashes.HashAlgorithm]] = hashes.SHA512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA512",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 544,
+    "col": 49,
+    "detector": "python.ast.call",
+    "raw_signal": "load_ssh_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_ssh_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 548,
+    "col": 51,
+    "detector": "python.ast.call",
+    "raw_signal": "load_pem_private_key(key_bytes, password=None)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_pem_private_key(key_bytes, password=None)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 555,
+    "col": 33,
+    "detector": "python.ast.call",
+    "raw_signal": "load_pem_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_pem_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 641,
+    "col": 33,
+    "detector": "python.ast.call",
+    "raw_signal": "RSAPublicNumbers(from_base64url_uint(obj['e']), from_base64url_uint(obj['n']))",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "RSAPublicNumbers(from_base64url_uint(obj['e']), from_base64url_uint(obj['n']))",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 647,
+    "col": 30,
+    "detector": "python.ast.call",
+    "raw_signal": "RSAPrivateNumbers(d=from_base64url_uint(obj['d']), p=from_base64url_uint(obj['p']), q=from_base64url_uint(obj['q']), dmp1=from_base64url_uint(obj['dp']), dmq1=from_base64url_uint(obj['dq']), iqmp=from",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "RSAPrivateNumbers(d=from_base64url_uint(obj['d']), p=from_base64url_uint(obj['p']), q=from_base64url_uint(obj['q']), dmp1=from_base64url_uint(obj['dp']), dmq1=from_base64url_uint(obj['dq']), iqmp=from",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 658,
+    "col": 27,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa_recover_prime_factors(public_numbers.n, d, public_numbers.e)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa_recover_prime_factors(public_numbers.n, d, public_numbers.e)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 662,
+    "col": 30,
+    "detector": "python.ast.call",
+    "raw_signal": "RSAPrivateNumbers(d=d, p=p, q=q, dmp1=rsa_crt_dmp1(d, p), dmq1=rsa_crt_dmq1(d, q), iqmp=rsa_crt_iqmp(p, q), public_numbers=public_numbers)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "RSAPrivateNumbers(d=d, p=p, q=q, dmp1=rsa_crt_dmp1(d, p), dmq1=rsa_crt_dmq1(d, q), iqmp=rsa_crt_iqmp(p, q), public_numbers=public_numbers)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 666,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa_crt_dmp1(d, p)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa_crt_dmp1(d, p)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 667,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa_crt_dmq1(d, q)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa_crt_dmq1(d, q)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 668,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "rsa_crt_iqmp(p, q)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "rsa_crt_iqmp(p, q)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 675,
+    "col": 23,
+    "detector": "python.ast.call",
+    "raw_signal": "RSAPublicNumbers(from_base64url_uint(obj['e']), from_base64url_uint(obj['n']))",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "RSAPublicNumbers(from_base64url_uint(obj['e']), from_base64url_uint(obj['n']))",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 683,
+    "col": 45,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PKCS1v15()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PKCS1v15()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 688,
+    "col": 37,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PKCS1v15()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PKCS1v15()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 699,
+    "col": 8,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA256: ClassVar[type[hashes.HashAlgorithm]] = hashes.SHA256",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA256",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA256",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 700,
+    "col": 8,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA384: ClassVar[type[hashes.HashAlgorithm]] = hashes.SHA384",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA384",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA384",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 701,
+    "col": 8,
+    "detector": "python.ast.attribute",
+    "raw_signal": "SHA512: ClassVar[type[hashes.HashAlgorithm]] = hashes.SHA512",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "SHA512",
+    "confidence": 0.75,
+    "provenance": {
+      "ast_node": "Assign",
+      "target": "SHA512",
+      "module": "cryptography.hazmat.primitives.hashes",
+      "attr": "SHA512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 744,
+    "col": 49,
+    "detector": "python.ast.call",
+    "raw_signal": "load_ssh_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_ssh_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 746,
+    "col": 33,
+    "detector": "python.ast.call",
+    "raw_signal": "load_pem_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_pem_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 754,
+    "col": 30,
+    "detector": "python.ast.call",
+    "raw_signal": "load_pem_private_key(key_bytes, password=None)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_pem_private_key(key_bytes, password=None)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 761,
+    "col": 36,
+    "detector": "python.ast.call",
+    "raw_signal": "ECDSA(self.hash_alg())",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "ECDSA",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ECDSA(self.hash_alg())",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 777,
+    "col": 48,
+    "detector": "python.ast.call",
+    "raw_signal": "ECDSA(self.hash_alg())",
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "algorithm_hint": "ECDSA",
+    "confidence": 0.85,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "ECDSA(self.hash_alg())",
+      "has_concrete_algo": true
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 860,
+    "col": 32,
+    "detector": "python.ast.call",
+    "raw_signal": "SECP256R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "SECP256R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 867,
+    "col": 32,
+    "detector": "python.ast.call",
+    "raw_signal": "SECP384R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "SECP384R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 874,
+    "col": 32,
+    "detector": "python.ast.call",
+    "raw_signal": "SECP521R1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "SECP521R1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 881,
+    "col": 32,
+    "detector": "python.ast.call",
+    "raw_signal": "SECP256K1()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "SECP256K1()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 889,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "EllipticCurvePublicNumbers(x=int.from_bytes(x, byteorder='big'), y=int.from_bytes(y, byteorder='big'), curve=curve_obj)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "EllipticCurvePublicNumbers(x=int.from_bytes(x, byteorder='big'), y=int.from_bytes(y, byteorder='big'), curve=curve_obj)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 904,
+    "col": 19,
+    "detector": "python.ast.call",
+    "raw_signal": "EllipticCurvePrivateNumbers(int.from_bytes(d, byteorder='big'), public_numbers)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "EllipticCurvePrivateNumbers(int.from_bytes(d, byteorder='big'), public_numbers)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 916,
+    "col": 16,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PSS(mgf=padding.MGF1(self.hash_alg()), salt_length=self.hash_alg().digest_size)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PSS(mgf=padding.MGF1(self.hash_alg()), salt_length=self.hash_alg().digest_size)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 917,
+    "col": 24,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.MGF1(self.hash_alg())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.MGF1(self.hash_alg())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 929,
+    "col": 20,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.PSS(mgf=padding.MGF1(self.hash_alg()), salt_length=self.hash_alg().digest_size)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.PSS(mgf=padding.MGF1(self.hash_alg()), salt_length=self.hash_alg().digest_size)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 930,
+    "col": 28,
+    "detector": "python.ast.call",
+    "raw_signal": "padding.MGF1(self.hash_alg())",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "padding.MGF1(self.hash_alg())",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 971,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "load_pem_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_pem_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 973,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "load_pem_private_key(key_bytes, password=None)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_pem_private_key(key_bytes, password=None)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 975,
+    "col": 29,
+    "detector": "python.ast.call",
+    "raw_signal": "load_ssh_public_key(key_bytes)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "load_ssh_public_key(key_bytes)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 1055,
+    "col": 41,
+    "detector": "python.ast.call",
+    "raw_signal": "NoEncryption()",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "NoEncryption()",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 1104,
+    "col": 31,
+    "detector": "python.ast.call",
+    "raw_signal": "Ed25519PublicKey.from_public_bytes(x)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Ed25519PublicKey.from_public_bytes(x)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 1105,
+    "col": 27,
+    "detector": "python.ast.call",
+    "raw_signal": "Ed448PublicKey.from_public_bytes(x)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Ed448PublicKey.from_public_bytes(x)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 1109,
+    "col": 34,
+    "detector": "python.ast.call",
+    "raw_signal": "Ed25519PrivateKey.from_private_bytes(d)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Ed25519PrivateKey.from_private_bytes(d)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "algorithms.py",
+    "line": 1111,
+    "col": 34,
+    "detector": "python.ast.call",
+    "raw_signal": "Ed448PrivateKey.from_private_bytes(d)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "Ed448PrivateKey.from_private_bytes(d)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 45,
+    "col": 20,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"ES256\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "ES256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 47,
+    "col": 20,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"ES384\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES384",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "ES384"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 49,
+    "col": 20,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"ES512\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES512",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "ES512"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 51,
+    "col": 20,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"ES256K\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "ES256K",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "ES256K"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 55,
+    "col": 16,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"RS256\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "RS256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "RS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 57,
+    "col": 16,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"HS256\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "HS256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "HS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jwk.py",
+    "line": 62,
+    "col": 20,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm = \"EdDSA\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "EdDSA",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm",
+      "value": "EdDSA"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jws.py",
+    "line": 140,
+    "col": 16,
+    "detector": "python.ast.assignment",
+    "raw_signal": "algorithm_ = \"HS256\"",
+    "roles": [
+      "configuration"
+    ],
+    "algorithm_hint": "HS256",
+    "confidence": 0.55,
+    "provenance": {
+      "ast_node": "Assign",
+      "variable": "algorithm_",
+      "value": "HS256"
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jws.py",
+    "line": 358,
+    "col": 18,
+    "detector": "python.ast.call",
+    "raw_signal": "jwt.encode('utf-8')",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "jwt.encode('utf-8')",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "api_jws.py",
+    "line": 364,
+    "col": 44,
+    "detector": "python.ast.call",
+    "raw_signal": "jwt.rsplit(b'.', 1)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "jwt.rsplit(b'.', 1)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "help.py",
+    "line": 8,
+    "col": 4,
+    "detector": "python.ast.import",
+    "raw_signal": "import cryptography",
+    "roles": [
+      "capability"
+    ],
+    "algorithm_hint": "cryptography",
+    "confidence": 0.5,
+    "provenance": {
+      "ast_node": "Import",
+      "module": "cryptography",
+      "local_alias": "cryptography",
+      "evidence_kind": "library_present"
+    },
+    "source_type": "python_source",
+    "library_package": "cryptography"
+  },
+  {
+    "file_path": "utils.py",
+    "line": 78,
+    "col": 11,
+    "detector": "python.ast.call",
+    "raw_signal": "decode_dss_signature(der_sig)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "decode_dss_signature(der_sig)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  },
+  {
+    "file_path": "utils.py",
+    "line": 93,
+    "col": 17,
+    "detector": "python.ast.call",
+    "raw_signal": "encode_dss_signature(r, s)",
+    "roles": [
+      "implementation"
+    ],
+    "algorithm_hint": "UNKNOWN",
+    "confidence": 0.65,
+    "provenance": {
+      "ast_node": "Call",
+      "call_text": "encode_dss_signature(r, s)",
+      "has_concrete_algo": false
+    },
+    "source_type": "python_source",
+    "library_package": ""
+  }
+]

@@ -168,19 +168,22 @@ def load_registry(registry_path: Optional[str] = None) -> list[PQCAlgorithm]:
         List of PQCAlgorithm objects.
     """
     path = Path(registry_path) if registry_path else _DEFAULT_REGISTRY_PATH
-    registry_data = None
 
-    if path.exists():
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                registry_data = json.load(f)
-            logger.info("PQC registry loaded from %s (%d entries)", path, len(registry_data))
-        except Exception as exc:
-            logger.warning("Failed to load PQC registry from %s: %s; using built-in", path, exc)
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Explicit configuration required: PQC registry file not found at '{path}'. "
+            "Silent fallback to embedded/built-in registry is disabled by real-only policy."
+        )
 
-    if registry_data is None:
-        registry_data = _BUILTIN_REGISTRY
-        logger.info("Using built-in PQC registry (%d entries)", len(registry_data))
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            registry_data = json.load(f)
+        logger.info("PQC registry loaded from %s (%d entries)", path, len(registry_data))
+    except Exception as exc:
+        raise ValueError(f"Failed to load PQC registry from '{path}': {exc}") from exc
+
+    if not registry_data or not isinstance(registry_data, list):
+        raise ValueError(f"Invalid PQC registry at '{path}': expected non-empty JSON array")
 
     algorithms: list[PQCAlgorithm] = []
     for entry in registry_data:

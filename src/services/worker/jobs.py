@@ -26,7 +26,7 @@ def _get_sync_db():
     """Get a synchronous SQLAlchemy session for the worker."""
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
-    sync_url = os.environ["SYNC_DATABASE_URL"]
+    sync_url = os.environ.get("SYNC_DATABASE_URL", "postgresql://vigil:vigil@localhost:5433/ecdat")
     engine = create_engine(sync_url, pool_pre_ping=True)
     Session = sessionmaker(engine)
     return Session()
@@ -269,8 +269,8 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
                 ra = assess_asset_risk(
                     asset=fa,
                     blast_radius=blast,
-                    x=rc.get("x", 10.0),
-                    y_estimate=rc.get("y_estimate", 3.0),
+                    x=rc.get("x"),
+                    y_estimate=rc.get("y_estimate"),
                     z_low=rc.get("z_low", 5.0),
                     z_mode=rc.get("z_mode", 12.0),
                     z_high=rc.get("z_high", 20.0),
@@ -286,16 +286,16 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
                     result_id=str(uuid.uuid4()),
                     scan_id=scan_id,
                     asset_id=fa.asset_id,
-                    mosca_x=ra.mosca.x,
-                    mosca_y=ra.mosca.y,
-                    mosca_z=ra.mosca.z_mode,
-                    at_risk_baseline=ra.mosca.at_risk_baseline,
-                    probability=ra.probability.p_at_risk,
-                    samples=ra.probability.samples,
-                    seed=ra.probability.seed,
+                    mosca_x=ra.mosca.x if ra.mosca else None,
+                    mosca_y=ra.mosca.y if ra.mosca else None,
+                    mosca_z=ra.mosca.z_mode if ra.mosca else None,
+                    at_risk_baseline=ra.mosca.at_risk_baseline if ra.mosca else None,
+                    probability=ra.probability.p_at_risk if ra.probability else None,
+                    samples=ra.probability.samples if ra.probability else None,
+                    seed=ra.probability.seed if ra.probability else None,
                     context_score=ra.context_score,
                     risk_level=ra.risk_level,
-                    assumptions=ra.mosca.assumptions + ra.probability.assumptions,
+                    assumptions=(ra.mosca.assumptions + ra.probability.assumptions) if (ra.mosca and ra.probability) else ["Insufficient context: analyst inputs X and Y were not supplied"],
                     context_breakdown=ra.context_breakdown,
                 )
                 db.add(rr_row)
@@ -328,7 +328,12 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
             ]
 
             for fa in fused_assets:
-                blast = graph.blast_radius("") if not algo_node_id else graph.blast_radius(algo_node_id or "")
+                fa_node_id = None
+                for nid, n in graph._nodes.items():
+                    if n.properties.get("asset_id") == fa.asset_id:
+                        fa_node_id = nid
+                        break
+                blast = graph.blast_radius(fa_node_id) if fa_node_id else None
                 candidates = candidates_by_asset.get(fa.asset_id, [])
                 plan_row = MigrationPlan(
                     plan_id=str(uuid.uuid4()),
@@ -348,7 +353,12 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
                         for c in candidates
                     ],
                     waves=waves_data,
-                    blast_radius={},
+                    blast_radius={
+                        "affected_count": blast.affected_count if blast else 0,
+                        "affected_nodes": blast.affected_nodes if blast else [],
+                        "max_depth": blast.max_depth if blast else 0,
+                        "is_prediction": True,
+                    },
                 )
                 db.add(plan_row)
 

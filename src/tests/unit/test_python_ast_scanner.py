@@ -156,3 +156,154 @@ class TestEdgeCases:
         large_source = "\n".join(f"x_{i} = {i}" for i in range(10000))
         findings = scan_python_file("large.py", large_source)
         assert isinstance(findings, list)
+
+
+# ---------------------------------------------------------------------------
+# Step 3B — Task 1: HMAC Call Detection
+# ---------------------------------------------------------------------------
+
+class TestStep3BHMAC:
+    def test_hmac_new_produces_implementation(self):
+        source = """
+import hmac
+import hashlib
+
+def sign_token(key, msg):
+    return hmac.new(key, msg, hashlib.sha256).digest()
+"""
+        findings = scan_python_file("hmac_test.py", source)
+        hmac_findings = [f for f in findings if f.algorithm_hint and f.algorithm_hint.upper() == "HMAC"]
+        assert len(hmac_findings) >= 1
+        call_finding = next(f for f in hmac_findings if f.detector == "python.ast.call")
+        assert EvidenceRole.IMPLEMENTATION in call_finding.roles
+        # Ensure it is implementation (not usage), representing library implementation
+        assert EvidenceRole.USAGE not in call_finding.roles
+
+    def test_import_hmac_alone_is_capability_only(self):
+        source = "import hmac"
+        findings = scan_python_file("hmac_import.py", source)
+        assert len(findings) == 1
+        assert findings[0].roles == [EvidenceRole.CAPABILITY]
+        assert EvidenceRole.USAGE not in findings[0].roles
+        assert EvidenceRole.IMPLEMENTATION not in findings[0].roles
+
+
+# ---------------------------------------------------------------------------
+# Step 3B — Task 2: Direct hashlib calls and attribute references
+# ---------------------------------------------------------------------------
+
+class TestStep3BHashlib:
+    def test_direct_hashlib_call(self):
+        source = """
+import hashlib
+digest = hashlib.sha256(b"hello").hexdigest()
+"""
+        findings = scan_python_file("hash_call.py", source)
+        sha_calls = [f for f in findings if f.algorithm_hint and "sha256" in f.algorithm_hint.lower() and f.detector == "python.ast.call"]
+        assert len(sha_calls) >= 1
+        assert EvidenceRole.IMPLEMENTATION in sha_calls[0].roles
+        assert EvidenceRole.USAGE in sha_calls[0].roles
+
+    def test_hashlib_new_with_literal(self):
+        source = """
+import hashlib
+h = hashlib.new("sha384", b"data")
+"""
+        findings = scan_python_file("hash_new.py", source)
+        sha_calls = [f for f in findings if f.algorithm_hint and "sha384" in f.algorithm_hint.lower()]
+        assert len(sha_calls) >= 1
+        assert EvidenceRole.USAGE in sha_calls[0].roles
+
+    def test_hashlib_attribute_assignment(self):
+        source = """
+import hashlib
+from typing import ClassVar
+
+class HashHolder:
+    SHA256: ClassVar = hashlib.sha256
+    SHA512 = hashlib.sha512
+"""
+        findings = scan_python_file("hash_attr.py", source)
+        attr_findings = [f for f in findings if f.detector == "python.ast.attribute"]
+        hints = {f.algorithm_hint.lower() for f in attr_findings}
+        assert "sha256" in hints
+        assert "sha512" in hints
+        for f in attr_findings:
+            assert EvidenceRole.IMPLEMENTATION in f.roles
+
+    def test_indirect_call_stays_unknown(self):
+        source = """
+class TokenSigner:
+    def __init__(self, hash_alg):
+        self.hash_alg = hash_alg
+
+    def sign(self, data):
+        return self.hash_alg(data)
+"""
+        findings = scan_python_file("indirect.py", source)
+        assert not any(f.algorithm_hint and f.algorithm_hint != "UNKNOWN" for f in findings)
+
+
+# ---------------------------------------------------------------------------
+# Step 3B — Task 3: RSA Usage Semantics
+# ---------------------------------------------------------------------------
+
+class TestStep3BRSASemantics:
+    def test_rs256_call_produces_rsa_digital_signature_usage(self):
+        source = """
+import jwt
+token = jwt.encode({"sub": "user"}, key, algorithm="RS256")
+"""
+        findings = scan_python_file("jwt_rs256.py", source)
+        rs256_findings = [f for f in findings if f.algorithm_hint == "RS256"]
+        assert len(rs256_findings) >= 1
+        call_f = rs256_findings[0]
+        assert EvidenceRole.USAGE in call_f.roles
+
+    def test_ps256_call_produces_rsa_pss_usage(self):
+        source = """
+import jwt
+token = jwt.encode({"sub": "user"}, key, algorithm="PS256")
+"""
+        findings = scan_python_file("jwt_ps256.py", source)
+        ps256_findings = [f for f in findings if f.algorithm_hint == "PS256"]
+        assert len(ps256_findings) >= 1
+        call_f = ps256_findings[0]
+        assert EvidenceRole.USAGE in call_f.roles
+
+    def test_rsa_import_alone_does_not_infer_usage(self):
+        source = "from cryptography.hazmat.primitives.asymmetric import rsa"
+        findings = scan_python_file("rsa_import.py", source)
+        assert len(findings) >= 1
+        roles = _roles_found(findings)
+        assert EvidenceRole.IMPLEMENTATION in roles
+        assert EvidenceRole.USAGE not in roles, "Pure RSA import must NOT infer USAGE"
+
+
+# ---------------------------------------------------------------------------
+# Step 3B — Task 4: Step 3A Semantics Preservation
+# ---------------------------------------------------------------------------
+
+class TestStep3APreservation:
+    def test_bare_import_hashlib_single_capability(self):
+        source = "import hashlib"
+        findings = scan_python_file("hashlib_only.py", source)
+        assert len(findings) == 1
+        assert findings[0].roles == [EvidenceRole.CAPABILITY]
+        assert findings[0].algorithm_hint == "hashlib"
+
+    def test_bare_import_cryptography_single_capability(self):
+        source = "import cryptography"
+        findings = scan_python_file("crypto_only.py", source)
+        assert len(findings) == 1
+        assert findings[0].roles == [EvidenceRole.CAPABILITY]
+        assert findings[0].algorithm_hint == "cryptography"
+
+    def test_helper_imports_no_spurious_findings(self):
+        source = """
+from cryptography.hazmat.primitives.serialization import Encoding, NoEncryption
+from cryptography.exceptions import InvalidSignature
+"""
+        findings = scan_python_file("helpers.py", source)
+        assert len(findings) == 0, f"Expected 0 findings for helper imports, got {findings}"
+

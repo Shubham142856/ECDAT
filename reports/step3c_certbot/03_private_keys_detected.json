@@ -1,0 +1,106 @@
+[
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\dsa512_key.pem",
+    "key_type_hint": "DSA PRIVATE KEY"
+  },
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\ec_secp384r1_key.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa1024_key.pem",
+    "key_type_hint": "RSA PRIVATE KEY"
+  },
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa2048_key.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa256_key.pem",
+    "key_type_hint": "RSA PRIVATE KEY"
+  },
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa4096_key.pem",
+    "key_type_hint": "RSA PRIVATE KEY"
+  },
+  {
+    "file_path": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa512_key.pem",
+    "key_type_hint": "RSA PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\ec_prime256v1_key.pem",
+    "key_type_hint": "EC PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\ec_secp384r1_key.pem",
+    "key_type_hint": "EC PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\ec_secp521r1_key.pem",
+    "key_type_hint": "EC PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\nistp256_key.pem",
+    "key_type_hint": "EC PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\rsa2048_key.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\rsa512_key.pem",
+    "key_type_hint": "RSA PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\privkey1.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\privkey1.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\key.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\privkey1.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\privkey1.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\privkey.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\keys\\0000_key-certbot.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\keys\\0001_key-certbot.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\keys\\0002_key-certbot.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\keys\\0003_key-certbot.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "lots/nginx/key2.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "site-10033/nginx/key2.pem",
+    "key_type_hint": "PRIVATE KEY"
+  },
+  {
+    "file_path": "site-14402/nginx/key2.pem",
+    "key_type_hint": "PRIVATE KEY"
+  }
+]

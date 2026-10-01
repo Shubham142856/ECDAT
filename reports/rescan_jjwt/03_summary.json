@@ -1,0 +1,31 @@
+{
+  "corpus": "JJWT @ fb71496",
+  "scan_id": "rescan_jjwt_20260930T231408",
+  "timestamp": "2026-09-30T23:17:05.440599+00:00",
+  "raw_findings_total": 499,
+  "detectors": {
+    "java.rule.import": 453,
+    "java.rule.engine_instantiation": 24,
+    "dependency.pom_xml": 9,
+    "certificate.x509_parser": 13
+  },
+  "roles": {
+    "capability": 386,
+    "implementation": 100,
+    "usage": 24,
+    "observed": 13
+  },
+  "fused_assets_total": 11,
+  "unknown_assets_total": 0,
+  "canonical_algorithms": [
+    "AES",
+    "ECDSA",
+    "Ed25519",
+    "Ed448",
+    "ML-DSA",
+    "ML-KEM",
+    "RSA",
+    "X25519",
+    "X448"
+  ]
+}

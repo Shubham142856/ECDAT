@@ -1,0 +1,42 @@
+{
+  "corpus": "Paramiko @ 142f593",
+  "scan_id": "rescan_paramiko_20260930T231408",
+  "timestamp": "2026-09-30T23:16:49.760239+00:00",
+  "raw_findings_total": 174,
+  "detectors": {
+    "python.ast.import_from": 37,
+    "python.ast.call": 80,
+    "python.ast.attribute": 5,
+    "python.ast.import": 3,
+    "python.ast.registry": 10,
+    "python.ast.assignment": 28,
+    "dependency.pyproject_toml": 11
+  },
+  "roles": {
+    "implementation": 132,
+    "usage": 13,
+    "capability": 14,
+    "configuration": 38
+  },
+  "fused_assets_total": 17,
+  "unknown_assets_total": 0,
+  "canonical_algorithms": [
+    "3DES",
+    "AES",
+    "BLAKE2b",
+    "ChaCha20-Poly1305",
+    "ECDH",
+    "ECDSA",
+    "Ed25519",
+    "Ed448",
+    "HMAC",
+    "MD5",
+    "ML-KEM",
+    "RSA",
+    "SHA-1",
+    "SHA-256",
+    "SHA-384",
+    "SHA-512",
+    "X25519"
+  ]
+}

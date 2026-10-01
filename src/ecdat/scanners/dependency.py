@@ -181,27 +181,61 @@ def scan_poetry_lock(file_path: str, text: str) -> list[DependencyFinding]:
 # ---------------------------------------------------------------------------
 
 _MAVEN_ARTIFACT = re.compile(
-    r"<artifactId>\s*(?P<artifact>[A-Za-z0-9_.\-]+)\s*</artifactId>"
+    r"<artifactId>\s*(?P<artifact>[A-Za-z0-9_.\-${}]+)\s*</artifactId>"
 )
 _MAVEN_VERSION = re.compile(
     r"<version>\s*(?P<version>[^<]+)\s*</version>"
+)
+_MAVEN_PROPERTY = re.compile(
+    r"<(?P<key>[A-Za-z0-9_.\-]+)>(?P<val>[^<]+)</(?P=key)>"
 )
 
 
 def scan_pom_xml(file_path: str, text: str) -> list[DependencyFinding]:
     findings: list[DependencyFinding] = []
     lines = text.splitlines()
+
+    # 1. Collect Maven properties (<propName>value</propName>)
+    props: dict[str, str] = {}
+    for line in lines:
+        line_clean = line.strip()
+        m_prop = _MAVEN_PROPERTY.search(line_clean)
+        if m_prop:
+            k = m_prop.group("key")
+            if k not in ("groupId", "artifactId", "version", "scope", "type", "packaging", "module", "name", "description"):
+                props[k] = m_prop.group("val").strip()
+
+    def _resolve(val: Optional[str]) -> Optional[str]:
+        if not val:
+            return val
+        res = val
+        for _ in range(3):
+            m_ref = re.search(r"\$\{(?P<ref>[A-Za-z0-9_.\-]+)\}", res)
+            if not m_ref:
+                break
+            ref_key = m_ref.group("ref")
+            if ref_key in props:
+                res = res.replace(f"${{{ref_key}}}", props[ref_key])
+            else:
+                break
+        return res
+
+    # 2. Extract artifactId and version tags
     artifacts = []
     versions = []
     for lineno, line in enumerate(lines, start=1):
         m = _MAVEN_ARTIFACT.search(line)
         if m:
-            artifacts.append((lineno, m.group("artifact")))
+            raw_art = m.group("artifact")
+            resolved_art = _resolve(raw_art) or raw_art
+            artifacts.append((lineno, resolved_art))
         m = _MAVEN_VERSION.search(line)
         if m:
-            versions.append(m.group("version"))
+            raw_ver = m.group("version")
+            resolved_ver = _resolve(raw_ver) or raw_ver
+            versions.append(resolved_ver)
 
-    # Simple heuristic: zip artifact/version in order of appearance
+    # 3. Simple heuristic: zip artifact/version in order of appearance
     for i, (lineno, artifact) in enumerate(artifacts):
         ver = versions[i] if i < len(versions) else None
         f = _make_dep_finding(file_path, lineno, artifact, ver,

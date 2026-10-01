@@ -1,0 +1,3581 @@
+[
+  {
+    "asset_id": "8a181eb0-10f1-408c-97b1-4136f34885bd",
+    "canonical_algorithm": "RSA",
+    "family": "asymmetric_cipher",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9850219859070546,
+    "roles": [
+      "implementation",
+      "capability",
+      "configuration"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 26,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "acme\\examples\\http01_example.py:33",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import rsa",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\crypto_util_test.py:12",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import rsa, x25519",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\crypto_util.py:16",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\client.py:14",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "generate_private_key",
+          "local_alias": "generate_private_key",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\renewal.py:19",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import rsa",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\renewal.py:755",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "config.key_type = 'rsa'",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "key_type",
+          "value": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\storage.py:20",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateKey",
+          "local_alias": "RSAPrivateKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\main_test.py:104",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "config.key_type = \"rsa\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "key_type",
+          "value": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\main_test.py:105",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "cert.private_key_type = \"rsa\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "private_key_type",
+          "value": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\main_test.py:131",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "config.key_type = \"rsa\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "key_type",
+          "value": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\renewal_test.py:165",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "self.config.key_type = \"rsa\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "key_type",
+          "value": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:24",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import rsa",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:35",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPublicKey",
+          "local_alias": "RSAPublicKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\tests\\util.py:27",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateKey",
+          "local_alias": "RSAPrivateKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\certbot_tests\\assertions.py:8",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateKey",
+          "local_alias": "RSAPrivateKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\misc.py:31",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import rsa",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "rsa",
+          "local_alias": "rsa",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\misc.py:43",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "RSA_KEY_TYPE = 'rsa'",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "RSA_KEY_TYPE",
+          "value": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\pebble_ocsp_server.py:17",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.rsa",
+          "name": "RSAPrivateKey",
+          "local_alias": "RSAPrivateKey",
+          "algo_identified": "rsa",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:35",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "cryptography",
+          "version": "==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:98",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "paramiko==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "paramiko",
+          "version": "==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:125",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyopenssl==26.4.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pyopenssl",
+          "version": "==26.4.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "cryptography",
+          "version": ">=47.0.0",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "PyOpenSSL = >=25.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "PyOpenSSL",
+          "version": ">=25.0.0",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "certbot-ci\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = ",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "certbot-ci\\pyproject.toml",
+          "package": "cryptography",
+          "version": "",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = 47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "cryptography",
+          "version": "47.0.0",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyOpenSSL = 26.1.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "pyOpenSSL",
+          "version": "26.1.0",
+          "ecosystem": "python",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "5dff47a6-4dc4-4836-9ca2-2574f43d66b3",
+    "canonical_algorithm": "SHA-256",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "implementation",
+      "usage",
+      "capability"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 16,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\client_test.py:668",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.attribute",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\challenges.py:114",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "thumbprint_hash_function = hashes.SHA256",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "Assign",
+          "target": "thumbprint_hash_function",
+          "module": "cryptography.hazmat.primitives.hashes",
+          "attr": "SHA256",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\challenges.py:265",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashlib.sha256(self.key_authorization(account_key).encode('utf-8'))",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashlib.sha256(self.key_authorization(account_key).encode('utf-8'))",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\crypto_util.py:140",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\crypto_util.py:304",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\renewal_test.py:38",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\san_test.py:81",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\san_test.py:105",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\san_test.py:126",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\san_test.py:147",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:563",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashlib.sha256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashlib.sha256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\misc.py:238",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\pebble_ocsp_server.py:77",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot-compatibility-test\\src\\certbot_compatibility_test\\util.py:102",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "tests\\modification-check.py:30",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashlib.sha256()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashlib.sha256()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:126",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyotp==2.10.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pyotp",
+          "version": "==2.10.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "SHA-256",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "192b7d7a-8b8f-4db5-8076-b1608fb0e3f8",
+    "canonical_algorithm": "X25519",
+    "family": "key_agreement",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.8903677461028803,
+    "roles": [
+      "implementation",
+      "capability"
+    ],
+    "usage_role": "key_establishment",
+    "evidence_count": 7,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\crypto_util_test.py:12",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import rsa, x25519",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "x25519",
+          "local_alias": "x25519",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:52",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PublicKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.x25519",
+          "name": "X25519PublicKey",
+          "local_alias": "X25519PublicKey",
+          "algo_identified": "x25519",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:35",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "cryptography",
+          "version": "==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:124",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pynacl",
+          "version": "==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "cryptography",
+          "version": ">=47.0.0",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "certbot-ci\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = ",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "certbot-ci\\pyproject.toml",
+          "package": "cryptography",
+          "version": "",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = 47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "cryptography",
+          "version": "47.0.0",
+          "ecosystem": "python",
+          "canonical": "X25519",
+          "family": "key_agreement",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "cb80df24-50c7-48ab-9ab4-492c8bb9c955",
+    "canonical_algorithm": "HMAC",
+    "family": "mac",
+    "variant": "SHA-256",
+    "quantum_status": "safe",
+    "claim_state": "supported",
+    "confidence": 0.9292481250360578,
+    "roles": [
+      "implementation",
+      "capability",
+      "configuration"
+    ],
+    "usage_role": "mac",
+    "evidence_count": 6,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\messages_test.py:221",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "self.hmac_alg = \"HS256\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "hmac_alg",
+          "value": "HS256",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "SHA-256",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\messages_test.py:297",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "hmac_alg = \"HS256\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "hmac_alg",
+          "value": "HS256",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "SHA-256",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\messages.py:311",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "HS256: jose.jwa.HS256",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "HS256",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "SHA-256",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\messages.py:312",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "HS384: jose.jwa.HS384",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "HS384",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "SHA-384",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.registry",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\messages.py:313",
+        "roles": [
+          "implementation",
+          "configuration"
+        ],
+        "raw_signal": "HS512: jose.jwa.HS512",
+        "confidence": 0.8,
+        "provenance": {
+          "ast_node": "Dict",
+          "registry_key": "HS512",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "SHA-512",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:126",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyotp==2.10.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pyotp",
+          "version": "==2.10.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "HMAC",
+          "family": "mac",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "886cb25a-6f86-4a9a-8617-c12dd93be6d5",
+    "canonical_algorithm": "Ed25519",
+    "family": "digital_signature",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9,
+    "roles": [
+      "implementation",
+      "capability"
+    ],
+    "usage_role": "digital_signature",
+    "evidence_count": 8,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "acme\\src\\acme\\crypto_util.py:16",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric import dsa, rsa, ec, ed25519, ed448, types",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric",
+          "name": "ed25519",
+          "local_alias": "ed25519",
+          "algo_identified": "ed25519",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:50",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.ed25519",
+          "name": "Ed25519PublicKey",
+          "local_alias": "Ed25519PublicKey",
+          "algo_identified": "ed25519",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:35",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "cryptography",
+          "version": "==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:98",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "paramiko==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "paramiko",
+          "version": "==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:124",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pynacl",
+          "version": "==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "cryptography",
+          "version": ">=47.0.0",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "certbot-ci\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = ",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "certbot-ci\\pyproject.toml",
+          "package": "cryptography",
+          "version": "",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = 47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "cryptography",
+          "version": "47.0.0",
+          "ecosystem": "python",
+          "canonical": "Ed25519",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "9a060d99-1b50-4f54-a019-190a8f3b69f3",
+    "canonical_algorithm": "MD5",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9,
+    "roles": [
+      "implementation",
+      "usage"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 2,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\account.py:70",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashlib.md5()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashlib.md5()",
+          "has_concrete_algo": true,
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\account.py:75",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashlib.new('md5', **cast(Mapping[str, Any], {'usedforsecurity': False}))",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashlib.new('md5', **cast(Mapping[str, Any], {'usedforsecurity': False}))",
+          "has_concrete_algo": true,
+          "canonical": "MD5",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "c27a0486-8593-4806-bf9f-ddfe0794cf62",
+    "canonical_algorithm": "SHA-1",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 0.9660964047443681,
+    "roles": [
+      "implementation",
+      "usage",
+      "capability"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 5,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\ocsp.py:100",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA1()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA1()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\ocsp_test.py:230",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA1()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA1()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\ocsp_test.py:241",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA1()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA1()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\pebble_ocsp_server.py:71",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "hashes.SHA1()",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "hashes.SHA1()",
+          "has_concrete_algo": true,
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:126",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyotp==2.10.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pyotp",
+          "version": "==2.10.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "SHA-1",
+          "family": "hash",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "4b0b3d47-0611-470f-9afc-f1935c2419ad",
+    "canonical_algorithm": "ECDSA",
+    "family": "digital_signature",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "implementation",
+      "usage",
+      "capability",
+      "configuration"
+    ],
+    "usage_role": "digital_signature",
+    "evidence_count": 17,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\renewal.py:758",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "config.key_type = 'ecdsa'",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "key_type",
+          "value": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\main_test.py:111",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "cert.private_key_type = \"ecdsa\"",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "private_key_type",
+          "value": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\main_test.py:1433",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "mock_lineage.private_key_type = 'ecdsa'",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "private_key_type",
+          "value": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\_internal\\tests\\renewal_test.py:109",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "self.config.key_type = 'ecdsa'",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "key_type",
+          "value": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:26",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.ec import ECDSA",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.ec",
+          "name": "ECDSA",
+          "local_alias": "ECDSA",
+          "algo_identified": "ECDSA",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.call",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:377",
+        "roles": [
+          "implementation",
+          "usage"
+        ],
+        "raw_signal": "ECDSA(signature_hash_algorithm)",
+        "confidence": 0.85,
+        "provenance": {
+          "ast_node": "Call",
+          "call_text": "ECDSA(signature_hash_algorithm)",
+          "has_concrete_algo": true,
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.assignment",
+        "source_type": "python_source",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\utils\\misc.py:44",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "ECDSA_KEY_TYPE = 'ecdsa'",
+        "confidence": 0.55,
+        "provenance": {
+          "ast_node": "Assign",
+          "variable": "ECDSA_KEY_TYPE",
+          "value": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:35",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "cryptography",
+          "version": "==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:98",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "paramiko==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "paramiko",
+          "version": "==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:125",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyopenssl==26.4.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pyopenssl",
+          "version": "==26.4.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "cryptography",
+          "version": ">=47.0.0",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "PyOpenSSL = >=25.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "PyOpenSSL",
+          "version": ">=25.0.0",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "certbot-ci\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = ",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "certbot-ci\\pyproject.toml",
+          "package": "cryptography",
+          "version": "",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = 47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "cryptography",
+          "version": "47.0.0",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyOpenSSL = 26.1.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "pyOpenSSL",
+          "version": "26.1.0",
+          "ecosystem": "python",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "config.text_scan",
+        "source_type": "config",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-renewal-ec.conf:49",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "key_type = ecdsa",
+        "confidence": 0.7,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-renewal-ec.conf",
+          "key": "key_type",
+          "value_hint": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "config.text_scan",
+        "source_type": "config",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\renewal\\c.encryption-example.com.conf:14",
+        "roles": [
+          "configuration"
+        ],
+        "raw_signal": "key_type = ecdsa",
+        "confidence": 0.7,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\renewal\\c.encryption-example.com.conf",
+          "key": "key_type",
+          "value_hint": "ecdsa",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "9ebb629b-b381-4b56-a0b4-0ee869421398",
+    "canonical_algorithm": "mldsa",
+    "family": "unknown",
+    "variant": null,
+    "quantum_status": "unknown",
+    "claim_state": "supported",
+    "confidence": 0.8292481250360578,
+    "roles": [
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 3,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:28",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.mldsa import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.mldsa",
+          "name": "MLDSA44PublicKey",
+          "local_alias": "MLDSA44PublicKey",
+          "algo_identified": "mldsa",
+          "canonical": "mldsa",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:28",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.mldsa import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.mldsa",
+          "name": "MLDSA65PublicKey",
+          "local_alias": "MLDSA65PublicKey",
+          "algo_identified": "mldsa",
+          "canonical": "mldsa",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:28",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.mldsa import (",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.mldsa",
+          "name": "MLDSA87PublicKey",
+          "local_alias": "MLDSA87PublicKey",
+          "algo_identified": "mldsa",
+          "canonical": "mldsa",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "a3aa72d3-116e-4110-a1c4-515cba94fccb",
+    "canonical_algorithm": "mlkem",
+    "family": "unknown",
+    "variant": null,
+    "quantum_status": "unknown",
+    "claim_state": "supported",
+    "confidence": 0.8,
+    "roles": [
+      "implementation"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 2,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:33",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.mlkem import MLKEM768PublicKey, MLKEM1024PublicKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.mlkem",
+          "name": "MLKEM768PublicKey",
+          "local_alias": "MLKEM768PublicKey",
+          "algo_identified": "mlkem",
+          "canonical": "mlkem",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "python.ast.import_from",
+        "source_type": "python_source",
+        "source_location": "certbot\\src\\certbot\\crypto_util.py:33",
+        "roles": [
+          "implementation"
+        ],
+        "raw_signal": "from cryptography.hazmat.primitives.asymmetric.mlkem import MLKEM768PublicKey, MLKEM1024PublicKey",
+        "confidence": 0.75,
+        "provenance": {
+          "ast_node": "ImportFrom",
+          "module": "cryptography.hazmat.primitives.asymmetric.mlkem",
+          "name": "MLKEM1024PublicKey",
+          "local_alias": "MLKEM1024PublicKey",
+          "algo_identified": "mlkem",
+          "canonical": "mlkem",
+          "family": "unknown",
+          "quantum_status": "unknown",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "0e953689-0ecd-4a2b-a076-97cb0e250940",
+    "canonical_algorithm": "AES",
+    "family": "symmetric_cipher",
+    "variant": null,
+    "quantum_status": "conditionally_safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.65,
+    "roles": [
+      "capability"
+    ],
+    "usage_role": "encryption",
+    "evidence_count": 8,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:35",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "cryptography",
+          "version": "==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:98",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "paramiko==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "paramiko",
+          "version": "==5.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:125",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyopenssl==26.4.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pyopenssl",
+          "version": "==26.4.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "cryptography",
+          "version": ">=47.0.0",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "PyOpenSSL = >=25.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "PyOpenSSL",
+          "version": ">=25.0.0",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "certbot-ci\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = ",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "certbot-ci\\pyproject.toml",
+          "package": "cryptography",
+          "version": "",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = 47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "cryptography",
+          "version": "47.0.0",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pyOpenSSL = 26.1.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "pyOpenSSL",
+          "version": "26.1.0",
+          "ecosystem": "python",
+          "canonical": "AES",
+          "family": "symmetric_cipher",
+          "quantum_status": "conditionally_safe",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "3bf20eb4-5638-4500-a3f5-e92b44d2a028",
+    "canonical_algorithm": "ChaCha20-Poly1305",
+    "family": "symmetric_cipher",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.6160964047443681,
+    "roles": [
+      "capability"
+    ],
+    "usage_role": "encryption",
+    "evidence_count": 5,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:35",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "cryptography",
+          "version": "==50.0.0 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:124",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pynacl",
+          "version": "==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "acme\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = >=47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "acme\\pyproject.toml",
+          "package": "cryptography",
+          "version": ">=47.0.0",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "certbot-ci\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = ",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "certbot-ci\\pyproject.toml",
+          "package": "cryptography",
+          "version": "",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "dependency.pyproject_toml",
+        "source_type": "dependency",
+        "source_location": "tools\\pinning\\oldest\\pyproject.toml",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "cryptography = 47.0.0",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\pinning\\oldest\\pyproject.toml",
+          "package": "cryptography",
+          "version": "47.0.0",
+          "ecosystem": "python",
+          "canonical": "ChaCha20-Poly1305",
+          "family": "symmetric_cipher",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "16a6b804-1171-4d39-83dc-1f9e1a52c7bc",
+    "canonical_algorithm": "BLAKE2b",
+    "family": "hash",
+    "variant": null,
+    "quantum_status": "safe",
+    "claim_state": "ambiguous",
+    "confidence": 0.5,
+    "roles": [
+      "capability"
+    ],
+    "usage_role": "hashing",
+    "evidence_count": 1,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "dependency.requirements_txt",
+        "source_type": "dependency",
+        "source_location": "tools\\requirements.txt:124",
+        "roles": [
+          "capability"
+        ],
+        "raw_signal": "pynacl==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+        "confidence": 0.5,
+        "provenance": {
+          "manifest": "tools\\requirements.txt",
+          "package": "pynacl",
+          "version": "==1.6.2 ; python_version >= \"3.10\" and python_version < \"4.0\"",
+          "ecosystem": "python",
+          "canonical": "BLAKE2b",
+          "family": "hash",
+          "quantum_status": "safe",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "6079e104-72d5-4d61-a0ad-5b0acad27cfa",
+    "canonical_algorithm": "RSA",
+    "family": "asymmetric_cipher",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "observed"
+    ],
+    "usage_role": "unknown",
+    "evidence_count": 46,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-100sans.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,OU=Electronic Frontier Foundation,L=San Francisco,ST=CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-100sans.pem",
+          "parser": "cryptography.x509",
+          "serial": "E1AB1B5527F651E2",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-idnsans.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,OU=Electronic Frontier Foundation,L=San Francisco,ST=CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-idnsans.pem",
+          "parser": "cryptography.x509",
+          "serial": "FE2B36AA8E2A27C2",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-ipsans.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=192.0.2.145 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-ipsans.pem",
+          "parser": "cryptography.x509",
+          "serial": "3CD04B417C21A149",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-ipv6sans.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=::1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-ipv6sans.pem",
+          "parser": "cryptography.x509",
+          "serial": "15DC5E64FFAFDAB8",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-nocn.der",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: OU=Multi-Domain SSL,O=Lucas Garron,L=Walnut Creek,ST=California,C=US | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-nocn.der",
+          "parser": "cryptography.x509",
+          "serial": "6F62BF131A04C53694E05EF41EE51325",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-san.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,O=University of Michigan and the EFF,L=Ann Arbor,ST=Michigan,C=US | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert-san.pem",
+          "parser": "cryptography.x509",
+          "serial": "539",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert.der",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert.der",
+          "parser": "cryptography.x509",
+          "serial": "C18232575A8C64AA",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,O=University of Michigan and the EFF,L=Ann Arbor,ST=Michigan,C=US | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "539",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\critical-san.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert:  | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\critical-san.pem",
+          "parser": "cryptography.x509",
+          "serial": "1136FB55000000001D19",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa1024_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa1024_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "EC91201B37413F10",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa2048_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: O=Certbot Test Certs Inc,L=The middle of nowhere,ST=WA,C=AU | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa2048_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "B546FD56C16F953B",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa4096_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "acme\\src\\acme\\_internal\\tests\\testdata\\rsa4096_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "226A83ACFE7757AF6F1513AC8CFFE02F462DA00E",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert-5sans_512.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,O=Electronic Frontier Foundation,L=San Francisco,ST=California,C= | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert-5sans_512.pem",
+          "parser": "cryptography.x509",
+          "serial": "935B7C005643C6DB",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert-san_512.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,O=University of Michigan and the EFF,L=Ann Arbor,ST=Michigan,C=US | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert-san_512.pem",
+          "parser": "cryptography.x509",
+          "serial": "539",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_2048.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: O=EFF,L=Toronto,ST=ON,C=CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_2048.pem",
+          "parser": "cryptography.x509",
+          "serial": "860BB484070411B4",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_512.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,O=University of Michigan and the EFF,L=Ann Arbor,ST=Michigan,C=US | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_512.pem",
+          "parser": "cryptography.x509",
+          "serial": "539",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_512_bad.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: 1.2.840.113549.1.9.1=yomna.nasser@eff.org,CN=Yomna,OU=Tech Projects,O=EFF,L=Toro | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_512_bad.pem",
+          "parser": "cryptography.x509",
+          "serial": "FBEABF84DC02DB85",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_fullchain_2048.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: O=EFF,L=Toronto,ST=ON,C=CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_fullchain_2048.pem",
+          "parser": "cryptography.x509",
+          "serial": "860BB484070411B4",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_fullchain_2048.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: O=EFF,L=Toronto,ST=ON,C=CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_fullchain_2048.pem",
+          "parser": "cryptography.x509",
+          "serial": "860BB484070411B4",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_intermediate_1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Pebble Intermediate CA 259bc1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_intermediate_1.pem",
+          "parser": "cryptography.x509",
+          "serial": "61B9D32ACC26F79B",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_intermediate_2.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Pebble Intermediate CA 259bc1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_intermediate_2.pem",
+          "parser": "cryptography.x509",
+          "serial": "2EB2530E25990C59",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert_leaf.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert_leaf.pem",
+          "parser": "cryptography.x509",
+          "serial": "61693F2E048EFB3A",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\ocsp_certificate.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert:  | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\ocsp_certificate.pem",
+          "parser": "cryptography.x509",
+          "serial": "723AC2E2165C79B6ED38",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\ocsp_issuer_certificate.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Buypass Class 2 Test4 CA 5,O=Buypass AS-983163327,C=NO | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\ocsp_issuer_certificate.pem",
+          "parser": "cryptography.x509",
+          "serial": "32FB1AF991500A3F27",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\ocsp_responder_certificate.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Buypass Test4 OCSP,O=Buypass AS-983163327,C=NO | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\ocsp_responder_certificate.pem",
+          "parser": "cryptography.x509",
+          "serial": "11308198944B03D4B4EDE83EF",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\cert1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=isnot.org | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\cert1.pem",
+          "parser": "cryptography.x509",
+          "serial": "FA33FC2065B8D415FC487D17E092E9D4B110",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\chain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=happy hacker fake CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\chain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "9CF1912EA8D50908",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=isnot.org | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "FA33FC2065B8D415FC487D17E092E9D4B110",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=happy hacker fake CA | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "9CF1912EA8D50908",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\chain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Pebble Intermediate CA 126c4b | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\chain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "6E2EFCEF256B70C0",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Pebble Intermediate CA 126c4b | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "6E2EFCEF256B70C0",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=nginx.wtf,O=Internet Widgits Pty Ltd,ST=Some-State,C=AU | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "477C1B33CA8513AF1FF0DC5F7221E152347519E5",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\cert1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=a.encryption-example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\cert1.pem",
+          "parser": "cryptography.x509",
+          "serial": "FAC0F21C503A5A5544C8009BF21BD0761DAB",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\chain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Fake LE Intermediate X1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\chain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "8BE12A0E5944ED3C546431F097614FE5",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=a.encryption-example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "FAC0F21C503A5A5544C8009BF21BD0761DAB",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Fake LE Intermediate X1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\a.encryption-example.com\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "8BE12A0E5944ED3C546431F097614FE5",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\cert1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=b.encryption-example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\cert1.pem",
+          "parser": "cryptography.x509",
+          "serial": "FA819742205DFE85F4B3BFF2C5754ACA00F4",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\chain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Fake LE Intermediate X1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\chain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "8BE12A0E5944ED3C546431F097614FE5",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=b.encryption-example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "FA819742205DFE85F4B3BFF2C5754ACA00F4",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Fake LE Intermediate X1 | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\b.encryption-example.com\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "8BE12A0E5944ED3C546431F097614FE5",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\chain.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Pebble Intermediate CA 126c4b | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\chain.pem",
+          "parser": "cryptography.x509",
+          "serial": "6E2EFCEF256B70C0",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\fullchain.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=Pebble Intermediate CA 126c4b | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\fullchain.pem",
+          "parser": "cryptography.x509",
+          "serial": "6E2EFCEF256B70C0",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-compatibility-test\\src\\certbot_compatibility_test\\testdata\\empty_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-compatibility-test\\src\\certbot_compatibility_test\\testdata\\empty_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "910B550A83659F45",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "lots/nginx/empty_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "lots/nginx/empty_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "910B550A83659F45",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "site-10033/nginx/empty_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "site-10033/nginx/empty_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "910B550A83659F45",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "site-14402/nginx/empty_cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com | key=RSA | sig=RSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "site-14402/nginx/empty_cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "910B550A83659F45",
+          "canonical": "RSA",
+          "family": "asymmetric_cipher",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  },
+  {
+    "asset_id": "6d801478-f3f1-4319-aac8-0b7ce2272af6",
+    "canonical_algorithm": "ECDSA",
+    "family": "digital_signature",
+    "variant": null,
+    "quantum_status": "vulnerable",
+    "claim_state": "supported",
+    "confidence": 1.0,
+    "roles": [
+      "observed"
+    ],
+    "usage_role": "digital_signature",
+    "evidence_count": 5,
+    "parameters": {
+      "standard": "",
+      "note": ""
+    },
+    "contradictions": [],
+    "evidence_records": [
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\cert-nosans_nistp256.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=example.com,O=EFF,L=Ann Arbor,ST=Michigan,C=US | key=EC | sig=ECDSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\cert-nosans_nistp256.pem",
+          "parser": "cryptography.x509",
+          "serial": "C29F37D467B4D074",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\cert1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=c.encryption-example.com | key=EC | sig=ECDSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\cert1.pem",
+          "parser": "cryptography.x509",
+          "serial": "6FAC49DB3D162EF",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\fullchain1.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=c.encryption-example.com | key=EC | sig=ECDSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot\\src\\certbot\\tests\\testdata\\sample-archive-ec\\fullchain1.pem",
+          "parser": "cryptography.x509",
+          "serial": "2E5986B59854144C",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\cert.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=c.encryption-example.com | key=EC | sig=ECDSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\cert.pem",
+          "parser": "cryptography.x509",
+          "serial": "6FAC49DB3D162EF",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      },
+      {
+        "detector": "certificate.x509_parser",
+        "source_type": "certificate",
+        "source_location": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\fullchain.pem",
+        "roles": [
+          "observed"
+        ],
+        "raw_signal": "cert: CN=c.encryption-example.com | key=EC | sig=ECDSA-with-SHA256",
+        "confidence": 0.95,
+        "provenance": {
+          "file": "certbot-ci\\src\\certbot_integration_tests\\assets\\sample-config\\archive\\c.encryption-example.com\\fullchain.pem",
+          "parser": "cryptography.x509",
+          "serial": "2E5986B59854144C",
+          "canonical": "ECDSA",
+          "family": "digital_signature",
+          "quantum_status": "vulnerable",
+          "variant": "",
+          "standard": ""
+        }
+      }
+    ]
+  }
+]

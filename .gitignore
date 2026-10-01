@@ -62,3 +62,14 @@ replay_pid*.log
 .hurc-harness/
 .vscode/
 
+# Real-corpus clones — pinned external repos; referenced by manifest only.
+# Clone locally with: git clone <url> real-corpus/<name>
+real-corpus/
+
+# Dataset benchmarks — external repos cloned for scanning only
+datasets/cambench/
+datasets/cryptoapi-bench/
+
+# Scratch & session files
+scratch_rescan.py
+microsoft-jdk-*.msi

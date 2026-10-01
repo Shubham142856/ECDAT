@@ -9,56 +9,74 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Deep Space Quantum Cybersecurity Palette
+        // User design theme colors
+        'bg-0': '#000000',
+        'bg-200': '#1a1d18',
+        'bg-300': '#2a2e26',
+        'text-100': '#f8f7f5',
+        'text-200': '#e6e1d7',
+        'text-300': '#a89080',
+        'primary-user': '#c8b4a0',
+        'primary-fg': '#1a1d18',
+        'border-user': 'rgba(200, 180, 160, 0.12)',
+        'color-1': 'rgb(42, 46, 38)',
+        'color-2': 'rgb(66, 58, 48)',
+        'color-3': 'rgb(107, 85, 69)',
+        'color-4': 'rgb(150, 122, 104)',
+        'color-5': 'rgb(200, 180, 160)',
+
+        // Enterprise space palette (warm luxury dark)
         space: {
-          950: "#020617", // slate black
-          900: "#030712", // dark cosmic
-          850: "#050A1F", // deep space navy
-          800: "#07112F", // dark cyan-navy
-          700: "#0B1947", // panel surface
-          600: "#0F2366", // panel hover
+          950: "#000000",
+          900: "#0d0f0c",
+          850: "#141712",
+          800: "#1a1d18",
+          700: "#2a2e26",
+          600: "#3d4237",
         },
         cyber: {
-          blue: "#2563EB",       // Electric Blue (Primary)
-          "blue-glow": "#3B82F6",
-          cyan: "#22D3EE",       // Cyan (Secondary)
-          "cyan-glow": "#67E8F9",
-          indigo: "#6366F1",     // Violet Accent
-          violet: "#8B5CF6",
-          emerald: "#10B981",    // Quantum Safe
-          amber: "#F59E0B",      // Medium / Transition
-          rose: "#F43F5E",       // Vulnerable / Critical
+          blue: "#c8b4a0",       // Champagne / Bronze Gold
+          "blue-glow": "#e6e1d7",
+          cyan: "#c8b4a0",       // Warm gold accent
+          "cyan-glow": "#e6e1d7",
+          indigo: "#a89080",     // Muted bronze
+          violet: "#bfa490",
+          emerald: "#8cae80",    // Quantum Safe (warm sage)
+          amber: "#d4a373",      // Transition (warm amber)
+          rose: "#c97064",       // Critical (warm terracotta)
         },
         text: {
-          bright: "#F8FAFC",
-          muted: "#CBD5E1",
-          dim: "#94A3B8",
-          dark: "#64748B",
+          bright: "#f8f7f5",
+          muted: "#e6e1d7",
+          dim: "#a89080",
+          dark: "#7d6a5d",
         },
         // Semantic aliases
-        background: "#020617",
-        surface: "#050A1F",
-        surface2: "#07112F",
-        border: "rgba(34, 211, 238, 0.12)",
-        "border-bright": "rgba(34, 211, 238, 0.28)",
-        primary: "#2563EB",
-        secondary: "#22D3EE",
-        safe: "#10B981",
-        vulnerable: "#F43F5E",
-        warning: "#F59E0B",
-        hybrid: "#8B5CF6",
+        background: "#000000",
+        surface: "#1a1d18",
+        surface2: "#2a2e26",
+        border: "rgba(200, 180, 160, 0.12)",
+        "border-bright": "rgba(200, 180, 160, 0.28)",
+        primary: "#c8b4a0",
+        secondary: "#a89080",
+        safe: "#8cae80",
+        vulnerable: "#c97064",
+        warning: "#d4a373",
+        hybrid: "#bfa490",
       },
       fontFamily: {
-        sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        sans: ["var(--font-inter)", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+        serif: ["var(--font-serif-accent)", "Instrument Serif", "Times New Roman", "serif"],
+        "serif-accent": ["var(--font-serif-accent)", "Instrument Serif", "Times New Roman", "serif"],
         mono: ["JetBrains Mono", "Fira Code", "Courier New", "monospace"],
       },
       boxShadow: {
-        "glow-cyan": "0 0 25px rgba(34, 211, 238, 0.25)",
-        "glow-blue": "0 0 25px rgba(37, 99, 235, 0.35)",
-        "glow-violet": "0 0 25px rgba(139, 92, 246, 0.25)",
-        "glow-rose": "0 0 25px rgba(244, 63, 94, 0.3)",
-        "panel": "0 10px 30px -10px rgba(2, 6, 23, 0.8), 0 0 1px 1px rgba(34, 211, 238, 0.1)",
-        "panel-hover": "0 15px 35px -10px rgba(2, 6, 23, 0.9), 0 0 15px rgba(34, 211, 238, 0.2)",
+        "glow-cyan": "0 0 25px rgba(200, 180, 160, 0.25)",
+        "glow-blue": "0 0 25px rgba(200, 180, 160, 0.25)",
+        "glow-violet": "0 0 25px rgba(168, 144, 128, 0.25)",
+        "glow-rose": "0 0 25px rgba(201, 112, 100, 0.25)",
+        "panel": "0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(200, 180, 160, 0.12)",
+        "panel-hover": "0 15px 35px -10px rgba(0, 0, 0, 0.9), 0 0 15px rgba(200, 180, 160, 0.22)",
       },
       animation: {
         "pulse-glow": "pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
@@ -87,4 +105,10 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.cache = false;
+    }
+    return config;
+  },
 };

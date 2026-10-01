@@ -9,24 +9,22 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-ecdat}
     volumes:
       - db_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ecdat}"]
       interval: 5s
       timeout: 5s
       retries: 10
+    # Security: Database is NOT exposed to host interface; accessible only via internal docker bridge
 
   redis:
     image: redis:7-alpine
     command: redis-server --save "" --appendonly no
-    ports:
-      - "6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 3s
       retries: 10
+    # Security: Redis is NOT exposed to host interface; internal queue only
 
   api:
     build:
@@ -34,7 +32,7 @@ services:
       dockerfile: services/api/Dockerfile
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
-      SYNC_DATABASE_URL: postgresql://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
+      SYNC_DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
       REDIS_URL: redis://redis:6379/0
       ECDAT_UPLOAD_DIR: /app/uploads
       ECDAT_MAX_UPLOAD_BYTES: "268435456"
@@ -44,15 +42,17 @@ services:
       - uploads:/app/uploads
       - ./config:/app/config:ro
       - ./ecdat:/app/ecdat:ro
+      - ./scripts:/app/scripts:ro
+      - ../corpus:/app/corpus:ro
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     depends_on:
       db:
         condition: service_healthy
       redis:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      test: ["CMD-SHELL", "python -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:8000/health\")' || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -63,7 +63,7 @@ services:
       dockerfile: services/worker/Dockerfile
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
-      SYNC_DATABASE_URL: postgresql://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
+      SYNC_DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-ecdat}:${POSTGRES_PASSWORD:-ecdat_secret}@db:5432/${POSTGRES_DB:-ecdat}
       REDIS_URL: redis://redis:6379/0
       ECDAT_UPLOAD_DIR: /app/uploads
       ECDAT_MAX_UPLOAD_BYTES: "268435456"
@@ -73,6 +73,8 @@ services:
       - uploads:/app/uploads
       - ./config:/app/config:ro
       - ./ecdat:/app/ecdat:ro
+      - ./scripts:/app/scripts:ro
+      - ../corpus:/app/corpus:ro
     depends_on:
       db:
         condition: service_healthy
@@ -85,10 +87,9 @@ services:
       dockerfile: Dockerfile
     environment:
       NEXT_PUBLIC_API_URL: http://api:8000
-      # When running in browser, it uses the host-mapped port
       NEXT_PUBLIC_API_BASE: http://localhost:8000
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     depends_on:
       api:
         condition: service_healthy

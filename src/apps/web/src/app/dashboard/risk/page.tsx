@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AlertTriangle, Info, Sliders, TrendingUp, Clock, Zap,
-  RefreshCw, ChevronRight, ShieldAlert, BarChart3
+  RefreshCw, ChevronRight, ShieldAlert, BarChart3, AlertCircle
 } from "lucide-react";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, ReferenceLine, Area, AreaChart, Legend
 } from "recharts";
+import { getProjects, getScans, getScanRisk } from "@/lib/api";
+import { ProjectItem, ScanSummaryItem } from "@/lib/types";
 
 // Mosca's theorem: P(Harvest Now Decrypt Later) meaningful if X + Y > Z
 // X = time to relevant CRQC; Y = migration time; Z = data security shelf life
@@ -21,8 +23,8 @@ function generateMoscaData(x: number, y: number, z: number) {
   const data = [];
   for (let t = 0; t <= 15; t++) {
     const remainingX = Math.max(0, x - t);
-    const migrationProgress = Math.min(100, (t / y) * 100);
-    const threatLevel = Math.max(0, 100 - (remainingX / x) * 100);
+    const migrationProgress = Math.min(100, (t / Math.max(1, y)) * 100);
+    const threatLevel = Math.max(0, 100 - (remainingX / Math.max(1, x)) * 100);
     const riskWindow = x + y > z ? Math.min(100, Math.max(0, (t - (z - y)) * 20)) : 0;
     data.push({
       year: `Y+${t}`,
@@ -34,34 +36,77 @@ function generateMoscaData(x: number, y: number, z: number) {
   return data;
 }
 
-const ASSET_MOSCA = [
-  { name: "RSA-2048", x: 8, y: 3, z: 5, status: "URGENT" },
-  { name: "ECDSA P-256", x: 9, y: 3, z: 5, status: "URGENT" },
-  { name: "RSA-OAEP (JJWT)", x: 8, y: 2, z: 4, status: "URGENT" },
-  { name: "ECDH P-256 (SSH)", x: 9, y: 3, z: 6, status: "URGENT" },
-  { name: "Ed25519 (PyJWT)", x: 12, y: 2, z: 5, status: "PLAN" },
-  { name: "Ed25519 (Paramiko)", x: 12, y: 2, z: 5, status: "PLAN" },
-  { name: "AES-CTR", x: 20, y: 1, z: 10, status: "MONITOR" },
-  { name: "AES-GCM", x: 20, y: 1, z: 10, status: "MONITOR" },
-  { name: "SHA-256", x: 30, y: 0.5, z: 15, status: "SAFE" },
-  { name: "SHA-512", x: 30, y: 0.5, z: 15, status: "SAFE" },
-];
-
 const STATUS_STYLE: Record<string, string> = {
-  URGENT: "text-rose-400 bg-rose-950/50 border-rose-500/30",
-  PLAN: "text-amber-400 bg-amber-950/50 border-amber-500/30",
-  MONITOR: "text-blue-400 bg-blue-950/50 border-blue-500/30",
-  SAFE: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
+  critical: "text-rose-400 bg-rose-950/50 border-rose-500/30",
+  high: "text-amber-400 bg-amber-950/50 border-amber-500/30",
+  medium: "text-blue-400 bg-blue-950/50 border-blue-500/30",
+  low: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
+  safe: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
 };
 
 export default function RiskPage() {
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
+  const [selectedProjectId, setSelectedProjectId] = useState<string>("");
+  const [activeScan, setActiveScan] = useState<ScanSummaryItem | null>(null);
+  const [riskAssets, setRiskAssets] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const [X, setX] = useState(DEFAULT_X);
   const [Y, setY] = useState(DEFAULT_Y);
   const [Z, setZ] = useState(DEFAULT_Z);
 
+  useEffect(() => {
+    let mounted = true;
+    async function init() {
+      try {
+        setLoading(true);
+        const projList = await getProjects();
+        if (!mounted) return;
+        setProjects(projList);
+
+        if (projList.length > 0) {
+          const first = projList[0];
+          setSelectedProjectId(first.project_id);
+          await loadRiskForProject(first.project_id);
+        }
+      } catch (err) {
+        console.warn("Failed to load projects:", err);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+    init();
+    return () => { mounted = false; };
+  }, []);
+
+  async function loadRiskForProject(projId: string) {
+    try {
+      setLoading(true);
+      const scans = await getScans(projId);
+      if (scans && scans.length > 0) {
+        const latest = scans[0];
+        setActiveScan(latest);
+        const riskData = await getScanRisk(latest.scan_id);
+        setRiskAssets(riskData.assets || riskData.results || []);
+      } else {
+        setActiveScan(null);
+        setRiskAssets([]);
+      }
+    } catch (err) {
+      console.warn("Failed to load risk for project:", err);
+      setRiskAssets([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleProjectChange = async (projId: string) => {
+    setSelectedProjectId(projId);
+    await loadRiskForProject(projId);
+  };
+
   const moscaData = generateMoscaData(X, Y, Z);
   const atRisk = X + Y > Z;
-  const urgentCount = ASSET_MOSCA.filter(a => a.status === "URGENT").length;
 
   return (
     <div className="space-y-8">
@@ -73,13 +118,26 @@ export default function RiskPage() {
           </div>
           <h1 className="text-2xl font-black text-text-bright">Mosca Theorem Risk Assessment</h1>
           <p className="text-xs text-text-dim mt-1">
-            P(HNDL risk) is meaningful when <span className="font-mono text-cyber-cyan">X + Y {">"} Z</span>. Adjust sliders to model enterprise scenarios.
+            P(HNDL risk) is meaningful when <span className="font-mono text-cyber-cyan">X + Y {">"} Z</span>. Rule 5: Scenario variables modeled dynamically.
           </p>
         </div>
-        <div className={`px-4 py-2 rounded-xl border font-mono text-xs font-bold ${
-          atRisk ? "bg-rose-950/60 border-rose-500/50 text-rose-300" : "bg-emerald-950/60 border-emerald-500/50 text-emerald-300"
-        }`}>
-          {atRisk ? "⚠ HARVEST-NOW DECRYPT-LATER RISK WINDOW OPEN" : "✓ CURRENTLY OUTSIDE RISK WINDOW"}
+        <div className="flex items-center gap-3">
+          <select
+            value={selectedProjectId}
+            onChange={(e) => handleProjectChange(e.target.value)}
+            className="px-3 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-xs font-mono text-cyber-cyan focus:outline-none"
+          >
+            {projects.map((p) => (
+              <option key={p.project_id} value={p.project_id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+          <div className={`px-4 py-2 rounded-xl border font-mono text-xs font-bold ${
+            atRisk ? "bg-rose-950/60 border-rose-500/50 text-rose-300" : "bg-emerald-950/60 border-emerald-500/50 text-emerald-300"
+          }`}>
+            {atRisk ? "⚠ HNDL RISK WINDOW OPEN" : "✓ WITHIN SAFE MARGIN"}
+          </div>
         </div>
       </div>
 
@@ -121,7 +179,7 @@ export default function RiskPage() {
             </div>
             <p className="text-xs text-text-dim mt-1">
               {atRisk
-                ? `An adversary harvesting encrypted data today could decrypt it after Y=${Y}y migration + remaining X=${X}y CRQC timeline. Begin migration immediately.`
+                ? `An adversary harvesting encrypted data today could decrypt it after Y=${Y}y migration + remaining X=${X}y CRQC timeline. Begin migration planning immediately.`
                 : `Your current migration timeline (Y=${Y}y) keeps assets protected within the CRQC window (X=${X}y) for data with Z=${Z}y lifetime.`
               }
             </p>
@@ -160,45 +218,72 @@ export default function RiskPage() {
         </ResponsiveContainer>
       </div>
 
-      {/* Per-asset Mosca Table */}
+      {/* Per-asset Live Risk Table */}
       <div className="bg-[#050A1F]/60 border border-white/10 rounded-2xl overflow-hidden">
-        <div className="px-6 py-4 border-b border-white/10">
-          <h2 className="text-sm font-bold font-mono text-text-bright">Per-Asset Mosca Classification</h2>
+        <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+          <h2 className="text-sm font-bold font-mono text-text-bright">Live Per-Asset Mosca & Monte Carlo Classification</h2>
+          <span className="text-[10px] font-mono text-text-dim">Scenario model results · Not guaranteed CRQC forecasts</span>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs font-mono">
-            <thead>
-              <tr className="border-b border-white/10">
-                {["Asset", "X (CRQC)", "Y (Migration)", "Z (Data Life)", "X+Y vs Z", "Priority"].map(h => (
-                  <th key={h} className="px-4 py-3 text-left text-[10px] font-bold tracking-wider text-text-dim uppercase">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/[0.05]">
-              {ASSET_MOSCA.map((a, i) => {
-                const risk = a.x + a.y > a.z;
-                return (
-                  <tr key={i} className="hover:bg-white/[0.025] transition-colors">
-                    <td className="px-4 py-3 font-bold text-text-bright">{a.name}</td>
-                    <td className="px-4 py-3 text-rose-400">{a.x}y</td>
-                    <td className="px-4 py-3 text-amber-400">{a.y}y</td>
-                    <td className="px-4 py-3 text-cyan-400">{a.z}y</td>
-                    <td className="px-4 py-3">
-                      <span className={risk ? "text-rose-400 font-bold" : "text-emerald-400 font-bold"}>
-                        {a.x + a.y} {risk ? ">" : "≤"} {a.z} — {risk ? "AT RISK" : "OK"}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_STYLE[a.status]}`}>
-                        {a.status}
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        {loading ? (
+          <div className="p-8 text-center text-xs font-mono text-text-dim flex items-center justify-center gap-3">
+            <RefreshCw className="w-4 h-4 animate-spin text-cyber-cyan" />
+            Loading live risk calculations from PostgreSQL...
+          </div>
+        ) : riskAssets.length === 0 ? (
+          <div className="p-8 text-center text-xs font-mono text-text-dim space-y-2">
+            <AlertCircle className="w-6 h-6 text-amber-400 mx-auto" />
+            <div>No risk assessment data available for this project.</div>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs font-mono">
+              <thead>
+                <tr className="border-b border-white/10">
+                  {["Asset / Algorithm", "Quantum Status", "Baseline (X+Y>Z)", "Monte Carlo P(Risk)", "Context Score", "Risk Tier"].map(h => (
+                    <th key={h} className="px-4 py-3 text-left text-[10px] font-bold tracking-wider text-text-dim uppercase">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.05]">
+                {riskAssets.map((a, i) => {
+                  const riskLevel = (a.risk_level || "low").toLowerCase();
+                  return (
+                    <tr key={i} className="hover:bg-white/[0.025] transition-colors">
+                      <td className="px-4 py-3 font-bold text-text-bright">{a.canonical_algorithm}</td>
+                      <td className="px-4 py-3 text-text-dim">{a.quantum_status}</td>
+                      <td className="px-4 py-3">
+                        <span className={a.at_risk_baseline ? "text-rose-400 font-bold" : "text-emerald-400 font-bold"}>
+                          {a.at_risk_baseline ? "AT RISK" : "PROTECTED"}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-2">
+                          <div className="h-1.5 w-16 bg-[#07112F] rounded-full overflow-hidden">
+                            <div
+                              className={`h-full rounded-full ${a.probability > 0.6 ? "bg-rose-500" : a.probability > 0.3 ? "bg-amber-500" : "bg-emerald-500"}`}
+                              style={{ width: `${Math.round((a.probability || 0) * 100)}%` }}
+                            />
+                          </div>
+                          <span className="font-bold text-text-bright">
+                            {typeof a.probability === "number" ? (a.probability * 100).toFixed(1) + "%" : "N/A"}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-cyan-400 font-bold">
+                        {typeof a.context_score === "number" ? a.context_score.toFixed(2) : "N/A"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_STYLE[riskLevel] || "text-text-dim border-white/10"}`}>
+                          {(a.risk_level || "UNKNOWN").toUpperCase()}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

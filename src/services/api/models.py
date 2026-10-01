@@ -11,11 +11,15 @@ from typing import Any, Optional
 
 from sqlalchemy import (
     BigInteger, Boolean, Column, DateTime, Float, ForeignKey,
-    Integer, String, Text, UniqueConstraint, Index,
+    Integer, String, Text, UniqueConstraint, Index, JSON,
 )
-from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID
 from sqlalchemy.orm import DeclarativeBase, relationship
 from sqlalchemy.sql import func
+
+# Cross-database portable types (works seamlessly on SQLite and PostgreSQL)
+UUID_TYPE = String(36)
+JSON_TYPE = JSON
+ARRAY_TYPE = JSON
 
 
 class Base(DeclarativeBase):
@@ -29,7 +33,7 @@ def _uuid() -> str:
 class Project(Base):
     __tablename__ = "projects"
 
-    project_id   = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    project_id   = Column(UUID_TYPE, primary_key=True, default=_uuid)
     name         = Column(String(255), nullable=False)
     description  = Column(Text, nullable=True)
     created_at   = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
@@ -42,8 +46,8 @@ class Project(Base):
 class Artifact(Base):
     __tablename__ = "artifacts"
 
-    artifact_id  = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    project_id   = Column(UUID(as_uuid=False), ForeignKey("projects.project_id", ondelete="CASCADE"), nullable=False)
+    artifact_id  = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    project_id   = Column(UUID_TYPE, ForeignKey("projects.project_id", ondelete="CASCADE"), nullable=False)
     artifact_type= Column(String(50), nullable=False)  # python_source | java_source | dependency | certificate | binary | container | config
     original_name= Column(String(500), nullable=False)
     stored_path  = Column(Text, nullable=False)         # path on server filesystem (never exposed to client)
@@ -62,15 +66,15 @@ class Artifact(Base):
 class Scan(Base):
     __tablename__ = "scans"
 
-    scan_id        = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    project_id     = Column(UUID(as_uuid=False), ForeignKey("projects.project_id", ondelete="CASCADE"), nullable=False)
+    scan_id        = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    project_id     = Column(UUID_TYPE, ForeignKey("projects.project_id", ondelete="CASCADE"), nullable=False)
     mode           = Column(String(10), nullable=False, default="live")  # live | replay
     state          = Column(String(40), nullable=False, default="queued")
-    stages         = Column(JSONB, nullable=False, default=dict)
+    stages         = Column(JSON_TYPE, nullable=False, default=dict)
     started_at     = Column(DateTime(timezone=True), nullable=True)
     completed_at   = Column(DateTime(timezone=True), nullable=True)
     error_message  = Column(Text, nullable=True)
-    replay_snapshot_id = Column(UUID(as_uuid=False), ForeignKey("replay_snapshots.snapshot_id"), nullable=True)
+    replay_snapshot_id = Column(UUID_TYPE, ForeignKey("replay_snapshots.snapshot_id"), nullable=True)
     created_at     = Column(DateTime(timezone=True), server_default=func.now())
 
     project   = relationship("Project", back_populates="scans")
@@ -85,22 +89,22 @@ class Scan(Base):
         Index("ix_scans_project_id", "project_id"),
         Index("ix_scans_state", "state"),
     )
-
+    
 
 class Evidence(Base):
     __tablename__ = "evidence"
 
-    evidence_id       = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    scan_id           = Column(UUID(as_uuid=False), ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
-    asset_id          = Column(UUID(as_uuid=False), ForeignKey("crypto_assets.asset_id", ondelete="CASCADE"), nullable=True)
+    evidence_id       = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    scan_id           = Column(UUID_TYPE, ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
+    asset_id          = Column(UUID_TYPE, ForeignKey("crypto_assets.asset_id", ondelete="CASCADE"), nullable=True)
     source_type       = Column(String(40), nullable=False)
     source_location   = Column(Text, nullable=False)
     detector          = Column(String(100), nullable=False)
     raw_signal        = Column(Text, nullable=True)
     normalized_claim  = Column(String(200), nullable=False)
-    roles             = Column(ARRAY(String), nullable=False, default=list)
+    roles             = Column(ARRAY_TYPE, nullable=False, default=list)
     confidence        = Column(Float, nullable=False, default=0.5)
-    provenance        = Column(JSONB, nullable=False, default=dict)
+    provenance        = Column(JSON_TYPE, nullable=False, default=dict)
     observation_time  = Column(DateTime(timezone=True), server_default=func.now())
     validity          = Column(String(20), nullable=False, default="valid")
 
@@ -116,20 +120,20 @@ class Evidence(Base):
 class CryptoAsset(Base):
     __tablename__ = "crypto_assets"
 
-    asset_id         = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    scan_id          = Column(UUID(as_uuid=False), ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
+    asset_id         = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    scan_id          = Column(UUID_TYPE, ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
     family           = Column(String(50), nullable=False)
     canonical_algorithm = Column(String(200), nullable=False)
     variant          = Column(String(100), nullable=True)
-    parameters       = Column(JSONB, nullable=False, default=dict)
+    parameters       = Column(JSON_TYPE, nullable=False, default=dict)
     usage_role       = Column(String(50), nullable=False, default="unknown")
     lifecycle        = Column(String(30), nullable=False, default="unknown")
     quantum_status   = Column(String(30), nullable=False, default="unknown")
     claim_state      = Column(String(30), nullable=False, default="ambiguous")
     confidence       = Column(Float, nullable=False, default=0.0)
-    roles            = Column(ARRAY(String), nullable=False, default=list)
-    contradictions   = Column(JSONB, nullable=False, default=list)
-    context          = Column(JSONB, nullable=False, default=dict)
+    roles            = Column(ARRAY_TYPE, nullable=False, default=list)
+    contradictions   = Column(JSON_TYPE, nullable=False, default=list)
+    context          = Column(JSON_TYPE, nullable=False, default=dict)
     created_at       = Column(DateTime(timezone=True), server_default=func.now())
 
     scan            = relationship("Scan", back_populates="assets")
@@ -147,11 +151,11 @@ class CryptoAsset(Base):
 class GraphNode(Base):
     __tablename__ = "graph_nodes"
 
-    node_id      = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    scan_id      = Column(UUID(as_uuid=False), ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
+    node_id      = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    scan_id      = Column(UUID_TYPE, ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
     node_type    = Column(String(50), nullable=False)
     label        = Column(Text, nullable=False)
-    properties   = Column(JSONB, nullable=False, default=dict)
+    properties   = Column(JSON_TYPE, nullable=False, default=dict)
 
     scan = relationship("Scan", back_populates="graph_nodes")
 
@@ -163,12 +167,12 @@ class GraphNode(Base):
 class GraphEdge(Base):
     __tablename__ = "graph_edges"
 
-    edge_id        = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    scan_id        = Column(UUID(as_uuid=False), ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
-    source_node_id = Column(UUID(as_uuid=False), ForeignKey("graph_nodes.node_id", ondelete="CASCADE"), nullable=False)
-    target_node_id = Column(UUID(as_uuid=False), ForeignKey("graph_nodes.node_id", ondelete="CASCADE"), nullable=False)
+    edge_id        = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    scan_id        = Column(UUID_TYPE, ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
+    source_node_id = Column(UUID_TYPE, ForeignKey("graph_nodes.node_id", ondelete="CASCADE"), nullable=False)
+    target_node_id = Column(UUID_TYPE, ForeignKey("graph_nodes.node_id", ondelete="CASCADE"), nullable=False)
     edge_type      = Column(String(50), nullable=False)
-    properties     = Column(JSONB, nullable=False, default=dict)
+    properties     = Column(JSON_TYPE, nullable=False, default=dict)
 
     scan = relationship("Scan", back_populates="graph_edges")
 
@@ -182,9 +186,9 @@ class GraphEdge(Base):
 class RiskResult(Base):
     __tablename__ = "risk_results"
 
-    result_id       = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    scan_id         = Column(UUID(as_uuid=False), ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
-    asset_id        = Column(UUID(as_uuid=False), ForeignKey("crypto_assets.asset_id", ondelete="CASCADE"), nullable=False, unique=True)
+    result_id       = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    scan_id         = Column(UUID_TYPE, ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
+    asset_id        = Column(UUID_TYPE, ForeignKey("crypto_assets.asset_id", ondelete="CASCADE"), nullable=False, unique=True)
     mosca_x         = Column(Float, nullable=True)
     mosca_y         = Column(Float, nullable=True)
     mosca_z         = Column(Float, nullable=True)
@@ -194,8 +198,8 @@ class RiskResult(Base):
     seed            = Column(Integer, nullable=True)
     context_score   = Column(Float, nullable=False)
     risk_level      = Column(String(30), nullable=False)
-    assumptions     = Column(JSONB, nullable=False, default=list)
-    context_breakdown = Column(JSONB, nullable=False, default=dict)
+    assumptions     = Column(JSON_TYPE, nullable=False, default=list)
+    context_breakdown = Column(JSON_TYPE, nullable=False, default=dict)
     created_at      = Column(DateTime(timezone=True), server_default=func.now())
 
     scan  = relationship("Scan", back_populates="risk_results")
@@ -209,13 +213,13 @@ class RiskResult(Base):
 class MigrationPlan(Base):
     __tablename__ = "migration_plans"
 
-    plan_id          = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
-    scan_id          = Column(UUID(as_uuid=False), ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
-    asset_id         = Column(UUID(as_uuid=False), ForeignKey("crypto_assets.asset_id", ondelete="CASCADE"), nullable=False, unique=True)
-    candidates       = Column(JSONB, nullable=False, default=list)
-    waves            = Column(JSONB, nullable=False, default=list)
-    blast_radius     = Column(JSONB, nullable=False, default=dict)
-    simulation_state = Column(JSONB, nullable=True)
+    plan_id          = Column(UUID_TYPE, primary_key=True, default=_uuid)
+    scan_id          = Column(UUID_TYPE, ForeignKey("scans.scan_id", ondelete="CASCADE"), nullable=False)
+    asset_id         = Column(UUID_TYPE, ForeignKey("crypto_assets.asset_id", ondelete="CASCADE"), nullable=False, unique=True)
+    candidates       = Column(JSON_TYPE, nullable=False, default=list)
+    waves            = Column(JSON_TYPE, nullable=False, default=list)
+    blast_radius     = Column(JSON_TYPE, nullable=False, default=dict)
+    simulation_state = Column(JSON_TYPE, nullable=True)
     created_at       = Column(DateTime(timezone=True), server_default=func.now())
 
     scan  = relationship("Scan", back_populates="migration_plans")
@@ -229,14 +233,18 @@ class MigrationPlan(Base):
 class ReplaySnapshot(Base):
     __tablename__ = "replay_snapshots"
 
-    snapshot_id      = Column(UUID(as_uuid=False), primary_key=True, default=_uuid)
+    snapshot_id      = Column(UUID_TYPE, primary_key=True, default=_uuid)
     source_description = Column(Text, nullable=False)
     input_sha256     = Column(String(64), nullable=True)
     scanner_version  = Column(String(50), nullable=False)
     registry_version = Column(String(50), nullable=False)
     config_hash      = Column(String(64), nullable=True)
-    summary          = Column(JSONB, nullable=False, default=dict)
+    summary          = Column(JSON_TYPE, nullable=False, default=dict)
     created_at       = Column(DateTime(timezone=True), server_default=func.now())
+
+    scans = relationship("Scan", backref="replay_snapshot_ref",
+                         primaryjoin="ReplaySnapshot.snapshot_id == Scan.replay_snapshot_id",
+                         foreign_keys="Scan.replay_snapshot_id")
 
     scans = relationship("Scan", backref="replay_snapshot_ref",
                          primaryjoin="ReplaySnapshot.snapshot_id == Scan.replay_snapshot_id",

@@ -26,8 +26,11 @@ def _get_sync_db():
     """Get a synchronous SQLAlchemy session for the worker."""
     from sqlalchemy import create_engine
     from sqlalchemy.orm import sessionmaker
-    sync_url = os.environ.get("SYNC_DATABASE_URL", "postgresql://vigil:vigil@localhost:5433/ecdat")
-    engine = create_engine(sync_url, pool_pre_ping=True)
+    sync_url = os.environ.get("SYNC_DATABASE_URL", "sqlite:///D:/ecdat/ecdat.db")
+    if sync_url.startswith("postgresql://"):
+        sync_url = sync_url.replace("postgresql://", "postgresql+psycopg2://", 1)
+    connect_args = {"check_same_thread": False} if "sqlite" in sync_url else {}
+    engine = create_engine(sync_url, pool_pre_ping=True, connect_args=connect_args)
     Session = sessionmaker(engine)
     return Session()
 
@@ -224,6 +227,7 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
         _update_stage(db, scan, "graph", "running")
         try:
             graph = build_graph_from_assets(scan_id, fused_assets)
+            node_ids = set()
             for node in graph._nodes.values():
                 row = GraphNode(
                     node_id=node.node_id,
@@ -233,16 +237,20 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
                     properties=node.properties,
                 )
                 db.add(row)
+                node_ids.add(node.node_id)
+            db.flush()
+
             for edge in graph._edges.values():
-                row = GraphEdge(
-                    edge_id=edge.edge_id,
-                    scan_id=scan_id,
-                    source_node_id=edge.source_node_id,
-                    target_node_id=edge.target_node_id,
-                    edge_type=edge.edge_type.value,
-                    properties=edge.properties,
-                )
-                db.add(row)
+                if edge.source_node_id in node_ids and edge.target_node_id in node_ids:
+                    row = GraphEdge(
+                        edge_id=edge.edge_id,
+                        scan_id=scan_id,
+                        source_node_id=edge.source_node_id,
+                        target_node_id=edge.target_node_id,
+                        edge_type=edge.edge_type.value,
+                        properties=edge.properties,
+                    )
+                    db.add(row)
             db.commit()
             _update_stage(db, scan, "graph", "done")
         except Exception as exc:

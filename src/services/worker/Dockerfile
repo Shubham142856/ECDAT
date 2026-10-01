@@ -15,6 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ecdat/ /app/ecdat/
 COPY services/ /app/services/
 COPY config/ /app/config/
+COPY scripts/ /app/scripts/
 
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1

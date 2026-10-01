@@ -73,3 +73,8 @@ datasets/cryptoapi-bench/
 # Scratch & session files
 scratch_rescan.py
 microsoft-jdk-*.msi
+*.db
+*.sqlite
+*.sqlite3
+*.tsbuildinfo
+

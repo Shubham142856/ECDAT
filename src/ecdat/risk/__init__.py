@@ -290,7 +290,7 @@ def assess_asset_risk(
         data_sensitivity=data_sensitivity,
         business_criticality=business_criticality,
         internet_exposure=internet_exposure,
-        blast_radius_count=blast_radius.affected_count,
+        blast_radius_count=blast_radius.affected_count if blast_radius is not None else 0,
         migration_difficulty=migration_difficulty,
         weights=context_weights,
     )

@@ -35,8 +35,9 @@ logging.basicConfig(level=logging.INFO)
 # Database setup
 # ---------------------------------------------------------------------------
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql+asyncpg://vigil:vigil@localhost:5433/ecdat")
-engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True)
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite+aiosqlite:///D:/ecdat/ecdat.db")
+connect_args = {"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
+engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True, connect_args=connect_args)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
 UPLOAD_DIR = Path(os.environ.get("ECDAT_UPLOAD_DIR", "./uploads"))
@@ -327,6 +328,17 @@ async def start_scan(body: ScanCreate, db: AsyncSession = Depends(get_db)):
         logger.warning("Could not enqueue scan job: %s — scan will remain queued", exc)
 
     return _scan_out(scan)
+
+
+@app.get("/api/scans", tags=["scans"])
+async def list_scans(project_id: Optional[str] = None, db: AsyncSession = Depends(get_db)):
+    """List scans, optionally filtered by project_id."""
+    query = select(Scan).order_by(Scan.created_at.desc())
+    if project_id:
+        query = query.where(Scan.project_id == project_id)
+    result = await db.execute(query)
+    scans = result.scalars().all()
+    return [_scan_out(s) for s in scans]
 
 
 @app.get("/api/scans/{scan_id}", tags=["scans"])

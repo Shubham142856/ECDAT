@@ -89,35 +89,18 @@ export default function DashboardLayout({
           {/* Active Scan Dataset Switcher */}
           <div className="flex items-center gap-1.5 bg-[#030712] px-3 py-1 rounded-full border border-white/10">
             <Radio className="w-3 h-3 text-cyber-cyan" />
-            <span className="text-text-dim">DATASET:</span>
-            <select
-              value={activeScan}
-              onChange={(e) => setActiveScan(e.target.value)}
-              className="bg-transparent text-cyber-cyan font-bold focus:outline-none cursor-pointer text-xs"
-            >
-              <option value="jjwt-postpatch" className="bg-[#050A1F] text-white">JJWT @ fb71496 (0 Spurious)</option>
-              <option value="certbot-postpatch" className="bg-[#050A1F] text-white">Certbot @ 4856493 (17 Assets)</option>
-              <option value="paramiko-postpatch" className="bg-[#050A1F] text-white">Paramiko @ 142f593 (AES-CTR)</option>
-              <option value="pyjwt-postpatch" className="bg-[#050A1F] text-white">PyJWT @ b5bd6fe (Ed448)</option>
-            </select>
+            <span className="text-text-dim">PROJECT:</span>
+            <span className="text-cyber-cyan font-bold text-xs uppercase">SIH26164 (NTRO)</span>
           </div>
         </div>
 
         {/* Right action controls */}
         <div className="flex items-center gap-3">
-          {/* Replay Mode Toggle */}
-          <button
-            onClick={() => setReplayMode(!replayMode)}
-            className={`text-xs font-mono font-bold px-3 py-1.5 rounded-xl border flex items-center gap-1.5 transition-all ${
-              replayMode
-                ? "bg-amber-950/80 border-amber-500/50 text-amber-300 shadow-glow-amber"
-                : "bg-[#030712] border-white/10 text-text-dim hover:text-white"
-            }`}
-          >
-            <RotateCcw className={`w-3.5 h-3.5 ${replayMode ? "animate-spin" : ""}`} />
-            <span className="hidden sm:inline">REPLAY MODE:</span>
-            <span>{replayMode ? "ACTIVE" : "OFF"}</span>
-          </button>
+          {/* Air-gapped On-Prem Badge */}
+          <div className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl border border-emerald-500/30 bg-emerald-950/40 text-emerald-300 flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>OFFLINE / ON-PREM</span>
+          </div>
 
           {/* User profile */}
           <div className="flex items-center gap-2 pl-2 border-l border-white/10">

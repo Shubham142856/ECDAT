@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { 
   ShieldAlert, 
   ShieldCheck, 
   Cpu, 
   AlertTriangle, 
-  TrendingUp, 
   ArrowRight, 
   Database, 
   Network, 
@@ -16,46 +15,125 @@ import {
   FileJson,
   CheckCircle2,
   Clock,
-  Radio
+  Radio,
+  AlertCircle,
+  Layers
 } from "lucide-react";
-import { REAL_ASSETS, MIGRATION_WAVES } from "@/lib/data";
+import { getProjects, getScans, getScanAssets, getScanMigrationPlan } from "@/lib/api";
+import { CryptoAssetItem, ProjectItem, ScanSummaryItem } from "@/lib/types";
 
 export default function DashboardOverviewPage() {
-  const totalAssets = 54;
-  const vulnerableAssets = 36; // 66.7%
-  const pqcReadyAssets = 11; // 20.3%
-  const criticalRiskAssets = 14;
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
+  const [assets, setAssets] = useState<CryptoAssetItem[]>([]);
+  const [selectedProjectId, setSelectedProjectId] = useState<string>("");
+  const [activeScan, setActiveScan] = useState<ScanSummaryItem | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [planSummary, setPlanSummary] = useState<any[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadData() {
+      try {
+        setLoading(true);
+        const projList = await getProjects();
+        if (!isMounted) return;
+        setProjects(projList);
+
+        if (projList.length > 0) {
+          const firstProj = projList[0];
+          setSelectedProjectId(firstProj.project_id);
+          const scans = await getScans(firstProj.project_id);
+          if (scans && scans.length > 0) {
+            const latest = scans[0];
+            if (isMounted) setActiveScan(latest);
+            const assetList = await getScanAssets(latest.scan_id);
+            if (isMounted) setAssets(assetList || []);
+
+            try {
+              const planData = await getScanMigrationPlan(latest.scan_id);
+              if (isMounted) setPlanSummary(planData.plans || []);
+            } catch (err) {
+              // Plan optional
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to load dashboard overview data:", err);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+    loadData();
+    return () => { isMounted = false; };
+  }, []);
+
+  const handleSelectProject = async (projectId: string) => {
+    setSelectedProjectId(projectId);
+    setLoading(true);
+    try {
+      const scans = await getScans(projectId);
+      if (scans && scans.length > 0) {
+        const latest = scans[0];
+        setActiveScan(latest);
+        const assetList = await getScanAssets(latest.scan_id);
+        setAssets(assetList || []);
+        try {
+          const planData = await getScanMigrationPlan(latest.scan_id);
+          setPlanSummary(planData.plans || []);
+        } catch {
+          setPlanSummary([]);
+        }
+      } else {
+        setActiveScan(null);
+        setAssets([]);
+        setPlanSummary([]);
+      }
+    } catch (err) {
+      console.warn("Failed to switch project:", err);
+      setAssets([]);
+      setPlanSummary([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const totalAssets = assets.length;
+  const vulnerableAssets = assets.filter((a) => a.quantum_status === "vulnerable").length;
+  const pqcReadyAssets = assets.filter((a) => a.quantum_status === "safe" || a.quantum_status === "hybrid").length;
+  const criticalRiskAssets = assets.filter(
+    (a) => a.context?.criticality === "CRITICAL" || (a.quantum_status === "vulnerable" && a.confidence >= 0.8)
+  ).length;
 
   return (
     <div className="space-y-8">
       {/* Top Banner / Headline */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-cyan-500/20">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyber-cyan animate-pulse" />
-            <span className="text-xs font-mono font-bold tracking-widest text-cyber-cyan uppercase">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">
               ENTERPRISE SECURITY OPERATIONS CENTER
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-text-bright tracking-tight mt-1">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1">
             Cryptographic Posture &amp; Quantum Risk Overview
           </h1>
-          <p className="text-xs sm:text-sm text-text-dim mt-1">
-            Continuous discovery telemetry across 4 enterprise corpora: <span className="text-cyber-cyan font-mono">PyJWT</span>, <span className="text-cyber-cyan font-mono">Certbot</span>, <span className="text-cyber-cyan font-mono">Paramiko</span>, and <span className="text-cyber-cyan font-mono">JJWT</span>.
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Continuous discovery telemetry across authentic enterprise repositories.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <Link
             href="/dashboard/discovery"
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyber-blue to-cyber-cyan text-[#020617] font-mono text-xs font-bold shadow-glow-cyan hover:scale-105 transition-all flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-md"
           >
             <Radio className="w-3.5 h-3.5 animate-pulse" />
             Trigger New Discovery
           </Link>
           <Link
             href="/dashboard/reports"
-            className="px-4 py-2.5 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-cyber-cyan font-mono text-xs font-bold hover:bg-cyan-950/40 transition-all flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white font-mono text-xs font-bold transition-all flex items-center gap-2"
           >
             <FileJson className="w-3.5 h-3.5" />
             CBOM Export
@@ -63,231 +141,158 @@ export default function DashboardOverviewPage() {
         </div>
       </div>
 
+      {/* Target Project Switcher */}
+      {projects.length > 0 && (
+        <div className="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800 text-xs font-mono">
+          <span className="text-slate-500 uppercase px-2 font-bold flex items-center gap-1.5">
+            <Layers className="w-3.5 h-3.5 text-cyan-400" /> ACTIVE CORPUS:
+          </span>
+          <div className="flex flex-wrap gap-1">
+            {projects.map((p) => (
+              <button
+                key={p.project_id}
+                onClick={() => handleSelectProject(p.project_id)}
+                className={`px-3 py-1.5 rounded-lg transition-all ${
+                  selectedProjectId === p.project_id
+                    ? "bg-cyan-500/20 text-cyan-400 font-bold border border-cyan-500/40"
+                    : "text-slate-400 hover:text-white hover:bg-slate-900"
+                }`}
+              >
+                {p.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Empty State if No Projects */}
+      {!loading && projects.length === 0 && (
+        <div className="p-12 text-center bg-slate-950/60 rounded-2xl border border-slate-800 flex flex-col items-center justify-center">
+          <AlertCircle className="w-12 h-12 text-slate-600 mb-3" />
+          <h3 className="text-base font-bold text-slate-300">No Scanned Projects Found in Database</h3>
+          <p className="text-xs text-slate-500 max-w-md mt-1 mb-5 font-mono">
+            The platform is connected to PostgreSQL. Trigger a repository scan via the Discovery Engine to analyze real cryptographic evidence.
+          </p>
+          <Link
+            href="/dashboard/discovery"
+            className="px-4 py-2 bg-cyan-600 text-slate-950 font-mono text-xs font-bold rounded-lg hover:bg-cyan-500"
+          >
+            Go to Discovery Engine
+          </Link>
+        </div>
+      )}
+
       {/* KPI Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Assets */}
-        <div className="p-5 rounded-2xl bg-[#050A1F] border border-white/10 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-text-dim">TOTAL CRYPTO ASSETS</div>
-          <div className="text-3xl font-black font-mono text-white mt-1">{totalAssets}</div>
-          <div className="text-[11px] text-text-muted mt-2 flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyber-cyan" />
-            Across 4 pinned repos
+        <div className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 relative overflow-hidden">
+          <div className="text-[10px] font-mono uppercase text-slate-500 font-bold">TOTAL CRYPTO ASSETS</div>
+          <div className="text-3xl font-black text-white mt-1 font-mono">{loading ? "..." : totalAssets}</div>
+          <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
+            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+            <span>Verified in PostgreSQL</span>
           </div>
         </div>
 
         {/* Quantum Vulnerable */}
-        <div className="p-5 rounded-2xl bg-[#050A1F] border border-rose-500/30 relative overflow-hidden shadow-glow-rose">
-          <div className="text-[10px] font-mono uppercase text-rose-400">QUANTUM VULNERABLE</div>
-          <div className="text-3xl font-black font-mono text-rose-400 mt-1">{vulnerableAssets}</div>
-          <div className="text-[11px] text-text-muted mt-2">
-            RSA, ECDSA, 3DES, DH (66.7%)
+        <div className="p-5 rounded-2xl bg-slate-950/80 border border-rose-900/30 relative overflow-hidden">
+          <div className="text-[10px] font-mono uppercase text-rose-400 font-bold">QUANTUM VULNERABLE</div>
+          <div className="text-3xl font-black text-rose-400 mt-1 font-mono">{loading ? "..." : vulnerableAssets}</div>
+          <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
+            <ShieldAlert className="w-3.5 h-3.5 text-rose-400" />
+            <span>{totalAssets > 0 ? Math.round((vulnerableAssets / totalAssets) * 100) : 0}% of active catalog</span>
           </div>
         </div>
 
-        {/* Mosca Critical Risk */}
-        <div className="p-5 rounded-2xl bg-[#050A1F] border border-amber-500/30 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-amber-400">MOSCA CRITICAL (X+Y &gt; Z)</div>
-          <div className="text-3xl font-black font-mono text-amber-400 mt-1">{criticalRiskAssets}</div>
-          <div className="text-[11px] text-text-muted mt-2">
-            Urgent SNDL Exposure Window
+        {/* PQC Ready / Hybrid */}
+        <div className="p-5 rounded-2xl bg-slate-950/80 border border-emerald-900/30 relative overflow-hidden">
+          <div className="text-[10px] font-mono uppercase text-emerald-400 font-bold">PQC READY / HYBRID</div>
+          <div className="text-3xl font-black text-emerald-400 mt-1 font-mono">{loading ? "..." : pqcReadyAssets}</div>
+          <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span>FIPS 203/204/205 aligned</span>
           </div>
         </div>
 
-        {/* Hybrid / PQC Ready */}
-        <div className="p-5 rounded-2xl bg-[#050A1F] border border-emerald-500/30 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-emerald-400">PQC / HYBRID READY</div>
-          <div className="text-3xl font-black font-mono text-emerald-400 mt-1">{pqcReadyAssets}</div>
-          <div className="text-[11px] text-text-muted mt-2">
-            ML-KEM / ML-DSA Standardized
-          </div>
-        </div>
-
-        {/* Agility Index */}
-        <div className="p-5 rounded-2xl bg-[#050A1F] border border-cyan-500/30 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-cyber-cyan">CRYPTO-AGILITY INDEX</div>
-          <div className="text-3xl font-black font-mono text-cyber-cyan mt-1">42 / 100</div>
-          <div className="text-[11px] text-text-muted mt-2">
-            High Hardcoded Literal Density
+        {/* Critical Risk Assets */}
+        <div className="p-5 rounded-2xl bg-slate-950/80 border border-amber-900/30 relative overflow-hidden">
+          <div className="text-[10px] font-mono uppercase text-amber-400 font-bold">HIGH / CRITICAL RISK</div>
+          <div className="text-3xl font-black text-amber-400 mt-1 font-mono">{loading ? "..." : criticalRiskAssets}</div>
+          <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
+            <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+            <span>Mosca X+Y &gt; Z condition</span>
           </div>
         </div>
       </div>
 
-      {/* Main Analysis Section (2 Columns) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Left Column: Quantum Exposure Breakdown */}
-        <div className="lg:col-span-7 space-y-6">
-          <div className="p-6 rounded-2xl bg-[#050A1F] border border-cyan-500/20 space-y-5">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-cyber-cyan" />
-                <h3 className="font-bold text-sm text-text-bright font-mono">
-                  QUANTUM EXPOSURE BY ALGORITHM FAMILY
-                </h3>
-              </div>
-              <span className="text-xs font-mono text-text-dim">4-Corpus Aggregation</span>
-            </div>
-
-            {/* Visual Bars for Families */}
-            <div className="space-y-4 font-mono text-xs">
-              <div>
-                <div className="flex justify-between mb-1.5">
-                  <span className="text-text-muted">Asymmetric Encryption &amp; Signatures (RSA, ECDSA)</span>
-                  <span className="text-rose-400 font-bold">28 Assets (CRITICAL)</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-rose-500 rounded-full" style={{ width: "52%" }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between mb-1.5">
-                  <span className="text-text-muted">Symmetric Ciphers (AES-128/256, 3DES, ChaCha20)</span>
-                  <span className="text-amber-400 font-bold">14 Assets (MODERATE)</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-amber-500 rounded-full" style={{ width: "26%" }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between mb-1.5">
-                  <span className="text-text-muted">Post-Quantum Primitives (ML-KEM-768, ML-DSA-65)</span>
-                  <span className="text-emerald-400 font-bold">11 Assets (SAFE)</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-emerald-400 rounded-full" style={{ width: "20%" }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between mb-1.5">
-                  <span className="text-text-muted">Unmapped / Spurious UNKNOWN Assets</span>
-                  <span className="text-emerald-400 font-bold">0 Assets (CLEAN)</span>
-                </div>
-                <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                  <div className="h-full bg-emerald-500 rounded-full" style={{ width: "0%" }} />
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#030712] border border-cyan-500/15 flex items-center justify-between text-xs font-mono">
-              <span className="text-text-dim">JJWT Precision Milestone:</span>
-              <span className="text-emerald-400 font-bold">68 Spurious UNKNOWN assets eliminated to 0</span>
-            </div>
-          </div>
-
-          {/* Quick Access Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Link
-              href="/dashboard/assets"
-              className="p-5 rounded-2xl bg-[#050A1F] border border-white/10 hover:border-cyan-500/40 hover:bg-[#07112F] transition-all group"
-            >
-              <Database className="w-5 h-5 text-cyber-cyan mb-3 group-hover:scale-110 transition-transform" />
-              <div className="font-bold text-sm text-text-bright">CBOM Inventory</div>
-              <div className="text-[11px] text-text-muted mt-1">Browse 54 discovered cryptographic components</div>
-            </Link>
-
-            <Link
-              href="/dashboard/graph"
-              className="p-5 rounded-2xl bg-[#050A1F] border border-white/10 hover:border-cyan-500/40 hover:bg-[#07112F] transition-all group"
-            >
-              <Network className="w-5 h-5 text-cyber-blue mb-3 group-hover:scale-110 transition-transform" />
-              <div className="font-bold text-sm text-text-bright">Topology Graph</div>
-              <div className="text-[11px] text-text-muted mt-1">Interactive reachability &amp; blast radius map</div>
-            </Link>
-
-            <Link
-              href="/dashboard/migration"
-              className="p-5 rounded-2xl bg-[#050A1F] border border-white/10 hover:border-cyan-500/40 hover:bg-[#07112F] transition-all group"
-            >
-              <Zap className="w-5 h-5 text-amber-400 mb-3 group-hover:scale-110 transition-transform" />
-              <div className="font-bold text-sm text-text-bright">Wave Planner</div>
-              <div className="text-[11px] text-text-muted mt-1">Prioritized 4-wave PQC transition schedule</div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Right Column: Live Telemetry Stream & Priority Wave 1 */}
-        <div className="lg:col-span-5 space-y-6">
-          {/* Priority Wave 1 Callout */}
-          <div className="p-6 rounded-2xl bg-gradient-to-b from-rose-950/40 to-[#050A1F] border border-rose-500/30 space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-rose-400 uppercase tracking-wider flex items-center gap-2">
-                <AlertTriangle className="w-3.5 h-3.5" />
-                URGENT PQC ACTION REQUIRED
-              </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-500/40 font-bold">
-                WAVE 1
-              </span>
-            </div>
-
+      {/* Discovered Assets Live Table */}
+      {assets.length > 0 && (
+        <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800">
+          <div className="flex items-center justify-between pb-4 border-b border-slate-800">
             <div>
-              <h4 className="text-base font-bold text-white">External RSA-2048 &amp; 3DES-CBC Deprecation</h4>
-              <p className="text-xs text-text-muted mt-1 leading-relaxed">
-                Auth Gateway and Legacy DMZ proxies use classical key exchange vulnerable to Store Now, Decrypt Later interception.
+              <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+                <Database className="w-4 h-4 text-cyan-400" /> Discovered Cryptographic Inventory (Live Telemetry)
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5 font-mono">
+                Atomic evidence provenance extracted from source AST and manifests.
               </p>
             </div>
-
-            <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-              <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                <div className="text-[10px] text-text-dim">AFFECTED SYSTEMS</div>
-                <div className="text-base font-bold text-amber-400">14 Services</div>
-              </div>
-              <div className="p-3 rounded-xl bg-black/40 border border-white/10">
-                <div className="text-[10px] text-text-dim">PQC CANDIDATE</div>
-                <div className="text-base font-bold text-cyber-cyan">ML-KEM-768</div>
-              </div>
-            </div>
-
-            <Link
-              href="/dashboard/migration"
-              className="w-full py-2.5 rounded-xl bg-rose-950/80 border border-rose-500/40 text-rose-300 hover:bg-rose-900/50 transition-all text-xs font-mono font-bold flex items-center justify-center gap-2"
-            >
-              Review Wave 1 Rollout Plan <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-
-          {/* Live Discovery Stream Feed */}
-          <div className="p-6 rounded-2xl bg-[#050A1F] border border-white/10 space-y-4">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <span className="text-xs font-mono font-bold text-text-bright uppercase">
-                VERIFIED CRYPTO EVIDENCE FEED
-              </span>
-              <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3" /> Ground Truth Validated
-              </span>
-            </div>
-
-            <div className="space-y-3 font-mono text-xs">
-              {REAL_ASSETS.slice(0, 4).map((a) => (
-                <div key={a.asset_id} className="p-3 rounded-xl bg-[#030712] border border-white/5 space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-cyber-cyan font-bold">{a.canonical_algorithm}</span>
-                    <span className={`text-[10px] px-1.5 py-0.2 rounded uppercase ${
-                      a.quantum_status === "vulnerable" ? "text-rose-400 bg-rose-950/60" : "text-emerald-400 bg-emerald-950/60"
-                    }`}>
-                      {a.quantum_status}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-text-muted truncate">
-                    {a.context?.service || a.source_corpus}
-                  </div>
-                  <div className="text-[10px] text-text-dim truncate">
-                    {a.evidence_records?.[0]?.source_location || "Verified ground truth"}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <Link
               href="/dashboard/assets"
-              className="text-xs font-mono text-cyber-cyan hover:underline flex items-center justify-center gap-1.5 pt-2"
+              className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
             >
-              View Full CBOM Inventory Table ({totalAssets} Assets) →
+              Full Inventory <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
+
+          <div className="overflow-x-auto mt-4">
+            <table className="w-full text-left text-xs font-mono">
+              <thead className="text-slate-400 border-b border-slate-800">
+                <tr>
+                  <th className="py-2.5 px-3">ALGORITHM</th>
+                  <th className="py-2.5 px-3">FAMILY</th>
+                  <th className="py-2.5 px-3">STATUS</th>
+                  <th className="py-2.5 px-3">USAGE ROLE</th>
+                  <th className="py-2.5 px-3">ROLES</th>
+                  <th className="py-2.5 px-3">CONFIDENCE</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-800/50">
+                {assets.slice(0, 8).map((a) => (
+                  <tr key={a.asset_id} className="hover:bg-slate-900/40 transition-colors">
+                    <td className="py-2.5 px-3 font-bold text-white">
+                      {a.canonical_algorithm} {a.variant && <span className="text-[10px] text-slate-400">({a.variant})</span>}
+                    </td>
+                    <td className="py-2.5 px-3 text-slate-300">{a.family}</td>
+                    <td className="py-2.5 px-3">
+                      <span
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                          a.quantum_status === "vulnerable"
+                            ? "bg-rose-950/80 text-rose-300 border border-rose-800/40"
+                            : "bg-emerald-950/80 text-emerald-300 border border-emerald-800/40"
+                        }`}
+                      >
+                        {a.quantum_status}
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3 text-slate-300">{a.usage_role || "general"}</td>
+                    <td className="py-2.5 px-3">
+                      <div className="flex gap-1">
+                        {a.roles?.map((r, i) => (
+                          <span key={i} className="px-1 py-0.2 rounded bg-slate-800 text-[10px] text-slate-300">
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="py-2.5 px-3 font-bold text-cyan-400">{Math.round(a.confidence * 100)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

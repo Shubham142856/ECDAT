@@ -17,7 +17,7 @@ from pathlib import Path
 from ecdat.scanners.python_ast import scan_python_file
 from ecdat.ontology import EvidenceRole
 
-CORPUS_DIR = Path(__file__).parent.parent.parent / "corpus" / "enterprise-lab" / "python-service"
+CORPUS_DIR = Path(__file__).resolve().parent.parent.parent.parent / "tests" / "fixtures" / "synthetic-lab" / "python-service"
 
 
 def _load_fixture(name: str) -> str:

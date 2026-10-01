@@ -44,6 +44,7 @@ from ecdat.scanners.python_ast import scan_python_file
 from ecdat.scanners.java_rules import scan_java_file
 from ecdat.scanners.dependency import scan_dependency_file
 from ecdat.scanners.certificate import scan_certificate_file
+from ecdat.scanners.container import scan_dockerfile
 from ecdat.scanners.config_scan import scan_config_file
 from ecdat.fusion import fuse_evidence
 from ecdat.graph import build_graph_from_assets
@@ -52,7 +53,9 @@ from ecdat.migration import load_registry, generate_candidates, build_wave_plan
 from ecdat.cbom import build_cbom, validate_cbom
 from ecdat.ontology import ScanState
 
-SYNC_DB_URL = os.environ.get("SYNC_DATABASE_URL", "postgresql://vigil:vigil@localhost:5433/ecdat")
+SYNC_DB_URL = os.environ.get("SYNC_DATABASE_URL", "sqlite:///D:/ecdat/ecdat.db")
+if SYNC_DB_URL.startswith("postgresql://"):
+    SYNC_DB_URL = SYNC_DB_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
 RISK_SEED = int(os.environ.get("ECDAT_RISK_SEED", 20260930))
 
 CORPUS_TARGETS = [
@@ -178,6 +181,36 @@ def scan_target(target: dict, db) -> dict:
             except Exception as e:
                 logger.debug(f"Error scanning dep {rel}: {e}")
 
+    # Container / Dockerfile definitions
+    dockerfile_patterns = ["Dockerfile*", "Containerfile*", "*.dockerfile"]
+    for pat in dockerfile_patterns:
+        for d_file in repo_path.rglob(pat):
+            rel = d_file.relative_to(repo_path)
+            if any(p in SKIP_DIRS for p in rel.parts):
+                continue
+            try:
+                content = d_file.read_text(encoding="utf-8", errors="replace")
+                findings = scan_dockerfile(str(rel), content)
+                scanned_files += 1
+                raw_findings.extend(findings)
+            except Exception as e:
+                logger.debug(f"Error scanning Dockerfile {rel}: {e}")
+
+    # X.509 Certificates
+    cert_patterns = ["*.pem", "*.crt", "*.cer", "*.der"]
+    for pat in cert_patterns:
+        for c_file in repo_path.rglob(pat):
+            rel = c_file.relative_to(repo_path)
+            if any(p in SKIP_DIRS for p in rel.parts):
+                continue
+            try:
+                data = c_file.read_bytes()
+                cert_f, pk_f = scan_certificate_file(str(rel), data)
+                scanned_files += 1
+                raw_findings.extend(cert_f)
+            except Exception as e:
+                logger.debug(f"Error scanning cert {rel}: {e}")
+
     # Filter out findings with empty/None algorithm hints (Noise reduction & provenance integrity)
     valid_findings = []
     for f in raw_findings:
@@ -189,14 +222,17 @@ def scan_target(target: dict, db) -> dict:
 
     logger.info(f"Discovery: {scanned_files} files scanned, {len(raw_findings)} raw findings -> {len(valid_findings)} valid crypto claims")
 
-    # 3. Create Scan in DB
-    scan_id = f"real-{repo_name.lower()}-{commit[:7]}"
+    # 3. Create Scan in DB (deterministic UUID for PostgreSQL UUID column)
+    scan_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"ecdat-{repo_name.lower()}-{commit}"))
     # Delete old scan if re-running
-    old_scan = db.query(Scan).filter_by(scan_id=scan_id).first()
-    if old_scan:
-        logger.info(f"Removing previous scan {scan_id} to ensure clean re-scan")
-        db.delete(old_scan)
-        db.commit()
+    try:
+        old_scan = db.query(Scan).filter_by(scan_id=scan_id).first()
+        if old_scan:
+            logger.info(f"Removing previous scan {scan_id} to ensure clean re-scan")
+            db.delete(old_scan)
+            db.commit()
+    except Exception:
+        db.rollback()
 
     scan = Scan(
         scan_id=scan_id,
@@ -263,6 +299,7 @@ def scan_target(target: dict, db) -> dict:
 
     # 5. Dependency Graph
     graph = build_graph_from_assets(scan_id, fused_assets)
+    node_ids = set()
     for node in graph._nodes.values():
         db.add(GraphNode(
             node_id=node.node_id,
@@ -271,15 +308,19 @@ def scan_target(target: dict, db) -> dict:
             label=node.label[:500],
             properties=node.properties,
         ))
+        node_ids.add(node.node_id)
+    db.flush()
+
     for edge in graph._edges.values():
-        db.add(GraphEdge(
-            edge_id=edge.edge_id,
-            scan_id=scan_id,
-            source_node_id=edge.source_node_id,
-            target_node_id=edge.target_node_id,
-            edge_type=edge.edge_type.value if hasattr(edge.edge_type, "value") else str(edge.edge_type),
-            properties=edge.properties,
-        ))
+        if edge.source_node_id in node_ids and edge.target_node_id in node_ids:
+            db.add(GraphEdge(
+                edge_id=edge.edge_id,
+                scan_id=scan_id,
+                source_node_id=edge.source_node_id,
+                target_node_id=edge.target_node_id,
+                edge_type=edge.edge_type.value if hasattr(edge.edge_type, "value") else str(edge.edge_type),
+                properties=edge.properties,
+            ))
     db.commit()
     logger.info(f"Graph: {len(graph._nodes)} nodes, {len(graph._edges)} edges created")
 
@@ -288,7 +329,7 @@ def scan_target(target: dict, db) -> dict:
     for fa in fused_assets:
         algo_node_id = None
         for nid, n in graph._nodes.items():
-            if n.properties.get("asset_id") == fa.asset_id:
+            if n.properties.get("asset_id") == fa.asset_id or (n.label == fa.canonical_algorithm and getattr(n.node_type, "value", str(n.node_type)) == "algorithm"):
                 algo_node_id = nid
                 break
         blast = graph.blast_radius(algo_node_id) if algo_node_id else None
@@ -407,11 +448,14 @@ def scan_target(target: dict, db) -> dict:
     db.commit()
 
     # 10. Write Snapshot for Replay
-    snapshot_id = f"snapshot-{repo_name.lower()}-{commit[:7]}"
-    old_snap = db.query(ReplaySnapshot).filter_by(snapshot_id=snapshot_id).first()
-    if old_snap:
-        db.delete(old_snap)
-        db.commit()
+    snapshot_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, f"snapshot-{repo_name.lower()}-{commit}"))
+    try:
+        old_snap = db.query(ReplaySnapshot).filter_by(snapshot_id=snapshot_id).first()
+        if old_snap:
+            db.delete(old_snap)
+            db.commit()
+    except Exception:
+        db.rollback()
 
     snap = ReplaySnapshot(
         snapshot_id=snapshot_id,
@@ -462,7 +506,8 @@ def scan_target(target: dict, db) -> dict:
 
 
 def main():
-    engine = create_engine(SYNC_DB_URL, pool_pre_ping=True)
+    connect_args = {"check_same_thread": False} if "sqlite" in SYNC_DB_URL else {}
+    engine = create_engine(SYNC_DB_URL, pool_pre_ping=True, connect_args=connect_args)
     Session = sessionmaker(engine)
     db = Session()
 
@@ -476,6 +521,7 @@ def main():
             if r:
                 results.append(r)
         except Exception as e:
+            db.rollback()
             logger.error(f"Failed scanning {target['name']}: {e}", exc_info=True)
 
     db.close()

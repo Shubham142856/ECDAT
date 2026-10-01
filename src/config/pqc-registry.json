@@ -8,7 +8,21 @@
     "variants": ["ML-KEM-512", "ML-KEM-768", "ML-KEM-1024"],
     "security_categories": [1, 3, 5],
     "notes": "NIST primary KEM standard. Not a signature scheme.",
-    "trade_offs": ["Larger key/ciphertext than ECDH", "Higher CPU than X25519"]
+    "trade_offs": ["Larger key/ciphertext than ECDH", "Higher CPU than X25519"],
+    "latency": {
+      "public_key_bytes": 1184,
+      "ciphertext_bytes": 1088,
+      "estimated_handshake_overhead_ms": 2.1,
+      "cpu_overhead_factor": 1.5,
+      "comparison": "+2.1ms overhead vs X25519; key size 1,184B vs 32B"
+    },
+    "cost": {
+      "bandwidth_per_exchange_kb": 2.27,
+      "infrastructure_cost_impact": "LOW",
+      "migration_complexity": "LOW",
+      "estimated_cost_tier": "$",
+      "details": "Drop-in KEM replacement via OpenSSL 3.4 / BouncyCastle 1.78; minimal egress cost impact"
+    }
   },
   {
     "name": "ML-DSA-65",
@@ -19,7 +33,21 @@
     "variants": ["ML-DSA-44", "ML-DSA-65", "ML-DSA-87"],
     "security_categories": [2, 3, 5],
     "notes": "NIST primary digital signature standard.",
-    "trade_offs": ["Larger signature than ECDSA", "Different performance profile"]
+    "trade_offs": ["Larger signature than ECDSA", "Different performance profile"],
+    "latency": {
+      "public_key_bytes": 1952,
+      "signature_bytes": 3309,
+      "estimated_handshake_overhead_ms": 3.4,
+      "cpu_overhead_factor": 1.8,
+      "comparison": "+3.4ms verification latency; sig size 3,309B vs 64B ECDSA"
+    },
+    "cost": {
+      "bandwidth_per_exchange_kb": 5.26,
+      "infrastructure_cost_impact": "LOW-MODERATE",
+      "migration_complexity": "MODERATE",
+      "estimated_cost_tier": "$$",
+      "details": "Requires JWT/token MTU size adjustment and X.509 cert chain buffering"
+    }
   },
   {
     "name": "SLH-DSA",
@@ -30,7 +58,21 @@
     "variants": ["SLH-DSA-SHA2-128s", "SLH-DSA-SHA2-192f", "SLH-DSA-SHA2-256f"],
     "security_categories": [1, 3, 5],
     "notes": "Hash-based signature, conservative security assumption.",
-    "trade_offs": ["Stateless but large signature size", "Slow signing for some variants"]
+    "trade_offs": ["Stateless but large signature size", "Slow signing for some variants"],
+    "latency": {
+      "public_key_bytes": 32,
+      "signature_bytes": 17088,
+      "estimated_handshake_overhead_ms": 8.5,
+      "cpu_overhead_factor": 3.2,
+      "comparison": "+8.5ms latency; sig size 17KB requires TCP packet fragmentation handling"
+    },
+    "cost": {
+      "bandwidth_per_exchange_kb": 17.12,
+      "infrastructure_cost_impact": "MODERATE",
+      "migration_complexity": "MODERATE-HIGH",
+      "estimated_cost_tier": "$$",
+      "details": "Higher egress bandwidth and compute requirements; recommended for firmware/root CA where signature frequency is low"
+    }
   },
   {
     "name": "X25519MLKEM768",
@@ -41,7 +83,21 @@
     "variants": ["X25519MLKEM768", "SecP256r1MLKEM768", "SecP384r1MLKEM1024"],
     "security_categories": [3],
     "notes": "Hybrid PQ/T KEX for TLS 1.3. RFC 10024 standards-track.",
-    "trade_offs": ["Larger ClientHello", "Requires TLS 1.3"]
+    "trade_offs": ["Larger ClientHello", "Requires TLS 1.3"],
+    "latency": {
+      "public_key_bytes": 1216,
+      "ciphertext_bytes": 1120,
+      "estimated_handshake_overhead_ms": 2.3,
+      "cpu_overhead_factor": 1.6,
+      "comparison": "+2.3ms TLS ClientHello/ServerHello latency; dual key share (32B ECDH + 1184B Kyber)"
+    },
+    "cost": {
+      "bandwidth_per_exchange_kb": 2.34,
+      "infrastructure_cost_impact": "LOW",
+      "migration_complexity": "LOW",
+      "estimated_cost_tier": "$",
+      "details": "Supported natively in modern web servers (nginx, envoy, cloudflare) with zero app code changes"
+    }
   },
   {
     "name": "mlkem768x25519-sha256",
@@ -52,6 +108,20 @@
     "variants": ["mlkem768x25519-sha256", "sntrup761x25519-sha512"],
     "security_categories": [3],
     "notes": "Hybrid PQ/T KEX for SSH. RFC 10042 informational.",
-    "trade_offs": ["Requires OpenSSH 9.x+"]
+    "trade_offs": ["Requires OpenSSH 9.x+"],
+    "latency": {
+      "public_key_bytes": 1216,
+      "ciphertext_bytes": 1120,
+      "estimated_handshake_overhead_ms": 2.3,
+      "cpu_overhead_factor": 1.6,
+      "comparison": "+2.3ms SSH connection initiation latency"
+    },
+    "cost": {
+      "bandwidth_per_exchange_kb": 2.34,
+      "infrastructure_cost_impact": "LOW",
+      "migration_complexity": "LOW",
+      "estimated_cost_tier": "$",
+      "details": "Configurable in sshd_config via KexAlgorithms directive; zero license or hardware cost"
+    }
   }
 ]

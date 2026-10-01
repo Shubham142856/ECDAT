@@ -43,6 +43,8 @@ class PQCAlgorithm:
     security_categories: list[int]  # NIST security categories
     notes: str = ""
     trade_offs: list[str] = field(default_factory=list)
+    latency: dict = field(default_factory=dict)
+    cost: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -57,6 +59,8 @@ class MigrationCandidate:
     trade_offs: list[str]
     compatibility_notes: str
     impact_label: str = "predicted — not guaranteed"
+    latency: dict = field(default_factory=dict)
+    cost: dict = field(default_factory=dict)
 
 
 @dataclass
@@ -218,6 +222,8 @@ def load_registry(registry_path: Optional[str] = None) -> list[PQCAlgorithm]:
                 security_categories=entry.get("security_categories", []),
                 notes=entry.get("notes", ""),
                 trade_offs=entry.get("trade_offs", []),
+                latency=entry.get("latency", {}),
+                cost=entry.get("cost", {}),
             ))
         except Exception as exc:
             logger.warning("Skipping malformed registry entry %s: %s", entry.get("name"), exc)
@@ -270,6 +276,8 @@ def generate_candidates(
                 trade_offs=pqc_algo.trade_offs,
                 compatibility_notes=compatibility_notes,
                 impact_label="predicted — not guaranteed",
+                latency=pqc_algo.latency,
+                cost=pqc_algo.cost,
             ))
 
     return candidates

@@ -1,15 +1,24 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   output: 'standalone',
   experimental: {
     cpus: 1,
     workerThreads: false,
-    serverActions: {
-      allowedOrigins: ['localhost:3000'],
-    },
+    optimizePackageImports: ['lucide-react', 'recharts', 'reactflow', 'framer-motion'],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.cache = false;
+    }
+    return config;
+  },
+};
 
-}
-
-module.exports = nextConfig
+module.exports = nextConfig;

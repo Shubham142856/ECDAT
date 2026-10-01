@@ -228,3 +228,92 @@ def scan_container_directory(root: str) -> Iterator[tuple]:
             continue
         logger.info("Scanning container tarball: %s", tarball)
         yield scan_container_tarball(str(tarball))
+
+
+def scan_dockerfile(file_path: str, content: str) -> list[ContainerFinding]:
+    """Scan a Dockerfile/Containerfile for base image crypto dependencies and instructions.
+
+    Emits CAPABILITY or CONFIGURATION roles — never USAGE or IMPLEMENTATION.
+    """
+    findings: list[ContainerFinding] = []
+    lines = content.splitlines()
+
+    for line_no, raw_line in enumerate(lines, start=1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+
+        # 1. Base image (FROM ...)
+        if line.upper().startswith("FROM "):
+            parts = line.split()
+            if len(parts) >= 2:
+                base_image = parts[1].split()[0]
+                findings.append(ContainerFinding(
+                    file_path=file_path,
+                    tarball_path=file_path,
+                    detector="container.dockerfile_base_image",
+                    raw_signal=f"FROM {base_image} (line {line_no})",
+                    roles=[EvidenceRole.CAPABILITY],
+                    package_name=base_image,
+                    version=None,
+                    algorithm_hints=[],
+                    confidence=0.85,
+                    provenance={"line": line_no, "base_image": base_image},
+                    source_type=SourceType.CONTAINER,
+                ))
+
+        # 2. Crypto packages installed via package manager
+        crypto_pkgs = ["openssl", "libssl", "liboqs", "gnutls", "mbedtls", "cryptography", "bouncycastle"]
+        for pkg in crypto_pkgs:
+            if re.search(r"\b" + re.escape(pkg) + r"(-dev|-devel|[0-9._-]*)?\b", line, re.IGNORECASE):
+                caps = get_package_capability(pkg)
+                algos = caps.get("algorithms", []) if caps else []
+                findings.append(ContainerFinding(
+                    file_path=file_path,
+                    tarball_path=file_path,
+                    detector="container.dockerfile_package",
+                    raw_signal=f"{pkg} installed in Dockerfile (line {line_no}): {line[:60]}",
+                    roles=[EvidenceRole.CAPABILITY],
+                    package_name=pkg,
+                    version=None,
+                    algorithm_hints=algos,
+                    confidence=0.80,
+                    provenance={"line": line_no, "instruction": line[:100]},
+                    source_type=SourceType.CONTAINER,
+                ))
+
+        # 3. Ports exposed (EXPOSE 443 -> TLS, EXPOSE 22 -> SSH)
+        if line.upper().startswith("EXPOSE "):
+            ports = line[7:].split()
+            for p in ports:
+                p_clean = p.split("/")[0]
+                if p_clean in ("443", "8443"):
+                    findings.append(ContainerFinding(
+                        file_path=file_path,
+                        tarball_path=file_path,
+                        detector="container.dockerfile_protocol",
+                        raw_signal=f"EXPOSE {p} (TLS/HTTPS protocol listener)",
+                        roles=[EvidenceRole.CONFIGURATION],
+                        package_name=None,
+                        version=None,
+                        algorithm_hints=["TLS"],
+                        confidence=0.75,
+                        provenance={"line": line_no, "port": p_clean},
+                        source_type=SourceType.CONTAINER,
+                    ))
+                elif p_clean == "22":
+                    findings.append(ContainerFinding(
+                        file_path=file_path,
+                        tarball_path=file_path,
+                        detector="container.dockerfile_protocol",
+                        raw_signal=f"EXPOSE {p} (SSH protocol listener)",
+                        roles=[EvidenceRole.CONFIGURATION],
+                        package_name=None,
+                        version=None,
+                        algorithm_hints=["SSH"],
+                        confidence=0.75,
+                        provenance={"line": line_no, "port": p_clean},
+                        source_type=SourceType.CONTAINER,
+                    ))
+
+    return findings

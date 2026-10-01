@@ -1,40 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Database, Filter, Shield, AlertTriangle, CheckCircle2,
   ChevronDown, Search, Download, Tag, Clock, FileJson,
-  Lock, Key, Hash, Cpu
+  Lock, Key, Hash, Cpu, RefreshCw, AlertCircle
 } from "lucide-react";
-
-const ALL_ASSETS = [
-  // PyJWT
-  { id: 1, name: "HMAC", repo: "PyJWT", commit: "b5bd6fe", role: "MAC", status: "VULNERABLE", riskScore: 0.74, pqcAlgo: "N/A (symmetric)", lang: "Python", file: "jwt/algorithms.py", evidence: "USAGE" },
-  { id: 2, name: "RSA", repo: "PyJWT", commit: "b5bd6fe", role: "SIGNATURE", status: "VULNERABLE", riskScore: 0.91, pqcAlgo: "ML-DSA (CRYSTALS-Dilithium)", lang: "Python", file: "jwt/algorithms.py", evidence: "USAGE" },
-  { id: 3, name: "RSA-PSS", repo: "PyJWT", commit: "b5bd6fe", role: "SIGNATURE", status: "VULNERABLE", riskScore: 0.91, pqcAlgo: "ML-DSA (CRYSTALS-Dilithium)", lang: "Python", file: "jwt/algorithms.py", evidence: "USAGE" },
-  { id: 4, name: "ECDSA", repo: "PyJWT", commit: "b5bd6fe", role: "SIGNATURE", status: "VULNERABLE", riskScore: 0.88, pqcAlgo: "ML-DSA (CRYSTALS-Dilithium)", lang: "Python", file: "jwt/algorithms.py", evidence: "USAGE" },
-  { id: 5, name: "Ed25519", repo: "PyJWT", commit: "b5bd6fe", role: "SIGNATURE", status: "MONITORING", riskScore: 0.55, pqcAlgo: "SLH-DSA (SPHINCS+)", lang: "Python", file: "jwt/algorithms.py", evidence: "USAGE" },
-  { id: 6, name: "SHA-256", repo: "PyJWT", commit: "b5bd6fe", role: "HASH", status: "SAFE", riskScore: 0.22, pqcAlgo: "SHA-3 / SHAKE256", lang: "Python", file: "jwt/utils.py", evidence: "USAGE" },
-  { id: 7, name: "SHA-384", repo: "PyJWT", commit: "b5bd6fe", role: "HASH", status: "SAFE", riskScore: 0.20, pqcAlgo: "SHA-3 / SHAKE256", lang: "Python", file: "jwt/utils.py", evidence: "USAGE" },
-  { id: 8, name: "SHA-512", repo: "PyJWT", commit: "b5bd6fe", role: "HASH", status: "SAFE", riskScore: 0.18, pqcAlgo: "SHA-3 / SHAKE256", lang: "Python", file: "jwt/utils.py", evidence: "USAGE" },
-  // Certbot
-  { id: 9, name: "RSA-2048", repo: "Certbot", commit: "4856493", role: "KEY_ESTABLISHMENT", status: "VULNERABLE", riskScore: 0.93, pqcAlgo: "ML-KEM (CRYSTALS-Kyber)", lang: "Python", file: "certbot/crypto_util.py", evidence: "IMPLEMENTATION" },
-  { id: 10, name: "ECDSA P-256", repo: "Certbot", commit: "4856493", role: "SIGNATURE", status: "VULNERABLE", riskScore: 0.88, pqcAlgo: "ML-DSA (CRYSTALS-Dilithium)", lang: "Python", file: "certbot/crypto_util.py", evidence: "IMPLEMENTATION" },
-  { id: 11, name: "X.509 (RSA)", repo: "Certbot", commit: "4856493", role: "CERTIFICATE", status: "VULNERABLE", riskScore: 0.89, pqcAlgo: "PQC hybrid cert (draft-ounsworth)", lang: "Python", file: "certbot/crypto_util.py", evidence: "IMPLEMENTATION" },
-  { id: 12, name: "TLS 1.2", repo: "Certbot", commit: "4856493", role: "PROTOCOL", status: "VULNERABLE", riskScore: 0.82, pqcAlgo: "TLS 1.3 + Kyber hybrid", lang: "Python", file: "certbot/ocsp.py", evidence: "CONFIGURATION" },
-  { id: 13, name: "ACME (JOSE)", repo: "Certbot", commit: "4856493", role: "PROTOCOL", status: "MONITORING", riskScore: 0.60, pqcAlgo: "ACME + PQC KEM (proposed)", lang: "Python", file: "acme/jws.py", evidence: "IMPLEMENTATION" },
-  // Paramiko
-  { id: 14, name: "AES-CTR", repo: "Paramiko", commit: "142f593", role: "ENCRYPTION", status: "MONITORING", riskScore: 0.48, pqcAlgo: "AES-256-CTR (symmetric, keep)", lang: "Python", file: "paramiko/packet.py", evidence: "IMPLEMENTATION" },
-  { id: 15, name: "AES-GCM", repo: "Paramiko", commit: "142f593", role: "ENCRYPTION", status: "MONITORING", riskScore: 0.45, pqcAlgo: "AES-256-GCM (symmetric, keep)", lang: "Python", file: "paramiko/packet.py", evidence: "IMPLEMENTATION" },
-  { id: 16, name: "ECDH (P-256)", repo: "Paramiko", commit: "142f593", role: "KEY_ESTABLISHMENT", status: "VULNERABLE", riskScore: 0.86, pqcAlgo: "ML-KEM (CRYSTALS-Kyber)", lang: "Python", file: "paramiko/kex_ecdh.py", evidence: "IMPLEMENTATION" },
-  { id: 17, name: "Ed25519 (SSH)", repo: "Paramiko", commit: "142f593", role: "SIGNATURE", status: "MONITORING", riskScore: 0.52, pqcAlgo: "SLH-DSA (SPHINCS+)", lang: "Python", file: "paramiko/ed25519key.py", evidence: "IMPLEMENTATION" },
-  // JJWT
-  { id: 18, name: "HMAC-SHA256", repo: "JJWT", commit: "fb71496", role: "MAC", status: "VULNERABLE", riskScore: 0.72, pqcAlgo: "N/A (symmetric)", lang: "Java", file: "impl/crypto/MacProvider.java", evidence: "IMPLEMENTATION" },
-  { id: 19, name: "RSA-OAEP", repo: "JJWT", commit: "fb71496", role: "KEY_ESTABLISHMENT", status: "VULNERABLE", riskScore: 0.92, pqcAlgo: "ML-KEM (CRYSTALS-Kyber)", lang: "Java", file: "impl/crypto/RsaProvider.java", evidence: "IMPLEMENTATION" },
-  { id: 20, name: "AES-CBC", repo: "JJWT", commit: "fb71496", role: "ENCRYPTION", status: "MONITORING", riskScore: 0.50, pqcAlgo: "AES-256-GCM (upgrade)", lang: "Java", file: "impl/crypto/AesProvider.java", evidence: "IMPLEMENTATION" },
-];
+import { getProjects, getScans, getScanAssets, getScanCBOM } from "@/lib/api";
+import { CryptoAssetItem, ProjectItem, ScanSummaryItem } from "@/lib/types";
 
 const STATUS_COLORS: Record<string, string> = {
+  vulnerable: "text-rose-400 bg-rose-950/50 border-rose-500/30",
+  monitoring: "text-amber-400 bg-amber-950/50 border-amber-500/30",
+  safe: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
   VULNERABLE: "text-rose-400 bg-rose-950/50 border-rose-500/30",
   MONITORING: "text-amber-400 bg-amber-950/50 border-amber-500/30",
   SAFE: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
@@ -51,21 +29,97 @@ const ROLE_ICONS: Record<string, React.ReactNode> = {
 };
 
 export default function AssetInventoryPage() {
+  const [projects, setProjects] = useState<ProjectItem[]>([]);
+  const [selectedProjectId, setSelectedProjectId] = useState<string>("");
+  const [activeScan, setActiveScan] = useState<ScanSummaryItem | null>(null);
+  const [assets, setAssets] = useState<CryptoAssetItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [search, setSearch] = useState("");
-  const [filterRepo, setFilterRepo] = useState("ALL");
   const [filterStatus, setFilterStatus] = useState("ALL");
+  const [exporting, setExporting] = useState(false);
 
-  const filtered = ALL_ASSETS.filter((a) => {
-    if (search && !a.name.toLowerCase().includes(search.toLowerCase()) &&
-        !a.file.toLowerCase().includes(search.toLowerCase())) return false;
-    if (filterRepo !== "ALL" && a.repo !== filterRepo) return false;
-    if (filterStatus !== "ALL" && a.status !== filterStatus) return false;
+  useEffect(() => {
+    let mounted = true;
+    async function init() {
+      try {
+        setLoading(true);
+        const projList = await getProjects();
+        if (!mounted) return;
+        setProjects(projList);
+
+        if (projList.length > 0) {
+          const first = projList[0];
+          setSelectedProjectId(first.project_id);
+          await loadScanForProject(first.project_id);
+        }
+      } catch (err) {
+        console.warn("Error loading projects:", err);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    }
+    init();
+    return () => { mounted = false; };
+  }, []);
+
+  async function loadScanForProject(projId: string) {
+    try {
+      setLoading(true);
+      const scans = await getScans(projId);
+      if (scans && scans.length > 0) {
+        const latest = scans[0];
+        setActiveScan(latest);
+        const assetList = await getScanAssets(latest.scan_id);
+        setAssets(assetList || []);
+      } else {
+        setActiveScan(null);
+        setAssets([]);
+      }
+    } catch (err) {
+      console.warn("Failed to load scans for project:", err);
+      setActiveScan(null);
+      setAssets([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleProjectChange = async (projId: string) => {
+    setSelectedProjectId(projId);
+    await loadScanForProject(projId);
+  };
+
+  const handleExportCBOM = async () => {
+    if (!activeScan) return;
+    try {
+      setExporting(true);
+      const cbomData = await getScanCBOM(activeScan.scan_id);
+      const blob = new Blob([JSON.stringify(cbomData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `cbom-${selectedProjectId || "scan"}.cyclonedx.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Failed to export CBOM:", err);
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  const filtered = assets.filter((a) => {
+    const nameMatch = !search || 
+      (a.canonical_algorithm || "").toLowerCase().includes(search.toLowerCase()) ||
+      (a.family || "").toLowerCase().includes(search.toLowerCase());
+    if (!nameMatch) return false;
+    if (filterStatus !== "ALL" && (a.quantum_status || "").toLowerCase() !== filterStatus.toLowerCase()) return false;
     return true;
   });
 
-  const vuln = ALL_ASSETS.filter(a => a.status === "VULNERABLE").length;
-  const monitor = ALL_ASSETS.filter(a => a.status === "MONITORING").length;
-  const safe = ALL_ASSETS.filter(a => a.status === "SAFE").length;
+  const vuln = assets.filter(a => (a.quantum_status || "").toLowerCase() === "vulnerable").length;
+  const monitor = assets.filter(a => (a.quantum_status || "").toLowerCase() === "monitoring" || (a.quantum_status || "").toLowerCase() === "hybrid").length;
+  const safe = assets.filter(a => (a.quantum_status || "").toLowerCase() === "safe").length;
 
   return (
     <div className="space-y-8">
@@ -77,26 +131,43 @@ export default function AssetInventoryPage() {
           </div>
           <h1 className="text-2xl font-black text-text-bright">Cryptographic Bill of Materials (CBOM)</h1>
           <p className="text-xs text-text-dim mt-1">
-            <span className="font-mono text-cyber-cyan">{ALL_ASSETS.length} fused assets</span> across 4 pinned corpora. Zero synthetic keys. Evidence-backed.
+            Live inventory from <span className="font-mono text-cyber-cyan">{assets.length} fused assets</span>. Evidence-grounded. Zero synthetic mocks.
           </p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-cyber-cyan font-mono text-xs font-bold hover:bg-cyan-950/40 transition-all">
-          <Download className="w-3.5 h-3.5" />
-          Export CycloneDX 1.7
-        </button>
+        <div className="flex items-center gap-3">
+          <select
+            value={selectedProjectId}
+            onChange={(e) => handleProjectChange(e.target.value)}
+            className="px-3 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-xs font-mono text-cyber-cyan focus:outline-none"
+          >
+            {projects.map((p) => (
+              <option key={p.project_id} value={p.project_id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+          <button 
+            onClick={handleExportCBOM}
+            disabled={!activeScan || exporting}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-cyber-cyan font-mono text-xs font-bold hover:bg-cyan-950/40 transition-all disabled:opacity-50"
+          >
+            <Download className="w-3.5 h-3.5" />
+            {exporting ? "Exporting..." : "Export CycloneDX 1.6"}
+          </button>
+        </div>
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Total Assets", value: ALL_ASSETS.length, color: "text-cyber-cyan", sub: "across 4 corpora" },
+          { label: "Discovered Assets", value: assets.length, color: "text-cyber-cyan", sub: activeScan ? `Scan ${activeScan.scan_id.slice(0, 8)}` : "No scan" },
           { label: "Vulnerable", value: vuln, color: "text-rose-400", sub: "quantum-breakable" },
-          { label: "Monitoring", value: monitor, color: "text-amber-400", sub: "risk assessed" },
-          { label: "PQC Safe", value: safe, color: "text-emerald-400", sub: "or symmetric" },
+          { label: "Monitoring / Hybrid", value: monitor, color: "text-amber-400", sub: "requires transition" },
+          { label: "Quantum Safe", value: safe, color: "text-emerald-400", sub: "symmetric / PQC ready" },
         ].map((c, i) => (
           <div key={i} className="p-4 rounded-2xl bg-[#050A1F]/60 border border-white/10 space-y-1">
             <div className="text-xs font-mono text-text-dim">{c.label}</div>
-            <div className={`text-3xl font-black ${c.color}`}>{c.value}</div>
+            <div className={`text-3xl font-black ${c.color}`}>{loading ? "..." : c.value}</div>
             <div className="text-[10px] text-text-dim">{c.sub}</div>
           </div>
         ))}
@@ -109,95 +180,102 @@ export default function AssetInventoryPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search assets, files..."
+            placeholder="Search algorithm, family..."
             className="bg-transparent text-text-bright font-mono focus:outline-none placeholder:text-text-dim w-48"
           />
         </div>
-        <select
-          value={filterRepo}
-          onChange={(e) => setFilterRepo(e.target.value)}
-          className="px-3 py-2 rounded-xl bg-[#050A1F] border border-white/10 text-xs font-mono text-text-bright focus:outline-none"
-        >
-          <option value="ALL">All Repos</option>
-          <option value="PyJWT">PyJWT</option>
-          <option value="Certbot">Certbot</option>
-          <option value="Paramiko">Paramiko</option>
-          <option value="JJWT">JJWT</option>
-        </select>
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
           className="px-3 py-2 rounded-xl bg-[#050A1F] border border-white/10 text-xs font-mono text-text-bright focus:outline-none"
         >
-          <option value="ALL">All Status</option>
-          <option value="VULNERABLE">Vulnerable</option>
-          <option value="MONITORING">Monitoring</option>
-          <option value="SAFE">Safe</option>
+          <option value="ALL">All Quantum Status</option>
+          <option value="vulnerable">Vulnerable</option>
+          <option value="monitoring">Monitoring / Hybrid</option>
+          <option value="safe">Safe</option>
         </select>
         <div className="text-xs text-text-dim flex items-center px-3">
-          {filtered.length} results
+          {filtered.length} live records
         </div>
       </div>
 
-      {/* Asset Table */}
-      <div className="bg-[#050A1F]/60 border border-white/10 rounded-2xl overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs font-mono">
-            <thead>
-              <tr className="border-b border-white/10">
-                {["Asset", "Repo", "Role", "Evidence", "Risk Score", "PQC Migration Target", "Status"].map((h) => (
-                  <th key={h} className="px-4 py-3 text-left text-[10px] font-bold tracking-wider text-text-dim uppercase">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/[0.05]">
-              {filtered.map((a) => (
-                <tr key={a.id} className="hover:bg-white/[0.025] transition-colors">
-                  <td className="px-4 py-3">
-                    <div className="font-bold text-text-bright">{a.name}</div>
-                    <div className="text-[10px] text-text-dim truncate max-w-[160px]">{a.file}</div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                      a.lang === "Java" ? "bg-amber-950/60 text-amber-400" : "bg-blue-950/60 text-blue-400"
-                    }`}>{a.repo}</span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1.5">
-                      {ROLE_ICONS[a.role]}
-                      <span className="text-text-muted">{a.role}</span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className="text-cyber-cyan">{a.evidence}</span>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <div className="h-1.5 w-16 bg-[#07112F] rounded-full overflow-hidden">
-                        <div
-                          className={`h-full rounded-full ${a.riskScore > 0.75 ? "bg-rose-500" : a.riskScore > 0.5 ? "bg-amber-500" : "bg-emerald-500"}`}
-                          style={{ width: `${a.riskScore * 100}%` }}
-                        />
-                      </div>
-                      <span className={`font-bold ${a.riskScore > 0.75 ? "text-rose-400" : a.riskScore > 0.5 ? "text-amber-400" : "text-emerald-400"}`}>
-                        {a.riskScore.toFixed(2)}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="text-[10px] text-text-dim max-w-[180px]">{a.pqcAlgo}</div>
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_COLORS[a.status]}`}>
-                      {a.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* Asset Table or Empty State */}
+      {loading ? (
+        <div className="p-12 text-center text-sm font-mono text-text-dim border border-white/10 rounded-2xl bg-[#050A1F]/40 flex items-center justify-center gap-3">
+          <RefreshCw className="w-4 h-4 animate-spin text-cyber-cyan" />
+          Loading cryptographic asset inventory from live API...
         </div>
-      </div>
+      ) : filtered.length === 0 ? (
+        <div className="p-12 text-center border border-white/10 rounded-2xl bg-[#050A1F]/40 space-y-3">
+          <AlertCircle className="w-8 h-8 text-amber-400 mx-auto" />
+          <div className="text-base font-bold text-text-bright">No Cryptographic Assets Available</div>
+          <p className="text-xs text-text-dim max-w-md mx-auto">
+            {assets.length === 0 
+              ? "No scan has been completed for this project yet. Trigger a discovery scan to populate the CBOM." 
+              : "No assets match your search filters."}
+          </p>
+        </div>
+      ) : (
+        <div className="bg-[#050A1F]/60 border border-white/10 rounded-2xl overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs font-mono">
+              <thead>
+                <tr className="border-b border-white/10">
+                  {["Algorithm / Family", "Usage Role", "Claim State", "Evidence Roles", "Confidence", "Status"].map((h) => (
+                    <th key={h} className="px-4 py-3 text-left text-[10px] font-bold tracking-wider text-text-dim uppercase">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/[0.05]">
+                {filtered.map((a) => (
+                  <tr key={a.asset_id} className="hover:bg-white/[0.025] transition-colors">
+                    <td className="px-4 py-3">
+                      <div className="font-bold text-text-bright">{a.canonical_algorithm}</div>
+                      <div className="text-[10px] text-text-dim truncate max-w-[200px]">{a.family} {a.variant ? `(${a.variant})` : ""}</div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1.5">
+                        {ROLE_ICONS[a.usage_role] || <Key className="w-3.5 h-3.5 text-text-dim" />}
+                        <span className="text-text-muted">{a.usage_role}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className="text-cyber-cyan font-bold">{a.claim_state}</span>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex flex-wrap gap-1">
+                        {(a.roles || []).map((r, idx) => (
+                          <span key={idx} className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] text-text-dim">
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <div className="h-1.5 w-16 bg-[#07112F] rounded-full overflow-hidden">
+                          <div
+                            className="h-full rounded-full bg-cyber-cyan"
+                            style={{ width: `${Math.round((a.confidence || 0) * 100)}%` }}
+                          />
+                        </div>
+                        <span className="font-bold text-text-dim">
+                          {(a.confidence || 0).toFixed(2)}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3">
+                      <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_COLORS[a.quantum_status] || "text-text-dim border-white/10"}`}>
+                        {a.quantum_status.toUpperCase()}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

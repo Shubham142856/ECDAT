@@ -1,6 +1,6 @@
 # ECDAT — Enterprise Cryptographic Discovery & Analysis Tool
 
-> **SIH Problem:** SIH26164 | **Organization:** NTRO | **Team:** Shubham142856
+> **SIH Problem:** SIH26164 | **Organization:** NTRO | 
 
 An evidence-backed cryptographic asset discovery and quantum-migration decision-support platform built for the Smart India Hackathon 2026.
 

@@ -325,7 +325,11 @@ async def start_scan(body: ScanCreate, db: AsyncSession = Depends(get_db)):
             job_timeout=3600,
         )
     except Exception as exc:
-        logger.warning("Could not enqueue scan job: %s — scan will remain queued", exc)
+        logger.info("Redis queue not available (%s); executing scan in local background worker thread", exc)
+        import threading
+        from services.worker.jobs import run_scan
+        t = threading.Thread(target=run_scan, args=(scan.scan_id, body.risk_config), daemon=True)
+        t.start()
 
     return _scan_out(scan)
 

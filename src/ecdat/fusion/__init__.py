@@ -436,7 +436,7 @@ def fuse_evidence(
         fused_assets.append(asset)
 
     logger.info(
-        "Fusion: %d raw findings → %d normalized (%d algorithm, %d library-capability, %d unresolved-API) → %d fused assets",
+        "Fusion: %d raw findings -> %d normalized (%d algorithm, %d library-capability, %d unresolved-API) -> %d fused assets",
         len(raw_findings), len(normalized), len(algorithm_evidence),
         len(library_capability_evidence), len(unresolved_api_evidence), len(fused_assets),
     )

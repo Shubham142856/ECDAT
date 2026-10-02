@@ -78,4 +78,8 @@ microsoft-jdk-*.msi
 *.sqlite
 *.sqlite3
 *.tsbuildinfo
+uploads/
+src/uploads/
+cbom_latest.json
+
 

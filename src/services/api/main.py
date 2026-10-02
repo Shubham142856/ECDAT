@@ -40,7 +40,7 @@ connect_args = {"check_same_thread": False} if "sqlite" in DATABASE_URL else {}
 engine = create_async_engine(DATABASE_URL, echo=False, pool_pre_ping=True, connect_args=connect_args)
 AsyncSessionLocal = async_sessionmaker(engine, expire_on_commit=False)
 
-UPLOAD_DIR = Path(os.environ.get("ECDAT_UPLOAD_DIR", "./uploads"))
+UPLOAD_DIR = Path(os.environ.get("ECDAT_UPLOAD_DIR", "D:/ecdat/uploads")).resolve()
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 MAX_UPLOAD_BYTES = int(os.environ.get("ECDAT_MAX_UPLOAD_BYTES", 256 * 1024 * 1024))
 
@@ -196,8 +196,26 @@ async def create_project(body: ProjectCreate, db: AsyncSession = Depends(get_db)
 
 @app.get("/api/projects", tags=["projects"])
 async def list_projects(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Project).order_by(Project.created_at.desc()))
+    result = await db.execute(select(Project).order_by(Project.created_at.asc()))
     projects = result.scalars().all()
+
+    # Sequence of the 4 benchmark artefacts with jjwt always at last:
+    # 1. PyJWT, 2. paramiko, 3. certbot, 4. jjwt
+    canonical_order = {
+        "pyjwt": 0,
+        "paramiko": 1,
+        "certbot": 2,
+        "jjwt": 999,
+    }
+
+    def _project_sort_key(p: Project):
+        name_lower = p.name.strip().lower()
+        if "jjwt" in name_lower:
+            return (1, 999, p.name)
+        order = canonical_order.get(name_lower, 50)
+        return (0, order, p.name)
+
+    sorted_projects = sorted(projects, key=_project_sort_key)
     return [
         {
             "project_id": p.project_id,
@@ -205,7 +223,7 @@ async def list_projects(db: AsyncSession = Depends(get_db)):
             "description": p.description,
             "created_at": _iso(p.created_at),
         }
-        for p in projects
+        for p in sorted_projects
     ]
 
 
@@ -242,7 +260,7 @@ async def upload_artifact(
     artifact_id = str(uuid.uuid4())
 
     # Store file
-    stored_path = UPLOAD_DIR / project_id / artifact_id
+    stored_path = (UPLOAD_DIR / project_id / artifact_id).resolve()
     stored_path.parent.mkdir(parents=True, exist_ok=True)
     stored_path.write_bytes(data)
 
@@ -327,8 +345,46 @@ async def start_scan(body: ScanCreate, db: AsyncSession = Depends(get_db)):
     except Exception as exc:
         logger.info("Redis queue not available (%s); executing scan in local background worker thread", exc)
         import threading
+        import sys
         from services.worker.jobs import run_scan
-        t = threading.Thread(target=run_scan, args=(scan.scan_id, body.risk_config), daemon=True)
+
+        # Force UTF-8 stdout/stderr for this process so Windows CP1252 doesn't
+        # crash log messages containing non-ASCII characters (e.g. arrows).
+        if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+            try:
+                sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+        if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+            try:
+                sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+            except Exception:
+                pass
+
+        def _safe_run_scan(sid, cfg):
+            try:
+                run_scan(sid, cfg)
+            except Exception as thread_exc:
+                logger.error("Background scan %s crashed: %s", sid, thread_exc, exc_info=True)
+                # Best-effort: mark scan as failed so UI doesn't hang forever
+                try:
+                    from sqlalchemy import create_engine
+                    from sqlalchemy.orm import sessionmaker
+                    from services.api.models import Scan
+                    _sync_url = os.environ.get("SYNC_DATABASE_URL", DATABASE_URL.replace("+aiosqlite", ""))
+                    _eng = create_engine(_sync_url, connect_args={"check_same_thread": False})
+                    _Sess = sessionmaker(_eng)
+                    _db = _Sess()
+                    _scan = _db.query(Scan).filter_by(scan_id=sid).first()
+                    if _scan and _scan.state not in ("completed", "failed"):
+                        _scan.state = "failed"
+                        _scan.error_message = str(thread_exc)
+                        _db.commit()
+                    _db.close()
+                except Exception:
+                    pass
+
+        t = threading.Thread(target=_safe_run_scan, args=(scan.scan_id, body.risk_config), daemon=True)
         t.start()
 
     return _scan_out(scan)

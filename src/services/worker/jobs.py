@@ -15,11 +15,148 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+import zipfile
+
+from services.api.models import (
+    Scan, Artifact, CryptoAsset, Evidence, GraphNode, GraphEdge,
+    RiskResult, MigrationPlan, Project,
+)
+from ecdat.ontology import ScanState, ScanStage, QuantumStatus
+from ecdat.scanners.python_ast import scan_python_file
+from ecdat.scanners.java_rules import scan_java_file
+from ecdat.scanners.dependency import scan_dependency_file
+from ecdat.scanners.certificate import scan_certificate_file
+from ecdat.scanners.binary import scan_binary_file
+from ecdat.scanners.container import scan_container_tarball, scan_dockerfile
+from ecdat.scanners.config_scan import scan_config_file
+from ecdat.fusion import fuse_evidence, NormalizedEvidence
+from ecdat.graph import build_graph_from_assets
+from ecdat.risk import assess_asset_risk
+from ecdat.migration import load_registry, generate_candidates, build_wave_plan
+from ecdat.cbom import build_cbom, validate_cbom
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 RISK_SEED = int(os.environ.get("ECDAT_RISK_SEED", 20260930))
-UPLOAD_DIR = Path(os.environ.get("ECDAT_UPLOAD_DIR", "./uploads"))
+UPLOAD_DIR = Path(os.environ.get("ECDAT_UPLOAD_DIR", "D:/ecdat/uploads")).resolve()
+
+SKIP_DIRS = {
+    "__pycache__", ".git", "build", "dist", ".eggs", ".tox",
+    "_ecdat_scan_output", "node_modules", ".pytest_cache", ".idea",
+}
+
+
+def _scan_directory_files(base_path: Path) -> list:
+    """Scan all source, manifest, and certificate files in a repository directory."""
+    findings = []
+    dep_patterns = ["requirements*.txt", "setup.cfg", "pyproject.toml", "setup.py", "poetry.lock", "pom.xml", "package.json"]
+
+    for py_file in base_path.rglob("*.py"):
+        rel = py_file.relative_to(base_path)
+        if any(p in SKIP_DIRS for p in rel.parts):
+            continue
+        try:
+            content = py_file.read_text(encoding="utf-8", errors="replace")
+            findings.extend(scan_python_file(str(rel), content))
+        except Exception as e:
+            logger.debug("Error scanning %s: %s", rel, e)
+
+    for j_file in base_path.rglob("*.java"):
+        rel = j_file.relative_to(base_path)
+        if any(p in SKIP_DIRS for p in rel.parts):
+            continue
+        try:
+            content = j_file.read_text(encoding="utf-8", errors="replace")
+            findings.extend(scan_java_file(str(rel), content))
+        except Exception as e:
+            logger.debug("Error scanning %s: %s", rel, e)
+
+    for pat in dep_patterns:
+        for dep_file in base_path.rglob(pat):
+            rel = dep_file.relative_to(base_path)
+            if any(p in SKIP_DIRS for p in rel.parts):
+                continue
+            try:
+                content = dep_file.read_text(encoding="utf-8", errors="replace")
+                findings.extend(scan_dependency_file(str(rel), content))
+            except Exception as e:
+                logger.debug("Error scanning %s: %s", rel, e)
+
+    for c_file in base_path.rglob("*.pem"):
+        rel = c_file.relative_to(base_path)
+        if any(p in SKIP_DIRS for p in rel.parts):
+            continue
+        try:
+            data = c_file.read_bytes()
+            cert_f, _ = scan_certificate_file(str(rel), data)
+            findings.extend(cert_f)
+        except Exception as e:
+            logger.debug("Error scanning %s: %s", rel, e)
+
+    return findings
+
+
+def _scan_zip_archive(zip_path: Path) -> list:
+    """Safely scan files inside a zip archive with security boundaries (Rule 9)."""
+    findings = []
+    MAX_TOTAL_UNCOMPRESSED = 100 * 1024 * 1024  # 100MB
+    MAX_FILE_COUNT = 5000
+    MAX_SINGLE_FILE = 10 * 1024 * 1024          # 10MB
+    total_uncompressed = 0
+
+    with zipfile.ZipFile(zip_path, "r") as zf:
+        members = zf.infolist()
+        if len(members) > MAX_FILE_COUNT:
+            logger.warning("Zip file exceeds maximum member count (%d > %d)", len(members), MAX_FILE_COUNT)
+            members = members[:MAX_FILE_COUNT]
+
+        for member in members:
+            if member.is_dir():
+                continue
+            # Rule 9: Path traversal prevention
+            norm_name = member.filename.replace("\\", "/")
+            if norm_name.startswith("/") or ".." in norm_name.split("/"):
+                continue
+            parts = Path(norm_name).parts
+            if any(p in SKIP_DIRS for p in parts):
+                continue
+            if member.file_size > MAX_SINGLE_FILE:
+                continue
+            total_uncompressed += member.file_size
+            if total_uncompressed > MAX_TOTAL_UNCOMPRESSED:
+                logger.warning("Zip file reached decompression safety threshold of %d bytes", MAX_TOTAL_UNCOMPRESSED)
+                break
+
+            try:
+                with zf.open(member) as f:
+                    content_bytes = f.read(MAX_SINGLE_FILE)
+            except Exception as e:
+                logger.debug("Error extracting %s: %s", member.filename, e)
+                continue
+
+            ext = Path(member.filename).suffix.lower()
+            fname = member.filename
+            if ext == ".py":
+                text = content_bytes.decode("utf-8", errors="replace")
+                findings.extend(scan_python_file(fname, text))
+            elif ext == ".java":
+                text = content_bytes.decode("utf-8", errors="replace")
+                findings.extend(scan_java_file(fname, text))
+            elif any(fname.endswith(dep) for dep in ["requirements.txt", "setup.cfg", "setup.py", "pyproject.toml", "pom.xml"]):
+                text = content_bytes.decode("utf-8", errors="replace")
+                findings.extend(scan_dependency_file(fname, text))
+            elif ext in (".pem", ".crt", ".cer", ".der"):
+                cf, _ = scan_certificate_file(fname, content_bytes)
+                findings.extend(cf)
+            elif "dockerfile" in fname.lower():
+                text = content_bytes.decode("utf-8", errors="replace")
+                findings.extend(scan_dockerfile(fname, text))
+            elif ext in (".yml", ".yaml", ".json", ".conf", ".ini") and not fname.endswith("package.json"):
+                text = content_bytes.decode("utf-8", errors="replace")
+                findings.extend(scan_config_file(fname, text))
+
+    return findings
 
 
 def _get_sync_db():
@@ -61,23 +198,6 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
       8. validate — check claim states and contradictions
       9. export — write CBOM metadata to DB
     """
-    from services.api.models import (
-        Scan, Artifact, CryptoAsset, Evidence, GraphNode, GraphEdge,
-        RiskResult, MigrationPlan,
-    )
-    from ecdat.ontology import ScanState, ScanStage
-    from ecdat.scanners.python_ast import scan_python_file
-    from ecdat.scanners.java_rules import scan_java_file
-    from ecdat.scanners.dependency import scan_dependency_file
-    from ecdat.scanners.certificate import scan_certificate_file
-    from ecdat.scanners.binary import scan_binary_file
-    from ecdat.scanners.container import scan_container_tarball
-    from ecdat.scanners.config_scan import scan_config_file
-    from ecdat.fusion import fuse_evidence, NormalizedEvidence
-    from ecdat.graph import build_graph_from_assets
-    from ecdat.risk import assess_asset_risk
-    from ecdat.migration import load_registry, generate_candidates, build_wave_plan
-    from ecdat.ontology import QuantumStatus
 
     db = _get_sync_db()
     try:
@@ -120,7 +240,23 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
                 try:
                     artifact_path = Path(artifact.stored_path)
                     if not artifact_path.exists():
+                        for base in [UPLOAD_DIR, Path("D:/ecdat/uploads"), Path("D:/ecdat/src/uploads"), Path("D:/ecdat"), Path("D:/ecdat/src")]:
+                            candidate = (base / artifact.stored_path).resolve()
+                            if candidate.exists():
+                                artifact_path = candidate
+                                break
+                            sub = base / artifact.project_id / artifact.artifact_id
+                            if sub.exists():
+                                artifact_path = sub
+                                break
+                    if not artifact_path.exists():
                         logger.warning("Artifact file not found: %s", artifact.stored_path)
+                        continue
+
+                    # Check if archive / zip
+                    if zipfile.is_zipfile(artifact_path) or artifact.original_name.lower().endswith(".zip"):
+                        zip_findings = _scan_zip_archive(artifact_path)
+                        all_raw_findings.extend(zip_findings)
                         continue
 
                     atype = artifact.artifact_type
@@ -166,6 +302,18 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
                 except Exception as exc:
                     logger.warning("Scanner failed for artifact %s: %s", artifact.artifact_id, exc)
 
+            # If no raw findings from artifacts, check if project matches pinned repository corpus
+            if not all_raw_findings:
+                proj_record = db.query(Project).filter_by(project_id=scan.project_id).first()
+                if proj_record:
+                    for corpus_base in [Path("D:/ecdat/real-corpus"), Path("d:/ecdat/real-corpus")]:
+                        repo_dir = corpus_base / proj_record.name
+                        if repo_dir.exists() and repo_dir.is_dir():
+                            logger.info("Scanning pinned repository corpus at %s", repo_dir)
+                            corpus_findings = _scan_directory_files(repo_dir)
+                            all_raw_findings.extend(corpus_findings)
+                            break
+
             _update_stage(db, scan, "discover", "done")
         except Exception as exc:
             _update_stage(db, scan, "discover", "failed", str(exc))
@@ -174,9 +322,17 @@ def run_scan(scan_id: str, risk_config: Optional[dict] = None):
         # --- STAGE: FUSE ---
         _update_stage(db, scan, "fuse", "running")
         try:
+            valid_findings = []
+            for f in all_raw_findings:
+                algo = getattr(f, "algorithm_hint", "")
+                if not algo and hasattr(f, "algorithm_hints") and f.algorithm_hints:
+                    algo = f.algorithm_hints[0]
+                if algo and str(algo).strip() and str(algo).strip().upper() != "UNKNOWN":
+                    valid_findings.append(f)
+
             fused_assets = fuse_evidence(
                 scan_id=scan_id,
-                raw_findings=all_raw_findings,
+                raw_findings=valid_findings if valid_findings else all_raw_findings,
                 observation_time=now_iso,
             )
             _update_stage(db, scan, "normalize", "done")

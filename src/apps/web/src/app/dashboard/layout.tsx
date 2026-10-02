@@ -21,7 +21,8 @@ import {
   ChevronRight,
   ExternalLink,
   Radio,
-  CheckCircle2
+  CheckCircle2,
+  Scale
 } from "lucide-react";
 
 interface NavItem {
@@ -39,6 +40,7 @@ const NAV_ITEMS: NavItem[] = [
   { name: "Quantum Risk (Mosca)", href: "/dashboard/risk", icon: AlertTriangle, badge: "P(X+Y>Z)" },
   { name: "PQC Migration", href: "/dashboard/migration", icon: Cpu, badge: "WAVES" },
   { name: "Reports & Export", href: "/dashboard/reports", icon: FileText },
+  { name: "Compare Problem Statement", href: "/dashboard/compare", icon: Scale, badge: "SIH26164" },
 ];
 
 export default function DashboardLayout({
@@ -49,7 +51,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [replayMode, setReplayMode] = useState(false);
-  const [activeScan, setActiveScan] = useState("jjwt-postpatch");
+  const [activeScan, setActiveScan] = useState("pyjwt-baseline");
 
   return (
     <div className="min-h-screen bg-[#020617] text-text-bright flex flex-col font-sans">

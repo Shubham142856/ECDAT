@@ -329,7 +329,17 @@ def build_wave_plan(
         if ra is None:
             buckets["LOW"].append(asset.asset_id)
             continue
-        buckets[ra.risk_level].append(asset.asset_id)
+        level = (ra.risk_level or "LOW").upper()
+        if level in buckets:
+            buckets[level].append(asset.asset_id)
+        elif "CRIT" in level:
+            buckets["CRITICAL"].append(asset.asset_id)
+        elif "HIGH" in level:
+            buckets["HIGH"].append(asset.asset_id)
+        elif "MED" in level:
+            buckets["MEDIUM"].append(asset.asset_id)
+        else:
+            buckets["LOW"].append(asset.asset_id)
 
     wave_configs = [
         ("CRITICAL", "CRITICAL", "Immediate: highest quantum risk, internet-facing, sensitive data"),

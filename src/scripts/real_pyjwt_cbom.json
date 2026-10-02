@@ -1,0 +1,983 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.7",
+  "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
+  "serialNumber": "urn:uuid:a7bcadec-2af1-43e4-bdd1-d0cf685132f2",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-02T09:52:40.614002+00:00",
+    "tools": [
+      {
+        "vendor": "ECDAT",
+        "name": "Enterprise Cryptographic Discovery & Analysis Tool",
+        "version": "1.0.0",
+        "externalReferences": [
+          {
+            "type": "website",
+            "url": "https://github.com/ecdat/ecdat"
+          }
+        ]
+      }
+    ],
+    "component": {
+      "type": "library",
+      "name": "PyJWT",
+      "bom-ref": "project-8478c258-b0aa-4dd6-a565-c1c7f240af84"
+    },
+    "properties": [
+      {
+        "name": "ecdat:scanId",
+        "value": "8478c258-b0aa-4dd6-a565-c1c7f240af84"
+      },
+      {
+        "name": "ecdat:assetCount",
+        "value": "9"
+      },
+      {
+        "name": "ecdat:cbomStandard",
+        "value": "CycloneDX 1.7"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "4b9811ed-4f27-4695-9095-638f5d8b5b11",
+      "name": "HMAC",
+      "description": "Cryptographic asset: HMAC. Claim state: supported. Evidence roles: ['configuration', 'capability', 'usage', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "mac",
+          "parameterSetIdentifier": "SHA-256",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "mac"
+          ],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": ""
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:4",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:148",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:149",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:150",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:494",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\api_jwk.py:57",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\api_jws.py:140",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1849",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1862",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1882",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 1.0,
+          "methods": [
+            {
+              "technique": "python.ast.import",
+              "confidence": 0.5,
+              "value": "HMAC"
+            },
+            {
+              "technique": "python.ast.registry",
+              "confidence": 0.8,
+              "value": "HMAC"
+            },
+            {
+              "technique": "python.ast.registry",
+              "confidence": 0.8,
+              "value": "HMAC"
+            },
+            {
+              "technique": "python.ast.registry",
+              "confidence": 0.8,
+              "value": "HMAC"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "HMAC"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "47d93710-432e-4d9b-a22f-bc54ef5f1f07",
+      "name": "ECDSA",
+      "description": "Cryptographic asset: ECDSA. Claim state: supported. Evidence roles: ['configuration', 'usage', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "P-256",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.10045.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:41",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:130",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:131",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:132",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:133",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:134",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:159",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:160",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:161",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:162",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 1.0,
+          "methods": [
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "ECDSA"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "ECDSA"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "ECDSA"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "ECDSA"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "ECDSA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "ab217b64-4c35-4244-b752-674084997a9b",
+      "name": "Ed448",
+      "description": "Cryptographic asset: Ed448. Claim state: supported. Evidence roles: ['configuration', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": ""
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:53",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:53",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:20",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:20",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1269",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 0.8660964047443681,
+          "methods": [
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "Ed448"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "Ed448"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "Ed448"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "Ed448"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "Ed448"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "a0644bb4-caf2-46a6-8852-3987ac392cc5",
+      "name": "Ed25519",
+      "description": "Cryptographic asset: Ed25519. Claim state: supported. Evidence roles: ['configuration', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.3.101.112"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:57",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:57",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:138",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:169",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\api_jwk.py:62",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:24",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:24",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1387",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 0.9500000000000001,
+          "methods": [
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "Ed25519"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "Ed25519"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "Ed25519"
+            },
+            {
+              "technique": "python.ast.registry",
+              "confidence": 0.8,
+              "value": "Ed25519"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "Ed25519"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "ec09d74f-279a-437a-a16e-050518293a17",
+      "name": "RSA",
+      "description": "Cryptographic asset: RSA. Claim state: supported. Evidence roles: ['configuration', 'usage', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "classicalSecurityLevel": 112,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "1.2.840.113549.1.1.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:61",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:127",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:128",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 1.0,
+          "methods": [
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "RSA"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "RSA"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "RSA"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "RSA"
+            },
+            {
+              "technique": "python.ast.import_from",
+              "confidence": 0.75,
+              "value": "RSA"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "832dc1e1-47da-435c-b55e-012a3d2a8e19",
+      "name": "RSA-PSS",
+      "description": "Cryptographic asset: RSA-PSS. Claim state: supported. Evidence roles: ['configuration', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "sign",
+            "verify"
+          ],
+          "classicalSecurityLevel": 112,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": ""
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:135",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:136",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:137",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:166",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:167",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:168",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 0.9292481250360578,
+          "methods": [
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "RSA-PSS"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "RSA-PSS"
+            },
+            {
+              "technique": "python.ast.assignment",
+              "confidence": 0.55,
+              "value": "RSA-PSS"
+            },
+            {
+              "technique": "python.ast.registry",
+              "confidence": 0.8,
+              "value": "RSA-PSS"
+            },
+            {
+              "technique": "python.ast.registry",
+              "confidence": 0.8,
+              "value": "RSA-PSS"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "7105c7f9-9d1f-4311-9f7f-d542f6d30059",
+      "name": "SHA-256",
+      "description": "Cryptographic asset: SHA-256. Claim state: supported. Evidence roles: ['usage', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "hash"
+          ],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "2.16.840.1.101.3.4.2.1"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:320",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:508",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:699",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:67",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:76",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:91",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:108",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:116",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:122",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:132",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 1.0,
+          "methods": [
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-256"
+            },
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-256"
+            },
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-256"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "SHA-256"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "SHA-256"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "26075ef5-3187-463b-a4cf-5a617d6d8f20",
+      "name": "SHA-384",
+      "description": "Cryptographic asset: SHA-384. Claim state: supported. Evidence roles: ['usage', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "hash"
+          ],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "2.16.840.1.101.3.4.2.2"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:321",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:509",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:700",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1028",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1487",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1543",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1711",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1740",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 1.0,
+          "methods": [
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-384"
+            },
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-384"
+            },
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-384"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "SHA-384"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "SHA-384"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "1860ecf9-aee1-49ab-979e-43b0ec0e50d3",
+      "name": "SHA-512",
+      "description": "Cryptographic asset: SHA-512. Claim state: supported. Evidence roles: ['usage', 'implementation'].",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "any",
+          "certificationLevel": [
+            ""
+          ],
+          "mode": "unknown",
+          "padding": "unknown",
+          "cryptoFunctions": [
+            "hash"
+          ],
+          "classicalSecurityLevel": 256,
+          "nistQuantumSecurityLevel": 0
+        },
+        "oid": "2.16.840.1.101.3.4.2.3"
+      },
+      "evidence": {
+        "occurrences": [
+          {
+            "location": "jwt\\algorithms.py:322",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:510",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "jwt\\algorithms.py:701",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:438",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1056",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1502",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1554",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1718",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1735",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          },
+          {
+            "location": "tests\\test_algorithms.py:1745",
+            "detectorType": "python_source",
+            "detectorVersion": "1.0.0"
+          }
+        ],
+        "identity": {
+          "field": "name",
+          "confidence": 1.0,
+          "methods": [
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-512"
+            },
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-512"
+            },
+            {
+              "technique": "python.ast.attribute",
+              "confidence": 0.75,
+              "value": "SHA-512"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "SHA-512"
+            },
+            {
+              "technique": "python.ast.call",
+              "confidence": 0.85,
+              "value": "SHA-512"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

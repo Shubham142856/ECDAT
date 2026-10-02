@@ -43,9 +43,37 @@ export async function getHealth(): Promise<{ status: string; mode: string; versi
   return apiFetch<{ status: string; mode: string; version: string }>("/health");
 }
 
-/** Get all projects */
+/** Sort projects so that the 4 benchmark artefacts follow sequence (PyJWT, paramiko, certbot) with jjwt always at last */
+export function sortProjectsWithJjwtLast(projects: ProjectItem[]): ProjectItem[] {
+  const canonicalOrder: Record<string, number> = {
+    "pyjwt": 0,
+    "paramiko": 1,
+    "certbot": 2,
+    "jjwt": 999,
+  };
+
+  return [...projects].sort((a, b) => {
+    const aLower = a.name.trim().toLowerCase();
+    const bLower = b.name.trim().toLowerCase();
+
+    const isAJjwt = aLower.includes("jjwt");
+    const isBJjwt = bLower.includes("jjwt");
+
+    if (isAJjwt && !isBJjwt) return 1;
+    if (!isAJjwt && isBJjwt) return -1;
+
+    const orderA = canonicalOrder[aLower] ?? 50;
+    const orderB = canonicalOrder[bLower] ?? 50;
+
+    if (orderA !== orderB) return orderA - orderB;
+    return a.name.localeCompare(b.name);
+  });
+}
+
+/** Get all projects (guaranteeing jjwt at last) */
 export async function getProjects(): Promise<ProjectItem[]> {
-  return apiFetch<ProjectItem[]>("/api/projects");
+  const projects = await apiFetch<ProjectItem[]>("/api/projects");
+  return sortProjectsWithJjwtLast(projects);
 }
 
 /** Get scans, optionally for a specific project */

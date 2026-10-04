@@ -314,18 +314,18 @@ def jwt_crypto_service(token_data: bytes):
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* SIH26164 Procedure Stepper Bar */}
-      <div className="bg-[#050A1F]/90 border border-cyan-500/20 rounded-2xl p-4 shadow-xl">
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5">
+      <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-4 backdrop-blur-xl">
+        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-[11px] font-mono font-bold tracking-widest text-cyan-400 uppercase">
-              SIH26164 WORKFLOW PROCEDURE
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span className="text-[11px] font-mono font-bold tracking-widest text-white uppercase">
+              SIH26164 WORKFLOW PIPELINE
             </span>
           </div>
-          <span className="text-[10px] font-mono text-text-dim">
-            Evidence-First: Ingest → Discover → Prove → Graph → Risk → Migrate
+          <span className="text-[10px] font-mono text-slate-400">
+            Discover → Prove → Assess → Simulate → Migrate → Validate
           </span>
         </div>
         
@@ -336,66 +336,66 @@ def jwt_crypto_service(token_data: bytes):
               href={s.href}
               className={`p-2.5 rounded-xl border text-left transition-all ${
                 s.current
-                  ? "bg-cyan-500/15 border-cyan-400/50 shadow-glow-cyan text-white"
-                  : "bg-black/30 border-white/5 text-text-dim hover:text-text-bright hover:border-white/20"
+                  ? "bg-white/15 border-white/40 text-white font-bold"
+                  : "bg-black/40 border-white/10 text-slate-400 hover:text-white hover:border-white/25"
               }`}
             >
               <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold">
-                <span className={s.current ? "text-cyan-400" : "text-text-dim"}>0{s.id}.</span>
+                <span className={s.current ? "text-white" : "text-slate-400"}>0{s.id}.</span>
                 <span className="truncate">{s.name}</span>
               </div>
-              <div className="text-[9px] text-text-dim truncate mt-0.5">{s.desc}</div>
+              <div className="text-[9px] text-slate-400 truncate mt-0.5">{s.desc}</div>
             </Link>
           ))}
         </div>
       </div>
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-cyan-500/20">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Search className="w-4 h-4 text-cyber-cyan" />
-            <span className="text-xs font-mono font-bold tracking-widest text-cyber-cyan uppercase">
-              Step 1 — Discovery &amp; Ingestion Engine
+            <Search className="w-4 h-4 text-white" />
+            <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">
+              Step 1 — Discovery Engine
             </span>
           </div>
-          <h1 className="text-2xl font-black text-text-bright">Cryptographic Asset Discovery</h1>
-          <p className="text-xs text-text-dim mt-1">
-            Deterministic static analysis — AST visitor, dependency inspection, certificates, containers.
+          <h1 className="text-2xl font-black text-white">Cryptographic Asset Discovery</h1>
+          <p className="text-xs text-slate-400 mt-0.5 font-mono">
+            Deterministic static AST analysis, dependencies, and certificates.
           </p>
         </div>
         
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowIngestModal(true)}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-xs font-bold bg-primary text-[#1a1d18] hover:opacity-90 transition-all shadow-glow-cyan"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-bold bg-white text-black hover:bg-slate-200 transition-all"
           >
             <UploadCloud className="w-4 h-4" />
-            INGEST NEW ARTEFACT
+            Ingest Artefact
           </button>
         </div>
       </div>
 
       {/* Target Selector & Action Hub */}
-      <div className="p-6 rounded-2xl bg-[#050A1F]/80 border border-cyan-500/30 shadow-2xl space-y-5">
+      <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl space-y-4">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="space-y-1">
-            <span className="font-mono text-[10px] text-cyan-400 uppercase tracking-widest font-bold">
-              ACTIVE REPOSITORY / ARTEFACT TARGET
+            <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest font-bold">
+              ACTIVE TARGET
             </span>
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setShowProjectDropdown((v) => !v)}
-                className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-black border border-cyan-500/40 hover:border-cyan-400 transition-all font-mono text-sm text-text-bright font-bold"
+                className="flex items-center gap-3 px-4 py-2 rounded-xl bg-black border border-white/20 hover:border-white/40 transition-all font-mono text-sm text-white font-bold"
               >
                 <span>{loading ? "Loading..." : selectedProject ? selectedProject.name : "— Select Target —"}</span>
-                <ChevronDown className={`w-4 h-4 text-cyan-400 transition-transform ${showProjectDropdown ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${showProjectDropdown ? "rotate-180" : ""}`} />
               </button>
 
               {showProjectDropdown && !loading && (
-                <div className="absolute z-30 mt-2 w-72 rounded-2xl bg-[#050A1F] border border-cyan-500/40 shadow-2xl overflow-hidden">
-                  <div className="p-2 border-b border-white/10 text-[10px] font-mono text-text-dim uppercase tracking-wider">
-                    Available Corpora &amp; Projects
+                <div className="absolute z-30 mt-2 w-72 rounded-2xl bg-black border border-white/20 shadow-2xl overflow-hidden">
+                  <div className="p-2 border-b border-white/10 text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    Available Projects
                   </div>
                   {projects.map((p) => (
                     <button
@@ -403,24 +403,14 @@ def jwt_crypto_service(token_data: bytes):
                       onClick={() => handleSelectProject(p.project_id)}
                       className={`w-full px-4 py-2.5 text-left font-mono text-xs transition-colors border-b border-white/5 last:border-0 ${
                         selectedProjectId === p.project_id
-                          ? "bg-cyan-500/20 text-cyan-300 font-bold"
-                          : "text-text-bright hover:bg-white/5"
+                          ? "bg-white/15 text-white font-bold"
+                          : "text-slate-300 hover:bg-white/5 hover:text-white"
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span>{p.name}</span>
-                        {p.name === "PyJWT" && (
-                          <span className="text-[9px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
-                            9 Assets
-                          </span>
-                        )}
-                        {p.name === "crypto-service-demo" && (
-                          <span className="text-[9px] text-cyan-400 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-500/30">
-                            4 Assets
-                          </span>
-                        )}
                       </div>
-                      <div className="text-[9px] text-text-dim truncate mt-0.5">{p.project_id.slice(0, 18)}...</div>
+                      <div className="text-[9px] text-slate-500 truncate mt-0.5">{p.project_id.slice(0, 18)}...</div>
                     </button>
                   ))}
                 </div>
@@ -428,61 +418,61 @@ def jwt_crypto_service(token_data: bytes):
             </div>
           </div>
 
-          {/* Action Buttons: Run Scan vs Open Existing CBOM */}
+          {/* Action Buttons */}
           <div className="flex flex-wrap items-center gap-3">
             {baselineAssetCount !== null && (
               <Link
                 href="/dashboard/assets"
-                className="flex items-center gap-2 px-4 py-3 rounded-xl bg-black border border-white/15 text-text-bright hover:border-cyan-400 font-mono text-xs font-bold transition-all"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black border border-white/15 text-white hover:border-white/30 font-mono text-xs font-bold transition-all"
               >
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>Open CBOM Inventory ({baselineAssetCount} Assets) →</span>
+                <ShieldCheck className="w-4 h-4 text-white" />
+                <span>CBOM Inventory ({baselineAssetCount} Assets) →</span>
               </Link>
             )}
 
             <button
               onClick={handleStartScan}
               disabled={scanning || !selectedProjectId}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-mono text-xs font-bold transition-all shadow-glow-cyan ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-mono text-xs font-bold transition-all ${
                 scanning
-                  ? "bg-amber-950/80 border border-amber-500 text-amber-300 cursor-not-allowed"
-                  : "bg-primary text-[#1a1d18] hover:opacity-90"
+                  ? "bg-white/10 border border-white/20 text-white cursor-not-allowed"
+                  : "bg-white text-black hover:bg-slate-200"
               }`}
             >
               {scanning ? (
                 <>
-                  <RefreshCw className="w-4 h-4 animate-spin" />
-                  ANALYZING REPOSITORY...
+                  <RefreshCw className="w-4 h-4 animate-spin text-white" />
+                  ANALYZING...
                 </>
               ) : (
                 <>
                   <Play className="w-4 h-4 fill-current" />
-                  {baselineScan ? "RUN LIVE DISCOVERY SCAN" : "START FIRST SCAN"}
+                  {baselineScan ? "RUN DISCOVERY SCAN" : "START FIRST SCAN"}
                 </>
               )}
             </button>
           </div>
         </div>
 
-        {/* Target Details & Status Line */}
+        {/* Target Details */}
         {selectedProject && (
-          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-            <div className="text-text-dim flex items-center gap-2">
+          <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+            <div className="text-slate-400 flex items-center gap-2">
               <span className="text-white font-bold">{selectedProject.name}</span>
               <span>—</span>
-              <span className="text-text-muted">{selectedProject.description || "Uploaded project artefact"}</span>
+              <span className="text-slate-400">{selectedProject.description || "Project artefact"}</span>
             </div>
 
             <div className="flex items-center gap-3 text-[11px]">
               {baselineScan ? (
-                <span className="text-emerald-400 flex items-center gap-1.5 bg-emerald-950/40 px-2.5 py-1 rounded-lg border border-emerald-500/20">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Baseline on Record ({baselineAssetCount ?? 0} Assets)
+                <span className="text-white flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                  Verified Baseline ({baselineAssetCount ?? 0} Assets)
                 </span>
               ) : (
-                <span className="text-amber-400 flex items-center gap-1.5 bg-amber-950/40 px-2.5 py-1 rounded-lg border border-amber-500/20">
-                  <Clock className="w-3.5 h-3.5" />
-                  Ready to scan (No baseline saved yet)
+                <span className="text-slate-400 flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
+                  <Clock className="w-3.5 h-3.5 text-slate-400" />
+                  Ready to scan
                 </span>
               )}
             </div>
@@ -490,50 +480,49 @@ def jwt_crypto_service(token_data: bytes):
         )}
       </div>
 
-      {/* DISCOVERY SCAN RESULTS CARD (Revealed when a scan is completed in this session) */}
+      {/* DISCOVERY SCAN RESULTS CARD */}
       {scanSessionState === "completed" && (
-        <div className="p-6 rounded-2xl border border-cyan-400 bg-[#050A1F] shadow-2xl space-y-5 animate-in fade-in duration-300">
+        <div className="p-5 rounded-2xl border border-white/20 bg-white/[0.03] backdrop-blur-xl shadow-2xl space-y-4 animate-in fade-in duration-300">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <h3 className="text-lg font-black font-mono text-white">
+                <CheckCircle2 className="w-5 h-5 text-white" />
+                <h3 className="text-base font-bold font-mono text-white">
                   {liveAssets.length > 0
-                    ? `Discovery Scan Completed: ${liveAssets.length} Cryptographic Assets Discovered`
-                    : "Discovery Scan Completed: 0 Cryptographic Operations Detected"}
+                    ? `Scan Completed: ${liveAssets.length} Cryptographic Assets Discovered`
+                    : "Scan Completed: 0 Cryptographic Operations Detected"}
                 </h3>
               </div>
-              <p className="text-xs text-text-dim font-mono max-w-2xl">
+              <p className="text-xs text-slate-400 font-mono max-w-2xl">
                 {liveAssets.length > 0
-                  ? `Deterministic AST visitor verified all cryptographic primitives, key usages, and RFC parameters. Assets have been fused with 5 evidence roles and saved to the database.`
-                  : `All 9 pipeline stages executed successfully. No cryptographic imports, algorithm invocations, or certificates were present in the scanned file(s). ECDAT Rule 1 (Zero Fabrication): Non-cryptographic source code yields 0 claims.`}
+                  ? "Verified cryptographic primitives, key usages, and parameters fused into database."
+                  : "Deterministic scan completed. Non-cryptographic source code yields 0 claims."}
               </p>
             </div>
 
-            {/* Direct 1-Click Action Hub */}
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2">
               {liveAssets.length > 0 ? (
                 <>
                   <Link
                     href="/dashboard/assets"
-                    className="flex items-center gap-2 px-5 py-3 rounded-xl bg-primary text-[#1a1d18] font-mono text-xs font-bold hover:opacity-90 transition-all shadow-glow-cyan"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold hover:bg-slate-200 transition-all"
                   >
                     <ShieldCheck className="w-4 h-4" />
-                    Open CBOM Inventory ({liveAssets.length} Assets) →
+                    Open Inventory ({liveAssets.length}) →
                   </Link>
                   <Link
                     href="/dashboard/graph"
-                    className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-black border border-white/15 font-mono text-xs text-text-dim hover:text-white transition-all"
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black border border-white/15 font-mono text-xs text-white hover:border-white/30 transition-all"
                   >
-                    <Network className="w-3.5 h-3.5 text-cyan-400" />
+                    <Network className="w-3.5 h-3.5" />
                     Graph
                   </Link>
                   <Link
                     href="/dashboard/risk"
-                    className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-black border border-white/15 font-mono text-xs text-text-dim hover:text-white transition-all"
+                    className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black border border-white/15 font-mono text-xs text-white hover:border-white/30 transition-all"
                   >
-                    <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-                    Mosca Risk
+                    <AlertTriangle className="w-3.5 h-3.5" />
+                    Risk
                   </Link>
                 </>
               ) : (
@@ -543,49 +532,40 @@ def jwt_crypto_service(token_data: bytes):
                       const pyjwt = projects.find(p => (p.name || "").toLowerCase() === "pyjwt");
                       if (pyjwt) handleSelectProject(pyjwt.project_id);
                     }}
-                    className="px-4 py-2.5 rounded-xl bg-cyan-500/20 border border-cyan-400/40 font-mono text-xs font-bold text-cyan-300 hover:bg-cyan-500/30 transition-all"
+                    className="px-3 py-2 rounded-xl bg-white/10 border border-white/20 font-mono text-xs font-bold text-white hover:bg-white/20 transition-all"
                   >
-                    Switch to PyJWT (9 Assets) →
+                    Switch to PyJWT →
                   </button>
                   <button
                     onClick={() => setShowIngestModal(true)}
-                    className="px-4 py-2.5 rounded-xl bg-black border border-white/15 font-mono text-xs text-text-dim hover:text-white transition-all"
+                    className="px-3 py-2 rounded-xl bg-black border border-white/15 font-mono text-xs text-slate-300 hover:text-white transition-all"
                   >
-                    Ingest Crypto Sample
+                    Ingest File
                   </button>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Quick Discovered Asset Chips */}
+          {/* Discovered Asset Chips */}
           {liveAssets.length > 0 && (
-            <div className="pt-4 border-t border-white/10 space-y-2">
-              <div className="text-[10px] font-mono uppercase text-text-dim font-bold tracking-wider">
+            <div className="pt-3 border-t border-white/10 space-y-2">
+              <div className="text-[10px] font-mono uppercase text-slate-400 font-bold tracking-wider">
                 Discovered Cryptographic Primitives:
               </div>
               <div className="flex flex-wrap gap-2">
-                {liveAssets.map((asset) => {
-                  const isVuln = (asset.quantum_status || "").toLowerCase() === "vulnerable";
-                  return (
-                    <div
-                      key={asset.asset_id}
-                      className={`px-3 py-1.5 rounded-xl font-mono text-xs border flex items-center gap-2 ${
-                        isVuln
-                          ? "bg-rose-950/40 border-rose-500/30 text-rose-300"
-                          : "bg-emerald-950/40 border-emerald-500/30 text-emerald-300"
-                      }`}
-                    >
-                      <span className="font-bold">{asset.canonical_algorithm}</span>
-                      <span className="text-[10px] text-text-dim">({asset.usage_role})</span>
-                      <span className={`text-[9px] uppercase font-bold px-1.5 py-0.5 rounded ${
-                        isVuln ? "bg-rose-900/50 text-rose-200" : "bg-emerald-900/50 text-emerald-200"
-                      }`}>
-                        {asset.quantum_status}
-                      </span>
-                    </div>
-                  );
-                })}
+                {liveAssets.map((asset) => (
+                  <div
+                    key={asset.asset_id}
+                    className="px-3 py-1.5 rounded-xl font-mono text-xs border border-white/15 bg-white/5 text-white flex items-center gap-2"
+                  >
+                    <span className="font-bold">{asset.canonical_algorithm}</span>
+                    <span className="text-[10px] text-slate-400">({asset.usage_role})</span>
+                    <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-white/10 text-white">
+                      {asset.quantum_status}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -595,18 +575,18 @@ def jwt_crypto_service(token_data: bytes):
       {/* 9-Stage Pipeline & Live Terminal Inspection */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
         {/* 9-Stage Pipeline Card */}
-        <div className="xl:col-span-1 bg-[#050A1F]/80 border border-white/10 rounded-2xl p-5 space-y-3">
-          <div className="flex items-center justify-between font-mono text-xs font-bold text-text-bright">
+        <div className="xl:col-span-1 bg-white/[0.03] border border-white/10 rounded-2xl p-5 space-y-3 backdrop-blur-xl">
+          <div className="flex items-center justify-between font-mono text-xs font-bold text-white">
             <div className="flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-cyan-400" />
+              <Cpu className="w-4 h-4 text-white" />
               <span>9-Stage Pipeline Engine</span>
             </div>
             {scanning ? (
-              <span className="text-[10px] text-amber-400 font-bold animate-pulse">RUNNING LIVE</span>
+              <span className="text-[10px] text-white font-bold animate-pulse">RUNNING</span>
             ) : scanSessionState === "completed" ? (
-              <span className="text-[10px] text-emerald-400 font-bold">VERIFIED</span>
+              <span className="text-[10px] text-white font-bold">VERIFIED</span>
             ) : (
-              <span className="text-[10px] text-text-dim font-bold">STANDBY</span>
+              <span className="text-[10px] text-slate-400 font-bold">STANDBY</span>
             )}
           </div>
 
@@ -618,25 +598,25 @@ def jwt_crypto_service(token_data: bytes):
               return (
                 <div
                   key={stageName}
-                  className="flex items-center justify-between px-3 py-2 rounded-lg bg-black border border-white/5 font-mono text-xs"
+                  className="flex items-center justify-between px-3 py-2 rounded-lg bg-black/50 border border-white/5 font-mono text-xs"
                 >
                   <div className="flex items-center gap-2">
                     {isDone ? (
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-white" />
                     ) : isRunning ? (
-                      <RefreshCw className="w-3.5 h-3.5 text-amber-400 animate-spin" />
+                      <RefreshCw className="w-3.5 h-3.5 text-white animate-spin" />
                     ) : (
-                      <span className="text-[10px] text-text-dim font-bold w-3.5 text-center">{idx + 1}</span>
+                      <span className="text-[10px] text-slate-500 font-bold w-3.5 text-center">{idx + 1}</span>
                     )}
-                    <span className="font-bold uppercase text-text-bright">{stageName}</span>
+                    <span className="font-bold uppercase text-white">{stageName}</span>
                   </div>
                   <span
                     className={`text-[10px] px-2 py-0.5 rounded font-bold ${
                       isDone
-                        ? "bg-emerald-950/60 text-emerald-300 border border-emerald-500/20"
+                        ? "bg-white/10 text-white border border-white/20"
                         : isRunning
-                        ? "bg-amber-950/60 text-amber-300 border border-amber-500/20 animate-pulse"
-                        : "bg-white/5 text-text-dim"
+                        ? "bg-white/15 text-white border border-white/30 animate-pulse"
+                        : "bg-white/5 text-slate-500"
                     }`}
                   >
                     {isDone ? "VERIFIED" : isRunning ? "RUNNING" : "READY"}
@@ -648,50 +628,50 @@ def jwt_crypto_service(token_data: bytes):
         </div>
 
         {/* Live Terminal & Provenance Log */}
-        <div className="xl:col-span-2 bg-black border border-cyan-500/30 rounded-2xl overflow-hidden flex flex-col justify-between">
-          <div className="px-5 py-3 border-b border-cyan-500/20 flex items-center justify-between bg-[#050A1F]/50">
+        <div className="xl:col-span-2 bg-black border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+          <div className="px-5 py-3 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
             <div className="flex items-center gap-2">
-              <Terminal className={`w-3.5 h-3.5 ${scanning ? "text-cyan-400 animate-pulse" : "text-text-dim"}`} />
-              <span className="text-xs font-mono font-bold text-text-bright">SCAN PROVENANCE TERMINAL</span>
+              <Terminal className={`w-3.5 h-3.5 ${scanning ? "text-white animate-pulse" : "text-slate-400"}`} />
+              <span className="text-xs font-mono font-bold text-white">SCAN PROVENANCE LOG</span>
             </div>
-            <span className="text-[10px] font-mono text-text-dim">
+            <span className="text-[10px] font-mono text-slate-400">
               {liveScan
                 ? `Active Scan: ${liveScan.scan_id.slice(0, 8)}`
                 : baselineScan
                 ? `Saved Baseline: ${baselineScan.scan_id.slice(0, 8)}`
-                : "Engine Ready"}
+                : "Standby"}
             </span>
           </div>
 
-          <div className="p-5 font-mono text-xs space-y-1.5 h-72 overflow-y-auto bg-black/90">
+          <div className="p-5 font-mono text-xs space-y-1.5 h-72 overflow-y-auto bg-black text-slate-300">
             {scanning ? (
               <>
-                <div className="text-cyan-400">[SYSTEM] Pipeline executing for target {selectedProject?.name}...</div>
-                <div className="text-amber-300">[STAGE 1] Ingesting files into memory sandbox...</div>
-                <div className="text-cyan-300">[STAGE 2] AST visitor traversing Python / Java parse trees...</div>
-                <div className="text-text-dim">[STAGE 3] Canonical algorithm parameter normalization...</div>
-                <div className="text-text-dim">[STAGE 4] Fusing evidence into 5-role claims matrix...</div>
-                <div className="text-emerald-400 animate-pulse">[PROCESSING] Please wait...</div>
+                <div className="text-white font-bold">[SYSTEM] Executing pipeline for target {selectedProject?.name}...</div>
+                <div className="text-slate-300">[STAGE 1] Ingesting files into sandbox...</div>
+                <div className="text-slate-300">[STAGE 2] AST visitor traversing parse trees...</div>
+                <div className="text-slate-400">[STAGE 3] Algorithm parameter normalization...</div>
+                <div className="text-slate-400">[STAGE 4] Fusing evidence into claims matrix...</div>
+                <div className="text-white animate-pulse">[PROCESSING] Analyzing...</div>
               </>
             ) : scanSessionState === "completed" && liveScan ? (
               <>
-                <div className="text-emerald-400">[SUCCESS] Scan {liveScan.scan_id.slice(0, 8)} completed in 1s</div>
-                <div className="text-cyan-300">[INVENTORY] Discovered {liveAssets.length} cryptographic assets</div>
-                <div className="text-text-dim">[EVIDENCE] All claims backed by AST source location citations</div>
-                <div className="text-text-dim">[CBOM] CycloneDX 1.7 generated and schema validated</div>
-                <div className="text-primary font-bold">[ACTION] Ready to inspect Asset Inventory, Graph, or Mosca Risk</div>
+                <div className="text-white font-bold">[SUCCESS] Scan {liveScan.scan_id.slice(0, 8)} completed</div>
+                <div className="text-white">[INVENTORY] Discovered {liveAssets.length} cryptographic assets</div>
+                <div className="text-slate-400">[EVIDENCE] Claims verified with AST source locations</div>
+                <div className="text-slate-400">[CBOM] CycloneDX 1.7 generated and schema validated</div>
+                <div className="text-white font-bold">[READY] Inspect inventory, graph, or risk</div>
               </>
             ) : baselineScan ? (
               <>
-                <div className="text-text-dim">[SYSTEM] Target loaded: {selectedProject?.name}</div>
-                <div className="text-text-dim">[BASELINE] Scan {baselineScan.scan_id.slice(0, 8)} completed on record</div>
-                <div className="text-emerald-400">[INVENTORY] {baselineAssetCount ?? 0} cryptographic assets available in inventory</div>
-                <div className="text-cyan-300">[READY] Click "RUN LIVE DISCOVERY SCAN" to re-scan with fresh AST parser</div>
+                <div className="text-slate-400">[SYSTEM] Target loaded: {selectedProject?.name}</div>
+                <div className="text-slate-400">[BASELINE] Scan {baselineScan.scan_id.slice(0, 8)} on record</div>
+                <div className="text-white">[INVENTORY] {baselineAssetCount ?? 0} cryptographic assets in inventory</div>
+                <div className="text-slate-300">[READY] Click "RUN DISCOVERY SCAN" to re-scan</div>
               </>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center text-text-dim space-y-2">
-                <AlertCircle className="w-6 h-6 text-cyan-400" />
-                <p>Engine standby. Select a target and click "RUN LIVE DISCOVERY SCAN" or ingest a file.</p>
+              <div className="flex flex-col items-center justify-center h-full text-center text-slate-400 space-y-2">
+                <AlertCircle className="w-6 h-6 text-slate-400" />
+                <p>Engine standby. Select target and click "RUN DISCOVERY SCAN".</p>
               </div>
             )}
           </div>
@@ -701,16 +681,16 @@ def jwt_crypto_service(token_data: bytes):
       {/* INGESTION MODAL WITH INSTANT TEST TEMPLATES */}
       {showIngestModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="w-full max-w-xl p-6 rounded-3xl bg-[#050A1F] border border-cyan-400/50 shadow-2xl space-y-5">
+          <div className="w-full max-w-xl p-6 rounded-3xl bg-black border border-white/10 shadow-2xl space-y-5">
             {/* Modal header */}
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2">
-                <UploadCloud className="w-5 h-5 text-cyan-400" />
-                <h3 className="text-base font-bold text-text-bright font-mono">Ingest &amp; Analyze Artefact</h3>
+                <UploadCloud className="w-5 h-5 text-white" />
+                <h3 className="text-base font-bold text-white font-mono">Ingest &amp; Analyze Artefact</h3>
               </div>
               <button
                 onClick={() => { setShowIngestModal(false); setUploadStatus(null); }}
-                className="text-text-dim hover:text-white"
+                className="text-slate-400 hover:text-white"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -726,8 +706,8 @@ def jwt_crypto_service(token_data: bytes):
                     onClick={() => setTargetType(t)}
                     className={`flex-1 py-2 rounded-lg font-mono text-xs font-bold transition-all ${
                       targetType === t
-                        ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
-                        : "text-text-dim hover:text-text-bright"
+                        ? "bg-white/15 text-white border border-white/30"
+                        : "text-slate-400 hover:text-white"
                     }`}
                   >
                     {t === "existing" ? "ADD TO EXISTING PROJECT" : "CREATE NEW PROJECT"}
@@ -738,14 +718,14 @@ def jwt_crypto_service(token_data: bytes):
               {/* Target Project Selector */}
               {targetType === "existing" ? (
                 <div className="space-y-1">
-                  <label className="font-mono text-[11px] text-text-dim">Target Project</label>
+                  <label className="font-mono text-[11px] text-slate-400">Target Project</label>
                   <select
                     value={selectedProjectId}
                     onChange={(e) => {
                       setSelectedProjectId(e.target.value);
                       setStoredProjectId(e.target.value);
                     }}
-                    className="w-full px-3 py-2.5 rounded-xl bg-black border border-white/15 text-text-bright font-mono text-xs focus:outline-none focus:border-cyan-400"
+                    className="w-full px-3 py-2.5 rounded-xl bg-black border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-white/40"
                   >
                     {projects.map((p) => (
                       <option key={p.project_id} value={p.project_id}>{p.name}</option>
@@ -755,23 +735,23 @@ def jwt_crypto_service(token_data: bytes):
               ) : (
                 <div className="space-y-2">
                   <div>
-                    <label className="font-mono text-[11px] text-text-dim">Project Name *</label>
+                    <label className="font-mono text-[11px] text-slate-400">Project Name *</label>
                     <input
                       type="text"
                       value={newProjectName}
                       onChange={(e) => setNewProjectName(e.target.value)}
                       placeholder="e.g., auth-microservice"
-                      className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-text-bright font-mono text-xs focus:outline-none focus:border-cyan-400"
+                      className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-white/40"
                     />
                   </div>
                   <div>
-                    <label className="font-mono text-[11px] text-text-dim">Description</label>
+                    <label className="font-mono text-[11px] text-slate-400">Description</label>
                     <input
                       type="text"
                       value={newProjectDesc}
                       onChange={(e) => setNewProjectDesc(e.target.value)}
                       placeholder="e.g., RSA & AES crypto provider"
-                      className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-text-bright font-mono text-xs focus:outline-none focus:border-cyan-400"
+                      className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-white/40"
                     />
                   </div>
                 </div>
@@ -779,11 +759,11 @@ def jwt_crypto_service(token_data: bytes):
 
               {/* Artefact Type */}
               <div className="space-y-1">
-                <label className="font-mono text-[11px] text-text-dim">Artefact Type</label>
+                <label className="font-mono text-[11px] text-slate-400">Artefact Type</label>
                 <select
                   value={selectedArtifactType}
                   onChange={(e) => setSelectedArtifactType(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-text-bright font-mono text-xs focus:outline-none focus:border-cyan-400"
+                  className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-white font-mono text-xs focus:outline-none focus:border-white/40"
                 >
                   {ARTIFACT_TYPES.map((a) => (
                     <option key={a.value} value={a.value}>{a.label}</option>
@@ -791,24 +771,24 @@ def jwt_crypto_service(token_data: bytes):
                 </select>
               </div>
 
-              {/* Quick Sample Templates (1-Click Test for Judges) */}
-              <div className="space-y-1.5 p-3 rounded-xl bg-black/60 border border-cyan-500/20">
-                <div className="flex items-center gap-1.5 text-[11px] font-mono text-cyan-400 font-bold">
+              {/* Quick Sample Templates */}
+              <div className="space-y-1.5 p-3 rounded-xl bg-black/60 border border-white/10">
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-white font-bold">
                   <Sparkles className="w-3.5 h-3.5" />
-                  <span>1-Click Test Samples (Pre-populated Cryptographic Code):</span>
+                  <span>Test Samples:</span>
                 </div>
                 <div className="flex flex-wrap gap-2 pt-1">
                   <button
                     type="button"
                     onClick={handleLoadSampleAuthCrypto}
-                    className="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 border border-cyan-500/30 text-[10px] font-mono text-cyan-300 hover:bg-cyan-900/60 transition-colors"
+                    className="px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-[10px] font-mono text-white hover:bg-white/20 transition-colors"
                   >
                     Sample 1: RSA-2048 + AES-256 + SHA-256
                   </button>
                   <button
                     type="button"
                     onClick={handleLoadSampleJWTCrypto}
-                    className="px-2.5 py-1.5 rounded-lg bg-cyan-950/60 border border-cyan-500/30 text-[10px] font-mono text-cyan-300 hover:bg-cyan-900/60 transition-colors"
+                    className="px-2.5 py-1.5 rounded-lg bg-white/10 border border-white/20 text-[10px] font-mono text-white hover:bg-white/20 transition-colors"
                   >
                     Sample 2: ECDSA P-256 + HMAC-SHA256
                   </button>
@@ -817,14 +797,14 @@ def jwt_crypto_service(token_data: bytes):
 
               {/* File upload drag/drop */}
               <div className="space-y-1">
-                <label className="font-mono text-[11px] text-text-dim">Upload Custom Source File (.py, .java, etc.)</label>
+                <label className="font-mono text-[11px] text-slate-400">Upload Source File (.py, .java, etc.)</label>
                 <div
                   onClick={() => fileInputRef.current?.click()}
-                  className="w-full px-4 py-4 rounded-xl border border-dashed border-cyan-500/30 bg-black/50 flex items-center gap-3 cursor-pointer hover:border-cyan-400 transition-colors"
+                  className="w-full px-4 py-4 rounded-xl border border-dashed border-white/20 bg-black/50 flex items-center gap-3 cursor-pointer hover:border-white/40 transition-colors"
                 >
-                  <UploadCloud className="w-5 h-5 text-cyan-400 flex-shrink-0" />
-                  <span className="font-mono text-xs text-text-dim truncate">
-                    {selectedFile ? selectedFile.name : "Click to select a file from your computer"}
+                  <UploadCloud className="w-5 h-5 text-white flex-shrink-0" />
+                  <span className="font-mono text-xs text-slate-400 truncate">
+                    {selectedFile ? selectedFile.name : "Click to select a file"}
                   </span>
                 </div>
                 <input
@@ -837,11 +817,7 @@ def jwt_crypto_service(token_data: bytes):
 
               {/* Upload Status */}
               {uploadStatus && (
-                <div className={`px-3 py-2 rounded-xl font-mono text-xs border ${
-                  uploadStatus.startsWith("Error")
-                    ? "bg-rose-950/40 border-rose-500/30 text-rose-300"
-                    : "bg-emerald-950/40 border-emerald-500/30 text-emerald-300"
-                }`}>
+                <div className="px-3 py-2 rounded-xl font-mono text-xs border bg-white/5 border-white/15 text-white">
                   {uploadStatus}
                 </div>
               )}
@@ -850,9 +826,9 @@ def jwt_crypto_service(token_data: bytes):
               <button
                 type="submit"
                 disabled={uploading}
-                className="w-full py-3 rounded-xl font-mono text-xs font-bold bg-primary text-[#1a1d18] hover:opacity-90 transition-all disabled:opacity-50 shadow-glow-cyan"
+                className="w-full py-2.5 rounded-xl font-mono text-xs font-bold bg-white text-black hover:bg-slate-200 transition-all disabled:opacity-50"
               >
-                {uploading ? "UPLOADING & RUNNING PIPELINE..." : "UPLOAD & EXECUTE DISCOVERY SCAN"}
+                {uploading ? "UPLOADING & ANALYZING..." : "UPLOAD & RUN DISCOVERY SCAN"}
               </button>
             </form>
           </div>

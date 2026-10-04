@@ -2,18 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { Network, Zap, RefreshCw, AlertCircle } from "lucide-react";
+import { Network, RefreshCw, AlertCircle } from "lucide-react";
 import { getProjects, getScans, getScanGraph } from "@/lib/api";
 import { ProjectItem, ScanSummaryItem } from "@/lib/types";
 import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 // Lazy-load ReactFlow only on the client, never during SSR or initial bundle compile.
-// This prevents the 2MB ReactFlow bundle from blowing up dev-server memory.
 const ReactFlowCanvas = dynamic(() => import("./ReactFlowCanvas"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center text-sm font-mono text-text-dim gap-3">
-      <RefreshCw className="w-4 h-4 animate-spin text-primary" />
+    <div className="w-full h-full flex items-center justify-center text-sm font-mono text-slate-400 gap-3">
+      <RefreshCw className="w-4 h-4 animate-spin text-white" />
       Loading graph canvas...
     </div>
   ),
@@ -74,6 +73,7 @@ export default function GraphPage() {
         const rawNodes = graphData.nodes || [];
         const rawEdges = graphData.edges || [];
 
+        // Multi-colored nodes preserved strictly inside the graph visualization
         const rfNodes: RFNode[] = rawNodes.map((n, i) => {
           const isAlgo = n.node_type === "algorithm" || n.node_type === "asset";
           const isFile = n.node_type === "file" || n.node_type === "source_location";
@@ -121,15 +121,15 @@ export default function GraphPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#c8b4a0]/20">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Network className="w-4 h-4 text-primary" />
-            <span className="text-xs font-mono font-bold tracking-widest text-primary uppercase">Cryptographic Graph</span>
+            <Network className="w-4 h-4 text-white" />
+            <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">Cryptographic Graph</span>
           </div>
-          <h1 className="text-2xl font-black text-text-bright">Enterprise Dependency Topology</h1>
-          <p className="text-xs text-text-dim mt-1">
-            Directed graph linking artifacts to cryptographic primitives. Drag and zoom to inspect.
+          <h1 className="text-2xl font-black text-white">Dependency Topology</h1>
+          <p className="text-xs text-slate-400 mt-1">
+            Interactive directed graph linking artifacts to cryptographic primitives.
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -140,12 +140,13 @@ export default function GraphPage() {
               setStoredProjectId(e.target.value);
               loadGraphForProject(e.target.value);
             }}
-            className="px-3 py-2 rounded-xl bg-[#1a1d18] border border-[#c8b4a0]/20 text-xs font-mono text-primary focus:outline-none"
+            className="px-3 py-2 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-white focus:outline-none"
           >
             {projects.map((p) => (
-              <option key={p.project_id} value={p.project_id}>{p.name}</option>
+              <option key={p.project_id} value={p.project_id} className="bg-black text-white">{p.name}</option>
             ))}
           </select>
+          {/* Multi-color legend specifically for the graph visualization */}
           <div className="hidden sm:flex items-center gap-4 text-xs font-mono">
             {[
               { color: "bg-cyan-400", label: "PROJECT" },
@@ -154,24 +155,24 @@ export default function GraphPage() {
             ].map((l) => (
               <div key={l.label} className="flex items-center gap-1.5">
                 <div className={`w-2.5 h-2.5 rounded-full ${l.color}`} />
-                <span className="text-text-dim text-[11px]">{l.label}</span>
+                <span className="text-slate-400 text-[11px]">{l.label}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="h-[600px] rounded-2xl overflow-hidden border border-[#c8b4a0]/20 bg-[#020617] relative">
+      <div className="h-[600px] rounded-2xl overflow-hidden border border-white/10 bg-black relative">
         {loading ? (
-          <div className="w-full h-full flex items-center justify-center text-sm font-mono text-text-dim gap-3">
-            <RefreshCw className="w-4 h-4 animate-spin text-primary" />
+          <div className="w-full h-full flex items-center justify-center text-sm font-mono text-slate-400 gap-3">
+            <RefreshCw className="w-4 h-4 animate-spin text-white" />
             Loading topology...
           </div>
         ) : nodes.length === 0 ? (
-          <div className="w-full h-full flex flex-col items-center justify-center text-sm font-mono text-text-dim gap-3 p-6 text-center">
-            <AlertCircle className="w-8 h-8 text-amber-400" />
-            <div className="font-bold text-text-bright">No Graph Data</div>
-            <p className="text-xs max-w-sm">Run a scan first to populate the graph topology.</p>
+          <div className="w-full h-full flex flex-col items-center justify-center text-sm font-mono text-slate-400 gap-3 p-6 text-center">
+            <AlertCircle className="w-8 h-8 text-white opacity-70" />
+            <div className="font-bold text-white">No Graph Data</div>
+            <p className="text-xs max-w-sm text-slate-400">Run a scan first to populate the graph topology.</p>
           </div>
         ) : (
           <ReactFlowCanvas nodes={nodes} edges={edges} />
@@ -185,11 +186,11 @@ export default function GraphPage() {
           { label: "Crypto Assets", value: nodes.filter(n => (n.data?.label || "").includes("asset") || (n.data?.label || "").includes("algorithm")).length },
           { label: "Active Scan", value: activeScan ? activeScan.scan_id.slice(0, 8) : "None" },
         ].map((s, i) => (
-          <div key={i} className="p-4 rounded-2xl bg-[#1a1d18]/60 border border-white/10 flex items-center gap-4">
-            <Network className="w-8 h-8 text-primary/40" />
+          <div key={i} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl flex items-center gap-4">
+            <Network className="w-8 h-8 text-white/30" />
             <div>
-              <div className="text-xl font-black text-text-bright">{s.value}</div>
-              <div className="text-[10px] font-mono text-text-dim">{s.label}</div>
+              <div className="text-xl font-black text-white">{s.value}</div>
+              <div className="text-[10px] font-mono text-slate-400">{s.label}</div>
             </div>
           </div>
         ))}

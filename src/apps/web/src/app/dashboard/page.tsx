@@ -118,18 +118,15 @@ const SIH_STEPS = [
 ];
 
   return (
-    <div className="space-y-8">
-      {/* SIH26164 Procedure Stepper Bar */}
-      <div className="bg-[#050A1F]/90 border border-cyan-500/20 rounded-2xl p-4 shadow-xl">
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-[11px] font-mono font-bold tracking-widest text-cyan-400 uppercase">
-              SIH26164 CORE WORKFLOW PROCEDURE
-            </span>
-          </div>
+    <div className="space-y-6">
+      {/* SIH26164 Workflow Stepper */}
+      <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-4 backdrop-blur-xl">
+        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/5">
+          <span className="text-[11px] font-mono font-bold tracking-widest text-white uppercase">
+            SIH26164 WORKFLOW PIPELINE
+          </span>
           <span className="text-[10px] font-mono text-slate-400">
-            End-to-End Pipeline: Discover → Prove → Assess → Simulate → Migrate → Validate
+            Discover → Prove → Assess → Simulate → Migrate → Validate
           </span>
         </div>
         
@@ -138,45 +135,43 @@ const SIH_STEPS = [
             <Link
               key={s.id}
               href={s.href}
-              className="p-2.5 rounded-xl border bg-black/30 border-white/5 text-slate-400 hover:text-white hover:border-cyan-500/40 hover:bg-cyan-950/20 transition-all text-left"
+              className="p-2.5 rounded-xl border bg-black/40 border-white/10 text-slate-300 hover:text-white hover:border-white/30 transition-all text-left"
             >
-              <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold">
-                <span className="text-cyan-400">0{s.id}.</span>
+              <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-white">
+                <span className="text-slate-400">0{s.id}.</span>
                 <span className="truncate">{s.name}</span>
               </div>
-              <div className="text-[9px] text-slate-500 truncate mt-0.5">{s.desc}</div>
+              <div className="text-[9px] text-slate-400 truncate mt-0.5">{s.desc}</div>
             </Link>
           ))}
         </div>
       </div>
+
       {/* Top Banner / Headline */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">
-              ENTERPRISE SECURITY OPERATIONS CENTER
-            </span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight mt-1">
-            Cryptographic Posture &amp; Quantum Risk Overview
+          <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">
+            OPERATIONAL SECURITY CONSOLE
+          </span>
+          <h1 className="text-2xl font-black text-white tracking-tight mt-0.5">
+            Cryptographic Posture &amp; Quantum Risk
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
-            Continuous discovery telemetry across authentic enterprise repositories.
+          <p className="text-xs text-slate-400 mt-0.5 font-mono">
+            Live discovery telemetry across verified repositories.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <Link
             href="/dashboard/discovery"
-            className="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-slate-950 font-mono text-xs font-bold transition-all flex items-center gap-2 shadow-md"
+            className="px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold transition-all flex items-center gap-2 hover:bg-slate-200"
           >
-            <Radio className="w-3.5 h-3.5 animate-pulse" />
-            Trigger New Discovery
+            <Radio className="w-3.5 h-3.5" />
+            Trigger Scan
           </Link>
           <Link
             href="/dashboard/reports"
-            className="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white font-mono text-xs font-bold transition-all flex items-center gap-2"
+            className="px-4 py-2 rounded-xl bg-black border border-white/15 text-white hover:border-white/30 font-mono text-xs font-bold transition-all flex items-center gap-2"
           >
             <FileJson className="w-3.5 h-3.5" />
             CBOM Export
@@ -186,9 +181,9 @@ const SIH_STEPS = [
 
       {/* Target Project Switcher */}
       {projects.length > 0 && (
-        <div className="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800 text-xs font-mono">
-          <span className="text-slate-500 uppercase px-2 font-bold flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5 text-cyan-400" /> ACTIVE CORPUS:
+        <div className="flex items-center gap-2 bg-black/50 p-2 rounded-xl border border-white/10 text-xs font-mono">
+          <span className="text-slate-400 uppercase px-2 font-bold flex items-center gap-1.5">
+            <Layers className="w-3.5 h-3.5 text-white" /> TARGET:
           </span>
           <div className="flex flex-wrap gap-1">
             {projects.map((p) => (
@@ -197,8 +192,8 @@ const SIH_STEPS = [
                 onClick={() => handleSelectProject(p.project_id)}
                 className={`px-3 py-1.5 rounded-lg transition-all ${
                   selectedProjectId === p.project_id
-                    ? "bg-cyan-500/20 text-cyan-400 font-bold border border-cyan-500/40"
-                    : "text-slate-400 hover:text-white hover:bg-slate-900"
+                    ? "bg-white/15 text-white font-bold border border-white/30"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {p.name}
@@ -210,59 +205,57 @@ const SIH_STEPS = [
 
       {/* Empty State if No Projects */}
       {!loading && projects.length === 0 && (
-        <div className="p-12 text-center bg-slate-950/60 rounded-2xl border border-slate-800 flex flex-col items-center justify-center">
-          <AlertCircle className="w-12 h-12 text-slate-600 mb-3" />
-          <h3 className="text-base font-bold text-slate-300">No Scanned Projects Found in Database</h3>
-          <p className="text-xs text-slate-500 max-w-md mt-1 mb-5 font-mono">
-            The platform is connected to PostgreSQL. Trigger a repository scan via the Discovery Engine to analyze real cryptographic evidence.
+        <div className="p-8 text-center bg-white/[0.02] rounded-2xl border border-white/10 flex flex-col items-center justify-center">
+          <AlertCircle className="w-8 h-8 text-slate-400 mb-2" />
+          <h3 className="text-sm font-bold text-white">No Scanned Projects Found</h3>
+          <p className="text-xs text-slate-400 max-w-md mt-1 mb-4 font-mono">
+            Trigger a scan via the Discovery Engine to analyze cryptographic evidence.
           </p>
           <Link
             href="/dashboard/discovery"
-            className="px-4 py-2 bg-cyan-600 text-slate-950 font-mono text-xs font-bold rounded-lg hover:bg-cyan-500"
+            className="px-4 py-2 bg-white text-black font-mono text-xs font-bold rounded-lg hover:bg-slate-200"
           >
             Go to Discovery Engine
           </Link>
         </div>
       )}
 
-      {/* KPI Metric Cards */}
+      {/* KPI Metric Cards — Unified White & Slate Tones */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Assets */}
-        <div className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-slate-500 font-bold">TOTAL CRYPTO ASSETS</div>
+        <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
+          <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">TOTAL CRYPTO ASSETS</div>
           <div className="text-3xl font-black text-white mt-1 font-mono">{loading ? "..." : totalAssets}</div>
           <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
-            <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Verified in PostgreSQL</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+            <span>Verified in Database</span>
           </div>
         </div>
 
         {/* Quantum Vulnerable */}
-        <div className="p-5 rounded-2xl bg-slate-950/80 border border-rose-900/30 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-rose-400 font-bold">QUANTUM VULNERABLE</div>
-          <div className="text-3xl font-black text-rose-400 mt-1 font-mono">{loading ? "..." : vulnerableAssets}</div>
+        <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
+          <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">QUANTUM VULNERABLE</div>
+          <div className="text-3xl font-black text-white mt-1 font-mono">{loading ? "..." : vulnerableAssets}</div>
           <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
-            <ShieldAlert className="w-3.5 h-3.5 text-rose-400" />
-            <span>{totalAssets > 0 ? Math.round((vulnerableAssets / totalAssets) * 100) : 0}% of active catalog</span>
+            <span>{totalAssets > 0 ? Math.round((vulnerableAssets / totalAssets) * 100) : 0}% of catalog</span>
           </div>
         </div>
 
         {/* PQC Ready / Hybrid */}
-        <div className="p-5 rounded-2xl bg-slate-950/80 border border-emerald-900/30 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-emerald-400 font-bold">PQC READY / HYBRID</div>
-          <div className="text-3xl font-black text-emerald-400 mt-1 font-mono">{loading ? "..." : pqcReadyAssets}</div>
+        <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
+          <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">PQC READY / HYBRID</div>
+          <div className="text-3xl font-black text-white mt-1 font-mono">{loading ? "..." : pqcReadyAssets}</div>
           <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <ShieldCheck className="w-3.5 h-3.5 text-white" />
             <span>FIPS 203/204/205 aligned</span>
           </div>
         </div>
 
         {/* Critical Risk Assets */}
-        <div className="p-5 rounded-2xl bg-slate-950/80 border border-amber-900/30 relative overflow-hidden">
-          <div className="text-[10px] font-mono uppercase text-amber-400 font-bold">HIGH / CRITICAL RISK</div>
-          <div className="text-3xl font-black text-amber-400 mt-1 font-mono">{loading ? "..." : criticalRiskAssets}</div>
+        <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
+          <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">HIGH / CRITICAL RISK</div>
+          <div className="text-3xl font-black text-white mt-1 font-mono">{loading ? "..." : criticalRiskAssets}</div>
           <div className="text-[11px] text-slate-400 mt-2 flex items-center gap-1 font-mono">
-            <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
             <span>Mosca X+Y &gt; Z condition</span>
           </div>
         </div>
@@ -270,11 +263,11 @@ const SIH_STEPS = [
 
       {/* Discovered Assets Live Table */}
       {assets.length > 0 && (
-        <div className="p-6 rounded-2xl bg-slate-950/80 border border-slate-800">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
+          <div className="flex items-center justify-between pb-4 border-b border-white/10">
             <div>
               <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
-                <Database className="w-4 h-4 text-cyan-400" /> Discovered Cryptographic Inventory (Live Telemetry)
+                <Database className="w-4 h-4 text-white" /> Discovered Cryptographic Inventory
               </h3>
               <p className="text-xs text-slate-400 mt-0.5 font-mono">
                 Atomic evidence provenance extracted from source AST and manifests.
@@ -282,7 +275,7 @@ const SIH_STEPS = [
             </div>
             <Link
               href="/dashboard/assets"
-              className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+              className="text-xs font-mono text-white hover:text-slate-300 flex items-center gap-1"
             >
               Full Inventory <ArrowRight className="w-3 h-3" />
             </Link>
@@ -290,7 +283,7 @@ const SIH_STEPS = [
 
           <div className="overflow-x-auto mt-4">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="text-slate-400 border-b border-slate-800">
+              <thead className="text-slate-400 border-b border-white/10">
                 <tr>
                   <th className="py-2.5 px-3">ALGORITHM</th>
                   <th className="py-2.5 px-3">FAMILY</th>
@@ -300,21 +293,15 @@ const SIH_STEPS = [
                   <th className="py-2.5 px-3">CONFIDENCE</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/50">
+              <tbody className="divide-y divide-white/5">
                 {assets.slice(0, 8).map((a) => (
-                  <tr key={a.asset_id} className="hover:bg-slate-900/40 transition-colors">
+                  <tr key={a.asset_id} className="hover:bg-white/[0.03] transition-colors">
                     <td className="py-2.5 px-3 font-bold text-white">
                       {a.canonical_algorithm} {a.variant && <span className="text-[10px] text-slate-400">({a.variant})</span>}
                     </td>
                     <td className="py-2.5 px-3 text-slate-300">{a.family}</td>
                     <td className="py-2.5 px-3">
-                      <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
-                          a.quantum_status === "vulnerable"
-                            ? "bg-rose-950/80 text-rose-300 border border-rose-800/40"
-                            : "bg-emerald-950/80 text-emerald-300 border border-emerald-800/40"
-                        }`}
-                      >
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase border border-white/15 bg-white/5 text-white">
                         {a.quantum_status}
                       </span>
                     </td>
@@ -322,13 +309,13 @@ const SIH_STEPS = [
                     <td className="py-2.5 px-3">
                       <div className="flex gap-1">
                         {a.roles?.map((r, i) => (
-                          <span key={i} className="px-1 py-0.2 rounded bg-slate-800 text-[10px] text-slate-300">
+                          <span key={i} className="px-1 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] text-slate-300">
                             {r}
                           </span>
                         ))}
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 font-bold text-cyan-400">{Math.round(a.confidence * 100)}%</td>
+                    <td className="py-2.5 px-3 font-bold text-white">{Math.round(a.confidence * 100)}%</td>
                   </tr>
                 ))}
               </tbody>

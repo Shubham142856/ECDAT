@@ -107,23 +107,23 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-cyan-500/20">
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <FileText className="w-4 h-4 text-cyber-cyan" />
-            <span className="text-xs font-mono font-bold tracking-widest text-cyber-cyan uppercase">Reports & Export</span>
+            <FileText className="w-4 h-4 text-white" />
+            <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">Reports &amp; Export</span>
           </div>
-          <h1 className="text-2xl font-black text-text-bright">Intelligence Reports & CBOM Export</h1>
-          <p className="text-xs text-text-dim mt-1">
-            Evidence-backed reports for NTRO evaluation. CycloneDX Cryptographic Bill of Materials.
+          <h1 className="text-2xl font-black text-white">Intelligence Reports &amp; CBOM Export</h1>
+          <p className="text-xs text-slate-400 mt-0.5 font-mono">
+            Evidence-backed reports and CycloneDX Cryptographic Bill of Materials.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <select
             value={selectedProjectId}
             onChange={(e) => handleProjectChange(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-xs font-mono text-cyber-cyan focus:outline-none"
+            className="px-3 py-2 rounded-xl bg-black border border-white/20 text-xs font-mono text-white focus:outline-none"
           >
             {projects.map((p) => (
               <option key={p.project_id} value={p.project_id}>
@@ -134,7 +134,7 @@ export default function ReportsPage() {
           <button
             onClick={handleDownload}
             disabled={!cbomDoc}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyber-blue to-cyber-cyan text-[#020617] font-mono text-xs font-bold shadow-glow-cyan hover:scale-105 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold hover:bg-slate-200 transition-all disabled:opacity-50"
           >
             <Download className="w-3.5 h-3.5" />
             Download CycloneDX JSON
@@ -150,28 +150,28 @@ export default function ReportsPage() {
             onClick={() => setActiveTab(s.id)}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-mono font-bold transition-all ${
               activeTab === s.id
-                ? "bg-[#07112F] border-cyan-500/50 text-cyber-cyan shadow-glow-cyan"
-                : "bg-[#050A1F] border-white/10 text-text-dim hover:border-cyan-500/20 hover:text-text-bright"
+                ? "bg-white/15 border-white/40 text-white"
+                : "bg-white/[0.02] border-white/10 text-slate-400 hover:border-white/20 hover:text-white"
             }`}
           >
             <s.icon className="w-3.5 h-3.5" />
             {s.label}
-            {s.ready && <CheckCircle2 className="w-3 h-3 text-emerald-400" />}
+            {s.ready && <CheckCircle2 className="w-3 h-3 text-white" />}
           </button>
         ))}
       </div>
 
       {loading ? (
-        <div className="p-12 text-center text-xs font-mono text-text-dim flex items-center justify-center gap-3">
-          <RefreshCw className="w-4 h-4 animate-spin text-cyber-cyan" />
-          Loading reports and validating CycloneDX CBOM from PostgreSQL...
+        <div className="p-12 text-center text-xs font-mono text-slate-400 flex items-center justify-center gap-3 border border-white/10 rounded-2xl bg-white/[0.02]">
+          <RefreshCw className="w-4 h-4 animate-spin text-white" />
+          Loading reports and validating CycloneDX CBOM...
         </div>
       ) : !activeScan ? (
-        <div className="p-12 text-center border border-white/10 rounded-2xl bg-[#050A1F]/40 space-y-3">
-          <AlertCircle className="w-8 h-8 text-amber-400 mx-auto" />
-          <div className="text-base font-bold text-text-bright">No Scans Found</div>
-          <p className="text-xs text-text-dim max-w-md mx-auto">
-            No completed scan available for this project. Trigger a scan to export CBOM.
+        <div className="p-12 text-center border border-white/10 rounded-2xl bg-white/[0.02] space-y-3">
+          <AlertCircle className="w-8 h-8 text-slate-400 mx-auto" />
+          <div className="text-base font-bold text-white">No Scans Found</div>
+          <p className="text-xs text-slate-400 max-w-md mx-auto font-mono">
+            No completed scan available. Trigger a scan to export CBOM.
           </p>
         </div>
       ) : (
@@ -181,46 +181,41 @@ export default function ReportsPage() {
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono">
                 <div className="flex items-center gap-2">
-                  <span className="text-text-dim">Specification: CycloneDX 1.6 / 1.7</span>
+                  <span className="text-slate-400">CycloneDX 1.6 / 1.7</span>
                   {cbomValidation && (
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                      cbomValidation.is_valid ? "bg-emerald-950/60 border border-emerald-500/30 text-emerald-300" : "bg-rose-950/60 border border-rose-500/30 text-rose-300"
+                      cbomValidation.is_valid ? "bg-white/10 border border-white/20 text-white" : "bg-white/15 border border-white/30 text-white"
                     }`}>
                       {cbomValidation.is_valid ? "✓ SCHEMA VALID" : "⚠ SCHEMA ERRORS"}
                     </span>
                   )}
-                  <span className="text-cyber-cyan font-bold">{assetCount} components</span>
+                  <span className="text-white font-bold">{assetCount} components</span>
                 </div>
                 <div className="flex gap-2">
                   <button
                     onClick={handleCopy}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#050A1F] border border-white/10 text-xs font-mono text-text-dim hover:text-white transition-all"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-all"
                   >
                     <Copy className="w-3.5 h-3.5" />
                     {copied ? "Copied!" : "Copy JSON"}
                   </button>
                   <button 
                     onClick={handleDownload}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#050A1F] border border-white/10 text-xs font-mono text-text-dim hover:text-white transition-all"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black border border-white/10 text-xs font-mono text-slate-300 hover:text-white transition-all"
                   >
                     <Download className="w-3.5 h-3.5" />
                     Download .json
                   </button>
                 </div>
               </div>
-              <div className="bg-[#030712] border border-cyan-500/15 rounded-2xl overflow-auto max-h-[550px]">
+              <div className="bg-black border border-white/10 rounded-2xl overflow-auto max-h-[550px]">
                 <div className="px-4 py-2 border-b border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-rose-500/70" />
-                      <div className="w-3 h-3 rounded-full bg-amber-500/70" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
-                    </div>
-                    <span className="text-[10px] font-mono text-text-dim">cbom-{selectedProjectId}.json</span>
+                    <span className="text-[10px] font-mono text-slate-400">cbom-{selectedProjectId}.json</span>
                   </div>
-                  <span className="text-[10px] font-mono text-emerald-400">CycloneDX Standard Output</span>
+                  <span className="text-[10px] font-mono text-slate-400">CycloneDX Standard Output</span>
                 </div>
-                <pre className="p-6 text-[11px] font-mono text-emerald-300 leading-relaxed overflow-auto">
+                <pre className="p-6 text-[11px] font-mono text-slate-300 leading-relaxed overflow-auto">
                   {JSON.stringify(cbomDoc, null, 2)}
                 </pre>
               </div>
@@ -230,12 +225,12 @@ export default function ReportsPage() {
           {/* Executive Summary Tab */}
           {activeTab === "executive" && (
             <div className="space-y-6">
-              <div className="p-6 rounded-2xl bg-[#050A1F]/60 border border-cyan-500/20 space-y-4">
-                <div className="text-xs font-mono font-bold text-cyber-cyan uppercase tracking-wider">ECDAT — Executive Audit Summary</div>
-                <div className="text-sm text-text-muted leading-relaxed space-y-3 font-mono">
-                  <p>ECDAT cryptographic audit for <span className="text-cyber-cyan font-bold">{selectedProjectId.toUpperCase()}</span> (Scan ID: {activeScan.scan_id}).</p>
-                  <p>Discovered <span className="text-rose-400 font-bold">{assetCount} fused cryptographic primitives</span> backed by deterministic provenance records. Every normalized finding preserves the source artifact, detector, raw signal, and confidence score.</p>
-                  <p>Quantum risk modeling combines Mosca's theorem and Monte Carlo scenario simulations to identify migration priorities without arbitrary Q-day assumptions.</p>
+              <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 space-y-4 backdrop-blur-xl">
+                <div className="text-xs font-mono font-bold text-white uppercase tracking-wider">ECDAT — Executive Audit Summary</div>
+                <div className="text-sm text-slate-300 leading-relaxed space-y-3 font-mono">
+                  <p>Cryptographic audit for <span className="text-white font-bold">{selectedProjectId.toUpperCase()}</span> (Scan ID: {activeScan.scan_id}).</p>
+                  <p>Discovered <span className="text-white font-bold">{assetCount} cryptographic primitives</span> backed by deterministic provenance records with exact file/location citations.</p>
+                  <p>Quantum risk evaluated using Mosca inequality without arbitrary Q-day assumptions.</p>
                 </div>
               </div>
             </div>

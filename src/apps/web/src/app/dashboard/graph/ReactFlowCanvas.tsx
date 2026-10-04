@@ -30,12 +30,12 @@ export default function ReactFlowCanvas({ nodes: initialNodes, edges: initialEdg
       onEdgesChange={onEdgesChange}
       fitView
       fitViewOptions={{ padding: 0.2 }}
-      className="bg-[#020617]"
+      className="bg-black"
     >
-      <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="rgba(200, 180, 160, 0.08)" />
-      <Controls className="bg-[#1a1d18] border border-[#c8b4a0]/20 rounded-xl overflow-hidden" />
+      <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="rgba(255, 255, 255, 0.1)" />
+      <Controls className="bg-black/90 border border-white/10 rounded-xl overflow-hidden text-white" />
       <MiniMap
-        className="bg-[#1a1d18] border border-[#c8b4a0]/20 rounded-xl"
+        className="bg-black/90 border border-white/10 rounded-xl"
         nodeColor={(n) => {
           const border = ((n.style as React.CSSProperties)?.border as string) || "";
           if (border.includes("F43F5E")) return "#F43F5E";

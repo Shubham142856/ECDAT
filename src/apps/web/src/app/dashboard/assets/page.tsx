@@ -13,22 +13,22 @@ import { CryptoAssetItem, ProjectItem, ScanSummaryItem } from "@/lib/types";
 import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 const STATUS_COLORS: Record<string, string> = {
-  vulnerable: "text-rose-400 bg-rose-950/50 border-rose-500/30",
-  monitoring: "text-amber-400 bg-amber-950/50 border-amber-500/30",
-  safe: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
-  VULNERABLE: "text-rose-400 bg-rose-950/50 border-rose-500/30",
-  MONITORING: "text-amber-400 bg-amber-950/50 border-amber-500/30",
-  SAFE: "text-emerald-400 bg-emerald-950/50 border-emerald-500/30",
+  vulnerable: "text-white bg-white/10 border-white/25",
+  monitoring: "text-slate-300 bg-white/5 border-white/15",
+  safe: "text-slate-400 bg-white/5 border-white/10",
+  VULNERABLE: "text-white bg-white/10 border-white/25",
+  MONITORING: "text-slate-300 bg-white/5 border-white/15",
+  SAFE: "text-slate-400 bg-white/5 border-white/10",
 };
 
 const ROLE_ICONS: Record<string, React.ReactNode> = {
-  SIGNATURE: <Key className="w-3.5 h-3.5 text-blue-400" />,
-  HASH: <Hash className="w-3.5 h-3.5 text-purple-400" />,
-  MAC: <Shield className="w-3.5 h-3.5 text-cyan-400" />,
-  KEY_ESTABLISHMENT: <Lock className="w-3.5 h-3.5 text-amber-400" />,
-  ENCRYPTION: <Cpu className="w-3.5 h-3.5 text-emerald-400" />,
-  CERTIFICATE: <Shield className="w-3.5 h-3.5 text-rose-400" />,
-  PROTOCOL: <Database className="w-3.5 h-3.5 text-indigo-400" />,
+  SIGNATURE: <Key className="w-3.5 h-3.5 text-white" />,
+  HASH: <Hash className="w-3.5 h-3.5 text-white" />,
+  MAC: <Shield className="w-3.5 h-3.5 text-white" />,
+  KEY_ESTABLISHMENT: <Lock className="w-3.5 h-3.5 text-white" />,
+  ENCRYPTION: <Cpu className="w-3.5 h-3.5 text-white" />,
+  CERTIFICATE: <Shield className="w-3.5 h-3.5 text-white" />,
+  PROTOCOL: <Database className="w-3.5 h-3.5 text-white" />,
 };
 
 export default function AssetInventoryPage() {
@@ -156,18 +156,18 @@ const SIH_STEPS = [
 ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* SIH26164 Procedure Stepper Bar */}
-      <div className="bg-[#050A1F]/90 border border-cyan-500/20 rounded-2xl p-4 shadow-xl">
-        <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5">
+      <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-4 backdrop-blur-xl">
+        <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-[11px] font-mono font-bold tracking-widest text-cyan-400 uppercase">
-              SIH26164 WORKFLOW PROCEDURE
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            <span className="text-[11px] font-mono font-bold tracking-widest text-white uppercase">
+              SIH26164 WORKFLOW PIPELINE
             </span>
           </div>
-          <span className="text-[10px] font-mono text-text-dim">
-            Evidence-First: Ingest → Discover → Prove → Graph → Risk → Migrate
+          <span className="text-[10px] font-mono text-slate-400">
+            Discover → Prove → Assess → Simulate → Migrate → Validate
           </span>
         </div>
         
@@ -178,37 +178,37 @@ const SIH_STEPS = [
               href={s.href}
               className={`p-2.5 rounded-xl border text-left transition-all ${
                 s.current
-                  ? "bg-cyan-500/15 border-cyan-400/50 shadow-glow-cyan text-white"
-                  : "bg-black/30 border-white/5 text-text-dim hover:text-text-bright hover:border-white/20"
+                  ? "bg-white/15 border-white/40 text-white font-bold"
+                  : "bg-black/40 border-white/10 text-slate-400 hover:text-white hover:border-white/25"
               }`}
             >
               <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold">
-                <span className={s.current ? "text-cyan-400" : "text-text-dim"}>0{s.id}.</span>
+                <span className={s.current ? "text-white" : "text-slate-400"}>0{s.id}.</span>
                 <span className="truncate">{s.name}</span>
               </div>
-              <div className="text-[9px] text-text-dim truncate mt-0.5">{s.desc}</div>
+              <div className="text-[9px] text-slate-400 truncate mt-0.5">{s.desc}</div>
             </Link>
           ))}
         </div>
       </div>
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-cyan-500/20">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Database className="w-4 h-4 text-cyber-cyan" />
-            <span className="text-xs font-mono font-bold tracking-widest text-cyber-cyan uppercase">Asset Inventory</span>
+            <Database className="w-4 h-4 text-white" />
+            <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">Asset Inventory</span>
           </div>
-          <h1 className="text-2xl font-black text-text-bright">Cryptographic Bill of Materials (CBOM)</h1>
-          <p className="text-xs text-text-dim mt-1">
-            Live inventory from <span className="font-mono text-cyber-cyan">{assets.length} fused assets</span>. Evidence-grounded. Zero synthetic mocks.
+          <h1 className="text-2xl font-black text-white">Cryptographic Bill of Materials (CBOM)</h1>
+          <p className="text-xs text-slate-400 mt-0.5 font-mono">
+            Live inventory from {assets.length} fused assets. Evidence-grounded.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <select
             value={selectedProjectId}
             onChange={(e) => handleProjectChange(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-xs font-mono text-cyber-cyan focus:outline-none"
+            className="px-3 py-2 rounded-xl bg-black border border-white/20 text-xs font-mono text-white focus:outline-none"
           >
             {projects.map((p) => (
               <option key={p.project_id} value={p.project_id}>
@@ -219,10 +219,10 @@ const SIH_STEPS = [
           <button 
             onClick={handleExportCBOM}
             disabled={!activeScan || exporting || assets.length === 0}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#050A1F] border border-cyan-500/30 text-cyber-cyan font-mono text-xs font-bold hover:bg-cyan-950/40 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold hover:bg-slate-200 transition-all disabled:opacity-50"
           >
             <Download className="w-3.5 h-3.5" />
-            {exporting ? "Exporting..." : "Export CycloneDX 1.6"}
+            {exporting ? "Exporting..." : "Export CycloneDX"}
           </button>
         </div>
       </div>
@@ -230,23 +230,23 @@ const SIH_STEPS = [
       {/* Summary Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Discovered Assets", value: assets.length, color: "text-cyber-cyan", sub: activeScan ? `Scan ${activeScan.scan_id.slice(0, 8)}` : "No scan" },
-          { label: "Vulnerable", value: vuln, color: "text-rose-400", sub: "quantum-breakable" },
-          { label: "Monitoring / Hybrid", value: monitor, color: "text-amber-400", sub: "requires transition" },
-          { label: "Quantum Safe", value: safe, color: "text-emerald-400", sub: "symmetric / PQC ready" },
+          { label: "Discovered Assets", value: assets.length, sub: activeScan ? `Scan ${activeScan.scan_id.slice(0, 8)}` : "No scan" },
+          { label: "Vulnerable", value: vuln, sub: "quantum-breakable" },
+          { label: "Monitoring / Hybrid", value: monitor, sub: "requires transition" },
+          { label: "Quantum Safe", value: safe, sub: "symmetric / PQC ready" },
         ].map((c, i) => (
-          <div key={i} className="p-4 rounded-2xl bg-[#050A1F]/60 border border-white/10 space-y-1">
-            <div className="text-xs font-mono text-text-dim">{c.label}</div>
-            <div className={`text-3xl font-black ${c.color}`}>{loading ? "..." : c.value}</div>
-            <div className="text-[10px] text-text-dim">{c.sub}</div>
+          <div key={i} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-xl space-y-1">
+            <div className="text-xs font-mono text-slate-400">{c.label}</div>
+            <div className="text-3xl font-black text-white">{loading ? "..." : c.value}</div>
+            <div className="text-[10px] text-slate-400">{c.sub}</div>
           </div>
         ))}
       </div>
 
       {/* Filters */}
       <div className="flex flex-wrap gap-3">
-        <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#050A1F] border border-white/10 text-xs">
-          <Search className="w-3.5 h-3.5 text-text-dim" />
+        <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black border border-white/10 text-xs">
+          <Search className="w-3.5 h-3.5 text-slate-400" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -257,50 +257,49 @@ const SIH_STEPS = [
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
-          className="px-3 py-2 rounded-xl bg-[#050A1F] border border-white/10 text-xs font-mono text-text-bright focus:outline-none"
+          className="px-3 py-2 rounded-xl bg-black border border-white/10 text-xs font-mono text-white focus:outline-none"
         >
           <option value="ALL">All Quantum Status</option>
           <option value="vulnerable">Vulnerable</option>
           <option value="monitoring">Monitoring / Hybrid</option>
           <option value="safe">Safe</option>
         </select>
-        <div className="text-xs text-text-dim flex items-center px-3">
+        <div className="text-xs text-slate-400 flex items-center px-3 font-mono">
           {filtered.length} live records
         </div>
       </div>
 
       {/* Asset Table or Empty State */}
       {loading ? (
-        <div className="p-12 text-center text-sm font-mono text-text-dim border border-white/10 rounded-2xl bg-[#050A1F]/40 flex items-center justify-center gap-3">
-          <RefreshCw className="w-4 h-4 animate-spin text-cyber-cyan" />
-          Loading cryptographic asset inventory from live API...
+        <div className="p-12 text-center text-sm font-mono text-slate-400 border border-white/10 rounded-2xl bg-white/[0.02] flex items-center justify-center gap-3">
+          <RefreshCw className="w-4 h-4 animate-spin text-white" />
+          Loading cryptographic asset inventory...
         </div>
       ) : !activeScan ? (
-        <div className="p-12 text-center border border-white/10 rounded-2xl bg-[#050A1F]/40 space-y-4">
-          <AlertCircle className="w-10 h-10 text-amber-400 mx-auto" />
-          <div className="text-base font-bold text-text-bright">No Scan Performed Yet</div>
-          <p className="text-xs text-text-dim max-w-md mx-auto">
-            No discovery scan has been initiated for &ldquo;{selectedProject?.name || "this project"}&rdquo;. Run a scan from the Discovery Engine to generate the CBOM.
+        <div className="p-12 text-center border border-white/10 rounded-2xl bg-white/[0.02] space-y-3">
+          <AlertCircle className="w-8 h-8 text-slate-400 mx-auto" />
+          <div className="text-base font-bold text-white">No Scan Performed Yet</div>
+          <p className="text-xs text-slate-400 max-w-md mx-auto font-mono">
+            No discovery scan initiated for &ldquo;{selectedProject?.name || "this project"}&rdquo;. Run a scan from Discovery Engine.
           </p>
           <Link
             href="/dashboard/discovery"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-[#1a1d18] font-mono text-xs font-bold hover:opacity-90 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold hover:bg-slate-200 transition-all"
           >
             Go to Discovery Engine →
           </Link>
         </div>
       ) : assets.length === 0 ? (
-        <div className="p-12 text-center border border-white/10 rounded-2xl bg-[#050A1F]/40 space-y-4">
-          <ShieldCheck className="w-10 h-10 text-cyber-cyan mx-auto" />
-          <div className="text-base font-bold text-text-bright">Scan Completed: 0 Cryptographic Assets Detected</div>
-          <p className="text-xs text-text-dim max-w-lg mx-auto">
-            Scan <span className="font-mono text-cyber-cyan">{activeScan.scan_id.slice(0, 8)}</span> finished with all 9 stages verified.
-            No cryptographic algorithms, keys, or certificates were present in the scanned file(s).
+        <div className="p-12 text-center border border-white/10 rounded-2xl bg-white/[0.02] space-y-3">
+          <ShieldCheck className="w-8 h-8 text-white mx-auto" />
+          <div className="text-base font-bold text-white">Scan Completed: 0 Cryptographic Assets Detected</div>
+          <p className="text-xs text-slate-400 max-w-lg mx-auto font-mono">
+            Scan <span className="font-mono text-white">{activeScan.scan_id.slice(0, 8)}</span> finished. No cryptographic primitives detected in scanned code.
           </p>
-          <div className="p-4 bg-black/50 border border-white/10 rounded-xl text-left max-w-lg mx-auto text-xs font-mono space-y-1">
-            <span className="text-amber-400 font-bold">Rule 1 (Evidence-First / Zero Fabrication):</span>
-            <p className="text-text-dim">
-              ECDAT strictly inspects real code. Utility or non-cryptographic scripts (such as image cropping or UI templates) produce 0 crypto claims.
+          <div className="p-3 bg-black/60 border border-white/10 rounded-xl text-left max-w-lg mx-auto text-xs font-mono space-y-1">
+            <span className="text-white font-bold">Rule 1 (Zero Fabrication):</span>
+            <p className="text-slate-400">
+              Non-cryptographic code yields 0 claims.
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-3 pt-2">
@@ -309,26 +308,26 @@ const SIH_STEPS = [
                 const pyjwt = projects.find(p => (p.name || "").toLowerCase() === "pyjwt");
                 if (pyjwt) handleProjectChange(pyjwt.project_id);
               }}
-              className="px-4 py-2.5 rounded-xl bg-primary text-[#1a1d18] font-mono text-xs font-bold hover:opacity-90 transition-all"
+              className="px-4 py-2 rounded-xl bg-white text-black font-mono text-xs font-bold hover:bg-slate-200 transition-all"
             >
-              Switch to PyJWT (9 Assets) →
+              Switch to PyJWT →
             </button>
             <Link
               href="/dashboard/discovery"
-              className="px-4 py-2.5 rounded-xl bg-black border border-white/15 font-mono text-xs text-text-dim hover:text-text-bright transition-all"
+              className="px-4 py-2 rounded-xl bg-black border border-white/15 font-mono text-xs text-slate-300 hover:text-white transition-all"
             >
               Ingest Another File
             </Link>
           </div>
         </div>
       ) : (
-        <div className="bg-[#050A1F]/60 border border-white/10 rounded-2xl overflow-hidden">
+        <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden backdrop-blur-xl">
           <div className="overflow-x-auto">
             <table className="w-full text-xs font-mono">
               <thead>
                 <tr className="border-b border-white/10">
                   {["Algorithm / Family", "Usage Role", "Claim State", "Evidence Roles", "Confidence", "Status"].map((h) => (
-                    <th key={h} className="px-4 py-3 text-left text-[10px] font-bold tracking-wider text-text-dim uppercase">{h}</th>
+                    <th key={h} className="px-4 py-3 text-left text-[10px] font-bold tracking-wider text-slate-400 uppercase">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -340,25 +339,25 @@ const SIH_STEPS = [
                     className="hover:bg-white/[0.04] transition-colors cursor-pointer group"
                   >
                     <td className="px-4 py-3">
-                      <div className="font-bold text-text-bright group-hover:text-primary transition-colors flex items-center gap-1.5">
+                      <div className="font-bold text-white group-hover:text-slate-200 transition-colors flex items-center gap-1.5">
                         <span>{a.canonical_algorithm}</span>
-                        <ChevronRight className="w-3 h-3 text-text-dim opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <ChevronRight className="w-3 h-3 text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
-                      <div className="text-[10px] text-text-dim truncate max-w-[200px]">{a.family} {a.variant ? `(${a.variant})` : ""}</div>
+                      <div className="text-[10px] text-slate-400 truncate max-w-[200px]">{a.family} {a.variant ? `(${a.variant})` : ""}</div>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-1.5">
-                        {ROLE_ICONS[a.usage_role] || <Key className="w-3.5 h-3.5 text-text-dim" />}
-                        <span className="text-text-muted">{a.usage_role}</span>
+                        {ROLE_ICONS[a.usage_role] || <Key className="w-3.5 h-3.5 text-slate-400" />}
+                        <span className="text-slate-300">{a.usage_role}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="text-cyber-cyan font-bold">{a.claim_state}</span>
+                      <span className="text-white font-bold">{a.claim_state}</span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-1">
                         {(a.roles || []).map((r, idx) => (
-                          <span key={idx} className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] text-text-dim">
+                          <span key={idx} className="px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] text-slate-400">
                             {r}
                           </span>
                         ))}
@@ -366,19 +365,19 @@ const SIH_STEPS = [
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <div className="h-1.5 w-16 bg-[#07112F] rounded-full overflow-hidden">
+                        <div className="h-1.5 w-16 bg-white/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full rounded-full bg-cyber-cyan"
+                            className="h-full rounded-full bg-white"
                             style={{ width: `${Math.round((a.confidence || 0) * 100)}%` }}
                           />
                         </div>
-                        <span className="font-bold text-text-dim">
+                        <span className="font-bold text-white">
                           {(a.confidence || 0).toFixed(2)}
                         </span>
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_COLORS[a.quantum_status || ""] || "text-text-dim border-white/10"}`}>
+                      <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_COLORS[a.quantum_status || ""] || "text-slate-400 border-white/10"}`}>
                         {(a.quantum_status || "UNKNOWN").toUpperCase()}
                       </span>
                     </td>
@@ -393,22 +392,22 @@ const SIH_STEPS = [
       {/* ASSET DETAIL & PROVENANCE MODAL */}
       {selectedAsset && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-2xl max-h-[85vh] p-6 rounded-3xl bg-[#050A1F] border border-cyan-500/30 shadow-2xl flex flex-col space-y-5">
+          <div className="w-full max-w-2xl max-h-[85vh] p-6 rounded-3xl bg-black border border-white/20 shadow-2xl flex flex-col space-y-5">
             {/* Header */}
             <div className="flex items-start justify-between pb-4 border-b border-white/10">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <Key className="w-5 h-5 text-cyber-cyan" />
-                  <h3 className="text-lg font-black font-mono text-text-bright">{selectedAsset.canonical_algorithm}</h3>
-                  <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_COLORS[selectedAsset.quantum_status || ""] || "text-text-dim border-white/10"}`}>
+                  <Key className="w-5 h-5 text-white" />
+                  <h3 className="text-lg font-black font-mono text-white">{selectedAsset.canonical_algorithm}</h3>
+                  <span className={`px-2 py-0.5 rounded border text-[10px] font-bold ${STATUS_COLORS[selectedAsset.quantum_status || ""] || "text-slate-400 border-white/10"}`}>
                     {(selectedAsset.quantum_status || "UNKNOWN").toUpperCase()}
                   </span>
                 </div>
-                <div className="font-mono text-xs text-text-dim">
-                  Family: <span className="text-text-bright">{selectedAsset.family}</span> | Claim State: <span className="text-cyber-cyan font-bold">{selectedAsset.claim_state}</span>
+                <div className="font-mono text-xs text-slate-400">
+                  Family: <span className="text-white">{selectedAsset.family}</span> | Claim State: <span className="text-white font-bold">{selectedAsset.claim_state}</span>
                 </div>
               </div>
-              <button onClick={() => setSelectedAsset(null)} className="text-text-dim hover:text-white transition-colors">
+              <button onClick={() => setSelectedAsset(null)} className="text-slate-400 hover:text-white transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -418,46 +417,46 @@ const SIH_STEPS = [
               {/* Metadata Cards */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl">
-                  <div className="text-[10px] text-text-dim">Confidence</div>
-                  <div className="text-base font-bold text-cyber-cyan">{((selectedAsset.confidence || 0) * 100).toFixed(0)}%</div>
+                  <div className="text-[10px] text-slate-400">Confidence</div>
+                  <div className="text-base font-bold text-white">{((selectedAsset.confidence || 0) * 100).toFixed(0)}%</div>
                 </div>
                 <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl">
-                  <div className="text-[10px] text-text-dim">Usage Role</div>
-                  <div className="text-sm font-bold text-text-bright">{selectedAsset.usage_role}</div>
+                  <div className="text-[10px] text-slate-400">Usage Role</div>
+                  <div className="text-sm font-bold text-white">{selectedAsset.usage_role}</div>
                 </div>
                 <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl">
-                  <div className="text-[10px] text-text-dim">Lifecycle</div>
-                  <div className="text-sm font-bold text-text-bright">{selectedAsset.lifecycle || "ACTIVE"}</div>
+                  <div className="text-[10px] text-slate-400">Lifecycle</div>
+                  <div className="text-sm font-bold text-white">{selectedAsset.lifecycle || "ACTIVE"}</div>
                 </div>
                 <div className="p-3 bg-white/[0.03] border border-white/10 rounded-xl">
-                  <div className="text-[10px] text-text-dim">Evidence Records</div>
-                  <div className="text-base font-bold text-emerald-400">{selectedAsset.evidence?.length || selectedAsset.roles?.length || 1}</div>
+                  <div className="text-[10px] text-slate-400">Evidence Records</div>
+                  <div className="text-base font-bold text-white">{selectedAsset.evidence?.length || selectedAsset.roles?.length || 1}</div>
                 </div>
               </div>
 
               {/* Evidence Records (Provenance) */}
               <div className="space-y-2">
-                <div className="font-bold text-text-bright uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                  <FileCode className="w-4 h-4 text-cyber-cyan" />
-                  Evidence Provenance (Rule 3 Compliant)
+                <div className="font-bold text-white uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                  <FileCode className="w-4 h-4 text-white" />
+                  Evidence Provenance
                 </div>
                 {loadingDetail ? (
-                  <div className="p-6 text-center text-text-dim flex items-center justify-center gap-2">
-                    <RefreshCw className="w-4 h-4 animate-spin text-cyber-cyan" /> Loading evidence chain...
+                  <div className="p-6 text-center text-slate-400 flex items-center justify-center gap-2">
+                    <RefreshCw className="w-4 h-4 animate-spin text-white" /> Loading evidence chain...
                   </div>
                 ) : selectedAsset.evidence && selectedAsset.evidence.length > 0 ? (
                   <div className="space-y-2 max-h-56 overflow-y-auto">
                     {selectedAsset.evidence.map((ev: any, idx: number) => (
-                      <div key={idx} className="p-3 bg-black/60 border border-white/10 rounded-xl space-y-1">
+                      <div key={idx} className="p-3 bg-white/[0.02] border border-white/10 rounded-xl space-y-1">
                         <div className="flex items-center justify-between">
-                          <span className="text-cyber-cyan font-bold">{ev.detector || "AST Detector"}</span>
-                          <span className="text-[10px] text-text-dim">{ev.source_type}</span>
+                          <span className="text-white font-bold">{ev.detector || "AST Detector"}</span>
+                          <span className="text-[10px] text-slate-400">{ev.source_type}</span>
                         </div>
-                        <div className="text-text-bright font-mono text-[11px] truncate">
-                          Location: <span className="text-emerald-400">{ev.source_location}</span>
+                        <div className="text-slate-300 font-mono text-[11px] truncate">
+                          Location: <span className="text-white font-bold">{ev.source_location}</span>
                         </div>
                         {ev.raw_signal && (
-                          <div className="text-[10px] text-text-dim bg-white/[0.02] p-1.5 rounded border border-white/5 truncate">
+                          <div className="text-[10px] text-slate-400 bg-white/[0.02] p-1.5 rounded border border-white/5 truncate">
                             Signal: {ev.raw_signal}
                           </div>
                         )}
@@ -465,34 +464,34 @@ const SIH_STEPS = [
                     ))}
                   </div>
                 ) : (
-                  <div className="p-4 bg-black/40 border border-white/10 rounded-xl text-text-dim text-[11px]">
-                    Evidence fused from {selectedAsset.roles?.length || 1} detector signals across AST, manifest, and configuration inspection.
+                  <div className="p-3 bg-white/[0.02] border border-white/10 rounded-xl text-slate-400 text-[11px]">
+                    Evidence fused from {selectedAsset.roles?.length || 1} detector signals.
                   </div>
                 )}
               </div>
 
-              {/* Quick Navigation to Related Modules */}
+              {/* Quick Navigation */}
               <div className="pt-2 flex flex-wrap gap-2">
                 <Link
                   href="/dashboard/graph"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-cyber-cyan hover:bg-white/[0.08] transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.05] border border-white/15 text-white hover:bg-white/[0.1] transition-colors"
                 >
                   <Cpu className="w-3.5 h-3.5" />
-                  View in Dependency Graph →
+                  Dependency Graph →
                 </Link>
                 <Link
                   href="/dashboard/risk"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-amber-400 hover:bg-white/[0.08] transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.05] border border-white/15 text-white hover:bg-white/[0.1] transition-colors"
                 >
                   <AlertTriangle className="w-3.5 h-3.5" />
-                  Assess Mosca Quantum Risk →
+                  Mosca Risk →
                 </Link>
                 <Link
                   href="/dashboard/migration"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-emerald-400 hover:bg-white/[0.08] transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.05] border border-white/15 text-white hover:bg-white/[0.1] transition-colors"
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  PQC Migration Plan →
+                  PQC Migration →
                 </Link>
               </div>
             </div>

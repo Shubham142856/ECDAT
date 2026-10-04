@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { getProjects, getScans, getScanMigrationPlan } from "@/lib/api";
 import { ProjectItem, ScanSummaryItem } from "@/lib/types";
+import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 export default function MigrationPage() {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -27,9 +28,11 @@ export default function MigrationPage() {
         setProjects(projList);
 
         if (projList.length > 0) {
-          const first = projList[0];
-          setSelectedProjectId(first.project_id);
-          await loadPlanForProject(first.project_id);
+          const stored = getStoredProjectId();
+          const target = projList.find(p => p.project_id === stored) || projList[0];
+          setSelectedProjectId(target.project_id);
+          setStoredProjectId(target.project_id);
+          await loadPlanForProject(target.project_id);
         }
       } catch (err) {
         console.warn("Failed to load projects:", err);
@@ -65,6 +68,7 @@ export default function MigrationPage() {
 
   const handleProjectChange = async (projId: string) => {
     setSelectedProjectId(projId);
+    setStoredProjectId(projId);
     await loadPlanForProject(projId);
   };
 

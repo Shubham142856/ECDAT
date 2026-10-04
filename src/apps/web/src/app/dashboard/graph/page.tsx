@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { Network, Zap, RefreshCw, AlertCircle } from "lucide-react";
 import { getProjects, getScans, getScanGraph } from "@/lib/api";
 import { ProjectItem, ScanSummaryItem } from "@/lib/types";
+import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 // Lazy-load ReactFlow only on the client, never during SSR or initial bundle compile.
 // This prevents the 2MB ReactFlow bundle from blowing up dev-server memory.
@@ -46,8 +47,11 @@ export default function GraphPage() {
         if (!mounted) return;
         setProjects(projList);
         if (projList.length > 0) {
-          setSelectedProjectId(projList[0].project_id);
-          await loadGraphForProject(projList[0].project_id);
+          const stored = getStoredProjectId();
+          const target = projList.find(p => p.project_id === stored) || projList[0];
+          setSelectedProjectId(target.project_id);
+          setStoredProjectId(target.project_id);
+          await loadGraphForProject(target.project_id);
         }
       } catch (err) {
         console.warn("Failed to load projects:", err);
@@ -131,7 +135,11 @@ export default function GraphPage() {
         <div className="flex items-center gap-4">
           <select
             value={selectedProjectId}
-            onChange={(e) => { setSelectedProjectId(e.target.value); loadGraphForProject(e.target.value); }}
+            onChange={(e) => {
+              setSelectedProjectId(e.target.value);
+              setStoredProjectId(e.target.value);
+              loadGraphForProject(e.target.value);
+            }}
             className="px-3 py-2 rounded-xl bg-[#1a1d18] border border-[#c8b4a0]/20 text-xs font-mono text-primary focus:outline-none"
           >
             {projects.map((p) => (

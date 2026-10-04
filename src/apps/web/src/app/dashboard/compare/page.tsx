@@ -12,6 +12,7 @@ import {
   getScanMigrationPlan, getScanCBOM
 } from "@/lib/api";
 import { ProjectItem, ScanSummaryItem, CryptoAssetItem } from "@/lib/types";
+import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 interface ClauseComparison {
   clauseId: string;
@@ -57,9 +58,11 @@ export default function CompareProblemStatementPage() {
         setProjects(projList);
 
         if (projList.length > 0) {
-          const firstProj = projList[0];
-          setSelectedProjectId(firstProj.project_id);
-          await loadScanData(firstProj.project_id, firstProj);
+          const stored = getStoredProjectId();
+          const targetProj = projList.find(p => p.project_id === stored) || projList[0];
+          setSelectedProjectId(targetProj.project_id);
+          setStoredProjectId(targetProj.project_id);
+          await loadScanData(targetProj.project_id, targetProj);
         } else {
           setLoading(false);
         }
@@ -119,6 +122,7 @@ export default function CompareProblemStatementPage() {
 
   const handleProjectSelect = async (projId: string) => {
     setSelectedProjectId(projId);
+    setStoredProjectId(projId);
     await loadScanData(projId);
   };
 

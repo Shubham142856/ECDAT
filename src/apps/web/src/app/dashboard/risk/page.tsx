@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { getProjects, getScans, getScanRisk } from "@/lib/api";
 import { ProjectItem, ScanSummaryItem } from "@/lib/types";
+import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 // Mosca's theorem: P(Harvest Now Decrypt Later) meaningful if X + Y > Z
 // X = time to relevant CRQC; Y = migration time; Z = data security shelf life
@@ -65,9 +66,11 @@ export default function RiskPage() {
         setProjects(projList);
 
         if (projList.length > 0) {
-          const first = projList[0];
-          setSelectedProjectId(first.project_id);
-          await loadRiskForProject(first.project_id);
+          const stored = getStoredProjectId();
+          const target = projList.find(p => p.project_id === stored) || projList[0];
+          setSelectedProjectId(target.project_id);
+          setStoredProjectId(target.project_id);
+          await loadRiskForProject(target.project_id);
         }
       } catch (err) {
         console.warn("Failed to load projects:", err);
@@ -102,6 +105,7 @@ export default function RiskPage() {
 
   const handleProjectChange = async (projId: string) => {
     setSelectedProjectId(projId);
+    setStoredProjectId(projId);
     await loadRiskForProject(projId);
   };
 

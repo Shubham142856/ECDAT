@@ -582,6 +582,150 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* =========================================================================
+          SECTION — 4. ENQUIRIES & DEPLOYMENT
+          ========================================================================= */}
+      <section id="deployment" className="py-24 px-6 sm:px-12 max-w-7xl mx-auto z-10 relative">
+        <div className="text-left mb-12">
+          <div className="inline-flex items-center gap-2 font-mono text-xs text-white uppercase tracking-widest mb-3">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="font-bold">4. ENQUIRIES &amp; DEPLOYMENT</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+            Enterprise Deployment &amp; SIH Enquiries
+          </h2>
+          <p className="text-slate-300 text-sm mt-3 max-w-2xl leading-relaxed">
+            Deploy ECDAT natively into your secure enclaves, request air-gapped packages, or schedule a cryptographic migration readiness pilot.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* Card 1 */}
+          <div className="p-8 rounded-3xl bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-cyan-400/50 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-950/60 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">
+                Air-Gapped &amp; On-Premise
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Zero external dependencies. Fully air-gapped Docker Compose and Kubernetes Helm deployments verified for classified defense and sovereign infrastructure enclaves.
+              </p>
+              <div className="pt-2 text-[10px] font-mono text-slate-400 space-y-1">
+                <div className="flex items-center gap-1.5 text-emerald-400">
+                  <CheckCircle2 className="w-3 h-3" /> Zero Telemetry / No Phoning Home
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-300">
+                  <CheckCircle2 className="w-3 h-3 text-cyan-400" /> Offline AST &amp; Dependency DB
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/dashboard/discovery"
+              className="mt-6 flex items-center justify-between text-xs font-mono font-bold text-cyan-400 hover:text-white transition-colors"
+            >
+              <span>Explore Offline Scanner</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {/* Card 2 */}
+          <div className="p-8 rounded-3xl bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-cyan-400/50 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-blue-950/60 border border-blue-500/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                <Cpu className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white group-hover:text-blue-300 transition-colors">
+                SIH26164 Evaluation Kit
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Evaluation bundle tailored for NTRO jury and technical reviewers: includes ground-truth benchmark corpora (PyJWT, paramiko, certbot, jjwt), reproducible seeds, and CycloneDX 1.7 schema verifier.
+              </p>
+              <div className="pt-2 text-[10px] font-mono text-slate-400 space-y-1">
+                <div className="flex items-center gap-1.5 text-cyan-400">
+                  <CheckCircle2 className="w-3 h-3" /> Pinned Commit Reproducibility
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-300">
+                  <CheckCircle2 className="w-3 h-3 text-cyan-400" /> 65/65 Verified Test Cases
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/dashboard/compare"
+              className="mt-6 flex items-center justify-between text-xs font-mono font-bold text-blue-400 hover:text-white transition-colors"
+            >
+              <span>View SIH Deliverables</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+
+          {/* Card 3 */}
+          <div className="p-8 rounded-3xl bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-cyan-400/50 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-indigo-950/60 border border-indigo-500/30 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
+                <Server className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-white group-hover:text-indigo-300 transition-colors">
+                SOC Integration &amp; Pilots
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Integrate continuous cryptographic discovery into your DevSecOps pipelines: GitHub Actions, GitLab CI, syslog outputs, and automated quantum risk thresholds.
+              </p>
+              <div className="pt-2 text-[10px] font-mono text-slate-400 space-y-1">
+                <div className="flex items-center gap-1.5 text-indigo-400">
+                  <CheckCircle2 className="w-3 h-3" /> REST &amp; CLI Interfaces
+                </div>
+                <div className="flex items-center gap-1.5 text-slate-300">
+                  <CheckCircle2 className="w-3 h-3 text-cyan-400" /> FIPS 203/204 Wave Roadmap
+                </div>
+              </div>
+            </div>
+            <Link
+              href="/dashboard"
+              className="mt-6 flex items-center justify-between text-xs font-mono font-bold text-indigo-400 hover:text-white transition-colors"
+            >
+              <span>Open SOC Console</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Interactive Quick Enquiry Box */}
+        <div className="p-8 rounded-3xl bg-white/[0.03] backdrop-blur-2xl border border-white/10 hover:border-white/20 transition-all">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-xl">
+              <div className="text-xs font-mono text-cyan-400 font-bold uppercase tracking-wider">
+                Direct Technical Inquiries
+              </div>
+              <h3 className="text-xl font-bold text-white">
+                Initiate an Evaluation or Enterprise Pilot
+              </h3>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Technical enquiries, on-premise deployment validation, or custom algorithm signatures for SIH26164 (NTRO).
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+              <Link
+                href="/dashboard/discovery"
+                className="px-6 py-3.5 rounded-xl bg-primary text-[#000000] font-mono text-xs font-bold hover:opacity-90 transition-all shadow-glow-cyan flex items-center gap-2"
+              >
+                <Terminal className="w-4 h-4" />
+                Launch Live Discovery Console
+              </Link>
+              <Link
+                href="/dashboard/reports"
+                className="px-6 py-3.5 rounded-xl bg-black border border-white/20 text-white hover:border-cyan-400 font-mono text-xs font-bold transition-all flex items-center gap-2"
+              >
+                <FileJson className="w-4 h-4 text-cyan-400" />
+                Download CycloneDX 1.7 CBOM
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );

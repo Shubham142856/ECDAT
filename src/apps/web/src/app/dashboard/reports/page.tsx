@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { getProjects, getScans, getScanCBOM, getScanAssets } from "@/lib/api";
 import { ProjectItem, ScanSummaryItem } from "@/lib/types";
+import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 const REPORT_SECTIONS = [
   { id: "cbom", label: "CycloneDX CBOM v1.6/1.7", icon: FileJson, ready: true },
@@ -35,9 +36,11 @@ export default function ReportsPage() {
         setProjects(projList);
 
         if (projList.length > 0) {
-          const first = projList[0];
-          setSelectedProjectId(first.project_id);
-          await loadReportForProject(first.project_id);
+          const stored = getStoredProjectId();
+          const target = projList.find(p => p.project_id === stored) || projList[0];
+          setSelectedProjectId(target.project_id);
+          setStoredProjectId(target.project_id);
+          await loadReportForProject(target.project_id);
         }
       } catch (err) {
         console.warn("Failed to load projects:", err);
@@ -81,6 +84,7 @@ export default function ReportsPage() {
 
   const handleProjectChange = async (projId: string) => {
     setSelectedProjectId(projId);
+    setStoredProjectId(projId);
     await loadReportForProject(projId);
   };
 

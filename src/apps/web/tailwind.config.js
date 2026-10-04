@@ -9,60 +9,60 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // User design theme colors
+        // User design theme colors (Pure black + glassmorphism + white text)
         'bg-0': '#000000',
-        'bg-200': '#1a1d18',
-        'bg-300': '#2a2e26',
-        'text-100': '#f8f7f5',
-        'text-200': '#e6e1d7',
-        'text-300': '#a89080',
-        'primary-user': '#c8b4a0',
-        'primary-fg': '#1a1d18',
-        'border-user': 'rgba(200, 180, 160, 0.12)',
-        'color-1': 'rgb(42, 46, 38)',
-        'color-2': 'rgb(66, 58, 48)',
-        'color-3': 'rgb(107, 85, 69)',
-        'color-4': 'rgb(150, 122, 104)',
-        'color-5': 'rgb(200, 180, 160)',
+        'bg-200': '#0a0a0c',
+        'bg-300': '#121217',
+        'text-100': '#ffffff',
+        'text-200': '#f1f5f9',
+        'text-300': '#94a3b8',
+        'primary-user': '#38bdf8',
+        'primary-fg': '#000000',
+        'border-user': 'rgba(255, 255, 255, 0.10)',
+        'color-1': 'rgb(18, 18, 23)',
+        'color-2': 'rgb(30, 30, 38)',
+        'color-3': 'rgb(50, 50, 65)',
+        'color-4': 'rgb(148, 163, 184)',
+        'color-5': 'rgb(241, 245, 249)',
 
-        // Enterprise space palette (warm luxury dark)
+        // Enterprise space palette (pure deep black + subtle slate)
         space: {
           950: "#000000",
-          900: "#0d0f0c",
-          850: "#141712",
-          800: "#1a1d18",
-          700: "#2a2e26",
-          600: "#3d4237",
+          900: "#050508",
+          850: "#0a0a0e",
+          800: "#101016",
+          700: "#181822",
+          600: "#222230",
         },
         cyber: {
-          blue: "#c8b4a0",       // Champagne / Bronze Gold
-          "blue-glow": "#e6e1d7",
-          cyan: "#c8b4a0",       // Warm gold accent
-          "cyan-glow": "#e6e1d7",
-          indigo: "#a89080",     // Muted bronze
-          violet: "#bfa490",
-          emerald: "#8cae80",    // Quantum Safe (warm sage)
-          amber: "#d4a373",      // Transition (warm amber)
-          rose: "#c97064",       // Critical (warm terracotta)
+          blue: "#0284c7",
+          "blue-glow": "#38bdf8",
+          cyan: "#38bdf8",
+          "cyan-glow": "#7dd3fc",
+          indigo: "#818cf8",
+          violet: "#a78bfa",
+          emerald: "#34d399",    // Quantum Safe
+          amber: "#fbbf24",      // Transition / Monitoring
+          rose: "#f87171",       // Critical / Vulnerable
         },
         text: {
-          bright: "#f8f7f5",
-          muted: "#e6e1d7",
-          dim: "#a89080",
-          dark: "#7d6a5d",
+          bright: "#ffffff",
+          muted: "#f1f5f9",
+          dim: "#94a3b8",
+          dark: "#64748b",
         },
         // Semantic aliases
         background: "#000000",
-        surface: "#1a1d18",
-        surface2: "#2a2e26",
-        border: "rgba(200, 180, 160, 0.12)",
-        "border-bright": "rgba(200, 180, 160, 0.28)",
-        primary: "#c8b4a0",
-        secondary: "#a89080",
-        safe: "#8cae80",
-        vulnerable: "#c97064",
-        warning: "#d4a373",
-        hybrid: "#bfa490",
+        surface: "#0a0a0e",
+        surface2: "#121218",
+        border: "rgba(255, 255, 255, 0.10)",
+        "border-bright": "rgba(255, 255, 255, 0.25)",
+        primary: "#38bdf8",
+        secondary: "#94a3b8",
+        safe: "#34d399",
+        vulnerable: "#f87171",
+        warning: "#fbbf24",
+        hybrid: "#a78bfa",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],

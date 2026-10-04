@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { getProjects, getScans, getScanAssets, getScanMigrationPlan } from "@/lib/api";
 import { CryptoAssetItem, ProjectItem, ScanSummaryItem } from "@/lib/types";
+import { getStoredProjectId, setStoredProjectId } from "@/lib/projectContext";
 
 export default function DashboardOverviewPage() {
   const [projects, setProjects] = useState<ProjectItem[]>([]);
@@ -40,9 +41,11 @@ export default function DashboardOverviewPage() {
         setProjects(projList);
 
         if (projList.length > 0) {
-          const firstProj = projList[0];
-          setSelectedProjectId(firstProj.project_id);
-          const scans = await getScans(firstProj.project_id);
+          const stored = getStoredProjectId();
+          const targetProj = projList.find(p => p.project_id === stored) || projList[0];
+          setSelectedProjectId(targetProj.project_id);
+          setStoredProjectId(targetProj.project_id);
+          const scans = await getScans(targetProj.project_id);
           if (scans && scans.length > 0) {
             const latest = scans[0];
             if (isMounted) setActiveScan(latest);
@@ -69,6 +72,7 @@ export default function DashboardOverviewPage() {
 
   const handleSelectProject = async (projectId: string) => {
     setSelectedProjectId(projectId);
+    setStoredProjectId(projectId);
     setLoading(true);
     try {
       const scans = await getScans(projectId);
@@ -104,8 +108,47 @@ export default function DashboardOverviewPage() {
     (a) => a.context?.criticality === "CRITICAL" || (a.quantum_status === "vulnerable" && a.confidence >= 0.8)
   ).length;
 
+const SIH_STEPS = [
+  { id: 1, name: "Discovery", desc: "AST Scan & Ingest", href: "/dashboard/discovery" },
+  { id: 2, name: "CBOM Inventory", desc: "Evidence-Backed Assets", href: "/dashboard/assets" },
+  { id: 3, name: "Crypto Graph", desc: "Blast Radius & Topology", href: "/dashboard/graph" },
+  { id: 4, name: "Quantum Risk", desc: "Mosca P(X+Y>Z)", href: "/dashboard/risk" },
+  { id: 5, name: "PQC Migration", desc: "FIPS 203/204/205", href: "/dashboard/migration" },
+  { id: 6, name: "Reports & Export", desc: "CycloneDX 1.7 CBOM", href: "/dashboard/reports" },
+];
+
   return (
     <div className="space-y-8">
+      {/* SIH26164 Procedure Stepper Bar */}
+      <div className="bg-[#050A1F]/90 border border-cyan-500/20 rounded-2xl p-4 shadow-xl">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-[11px] font-mono font-bold tracking-widest text-cyan-400 uppercase">
+              SIH26164 CORE WORKFLOW PROCEDURE
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-slate-400">
+            End-to-End Pipeline: Discover → Prove → Assess → Simulate → Migrate → Validate
+          </span>
+        </div>
+        
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          {SIH_STEPS.map((s) => (
+            <Link
+              key={s.id}
+              href={s.href}
+              className="p-2.5 rounded-xl border bg-black/30 border-white/5 text-slate-400 hover:text-white hover:border-cyan-500/40 hover:bg-cyan-950/20 transition-all text-left"
+            >
+              <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold">
+                <span className="text-cyan-400">0{s.id}.</span>
+                <span className="truncate">{s.name}</span>
+              </div>
+              <div className="text-[9px] text-slate-500 truncate mt-0.5">{s.desc}</div>
+            </Link>
+          ))}
+        </div>
+      </div>
       {/* Top Banner / Headline */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div>

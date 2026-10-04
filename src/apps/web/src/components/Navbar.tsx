@@ -52,33 +52,33 @@ export function Navbar() {
         <nav className="hidden md:flex items-center gap-8">
           <a
             href="#platform"
-            className="text-sm font-medium text-text-dim hover:text-cyber-cyan transition-colors"
+            className="text-sm font-medium text-text-dim hover:text-white transition-colors"
           >
             Platform
           </a>
           <a
             href="#how-it-works"
-            className="text-sm font-medium text-text-dim hover:text-cyber-cyan transition-colors"
+            className="text-sm font-medium text-text-dim hover:text-white transition-colors"
           >
             How It Works
           </a>
           <a
             href="#capabilities"
-            className="text-sm font-medium text-text-dim hover:text-cyber-cyan transition-colors"
+            className="text-sm font-medium text-text-dim hover:text-white transition-colors"
           >
             Capabilities
           </a>
           <a
             href="#research"
-            className="text-sm font-medium text-text-dim hover:text-cyber-cyan transition-colors"
+            className="text-sm font-medium text-text-dim hover:text-white transition-colors"
           >
             Research
           </a>
           <a
-            href="#about"
-            className="text-sm font-medium text-text-dim hover:text-cyber-cyan transition-colors"
+            href="#deployment"
+            className="text-sm font-medium text-text-dim hover:text-white transition-colors"
           >
-            About
+            Deployment
           </a>
         </nav>
 
